@@ -1,5 +1,6 @@
 #pragma once
 #include "aica.h"
+#include <math.h>
 
 void AICA_Sample();
 

@@ -3,6 +3,7 @@
 	Handy register definitions and other minnor stuff
 */
 #include "types.h"
+#include <minmax.h>
 
 void gdrom_reg_Init();
 void gdrom_reg_Term();

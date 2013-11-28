@@ -5,6 +5,7 @@
 */
 
 #include "types.h"
+#include <minmax.h>
 #include "sh4_interpreter.h"
 #include "sh4_registers.h"
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "types.h"
+#include <minmax.h>
 
 struct CodeSpan
 {

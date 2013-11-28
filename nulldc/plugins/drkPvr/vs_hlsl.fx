@@ -49,7 +49,7 @@ float4 res_align_offset:  register(c4); // float2((-1.0/res.x)-1.0,(1.0/res.y)+1
 
 float fdecp(float flt,out float e)
 {
-	float lg2=log2(flt);	//ie , 2.5
+	float lg2=_log2(flt);	//ie , 2.5
 	float frc=frac(lg2);	//ie , 0.5
 	e=lg2-frc;				//ie , 2.5-0.5=2 (exp)
 	return pow(2,frc);		//2^0.5 (manitsa)
