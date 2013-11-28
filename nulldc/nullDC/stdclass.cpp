@@ -311,8 +311,8 @@ void VArray2::UnLockRegion(u32 offset,u32 size) {
 	m_last_lock_size = (u32)-1;
 }
 
-#include "dc\sh4\rec_v1\compiledblock.h"
-#include "dc\sh4\rec_v1\blockmanager.h"
+#include "dc/sh4/rec_v1/compiledblock.h"
+#include "dc/sh4/rec_v1/blockmanager.h"
 
 bool VramLockedWrite(u8* address);
 bool RamLockedWrite(u8* address,u32* sp);

@@ -8,7 +8,7 @@
 // Works with normal keyboards just the same.
 //#define _HAS_LGLCD_ 1
 
-#include "nullDC\plugins\plugin_header.h"
+#include "nullDC/plugins/plugin_header.h"
 #include <memory.h>
 #include <math.h>
 #include <random>

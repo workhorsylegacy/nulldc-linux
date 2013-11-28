@@ -1,6 +1,6 @@
 #pragma once
 #include "types.h"
-#include "dc\sh4\intc.h"
+#include "dc/sh4/intc.h"
 
 
 void fastcall asic_RaiseInterrupt(HollyInterruptID inter);

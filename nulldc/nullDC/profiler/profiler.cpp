@@ -6,7 +6,7 @@
 	we print the usage statistics on the console and reset the counters
 */
 #include "profiler.h"
-#include "dc\sh4\rec_v1\blockmanager.h"
+#include "dc/sh4/rec_v1/blockmanager.h"
 #include "plugins/plugin_manager.h"
 #include <windows.h>
 

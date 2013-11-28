@@ -9,7 +9,7 @@ volatile bool render_restart;
 #include <windows.h>
 #include <sdl.h>
 #include <SDL_syswm.h>
-#include <gl\gl.h>
+#include <gl/gl.h>
 #include "regs.h"
 #include <mmintrin.h>
 #include <xmmintrin.h>

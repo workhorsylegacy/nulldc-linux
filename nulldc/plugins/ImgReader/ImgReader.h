@@ -1,6 +1,6 @@
 #pragma once
 //bleh stupid windoze header
-#include "nullDC\plugins\plugin_header.h"
+#include "nullDC/plugins/plugin_header.h"
 #include <windows.h>
 #include <stdio.h>
 #include <tchar.h>

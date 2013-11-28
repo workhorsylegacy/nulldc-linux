@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <tchar.h>
 
-#include "..\..\nullDC\plugins\plugin_header.h"
+#include "../../nullDC/plugins/plugin_header.h"
 #include "resource.h"
 
 #include <commctrl.h>   // includes the common control header

@@ -3,7 +3,7 @@
 #define NO_MMU
 
 //Basic types & stuff
-#include "plugins\plugin_header.h"
+#include "plugins/plugin_header.h"
 
 //SHUT UP M$ COMPILER !@#!@$#
 #ifdef _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES

@@ -6,7 +6,7 @@
 
 
 //bleh stupid windoze header
-#include "..\..\nullDC\plugins\plugin_header.h"
+#include "../../nullDC/plugins/plugin_header.h"
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>

@@ -2,7 +2,7 @@
 #pragma once
 #include <List>
 #include "types.h"
-//#include "dc\sh4\shil\shil.h"
+//#include "dc/sh4/shil/shil.h"
 
 //count fallbacks and average block size, average execution time , ect :)
 //#define PROFILE_DYNAREC

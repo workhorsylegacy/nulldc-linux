@@ -2,7 +2,7 @@
 #pragma once
 
 #include <string>
-#include "..\..\nullDC\plugins\plugin_header.h"
+#include "../../nullDC/plugins/plugin_header.h"
 
 namespace EmulatedDevices
 {

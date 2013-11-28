@@ -5,7 +5,7 @@
 
 #include "gdromv3.h"
 #include "../../log/logging_interface.h"
-#include "plugins\plugin_manager.h"
+#include "plugins/plugin_manager.h"
 #include "dc/mem/sh4_mem.h"
 #include "dc/mem/memutil.h"
 #include "dc/mem/sb.h"

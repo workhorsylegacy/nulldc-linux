@@ -6,9 +6,9 @@
 #include <ntddscsi.h>
 #include "SCSIDEFS.H"
 
-//#include <wxp\winioctl.h>
-//#include <wxp\ntddcdvd.h>
-//#include <wxp\Ntddcdrm.h>
+//#include <wxp/winioctl.h>
+//#include <wxp/ntddcdvd.h>
+//#include <wxp/Ntddcdrm.h>
 
 #ifndef noheaders
 #define RAW_SECTOR_SIZE			2352

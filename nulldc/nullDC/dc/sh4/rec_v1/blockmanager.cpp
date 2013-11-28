@@ -1,5 +1,5 @@
-#include "dc\sh4\sh4_registers.h"
-#include "dc\mem\sh4_mem.h"
+#include "dc/sh4/sh4_registers.h"
+#include "dc/mem/sh4_mem.h"
 #include "blockmanager.h"
 
 #include "windows.h"

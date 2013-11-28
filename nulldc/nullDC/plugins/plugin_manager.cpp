@@ -17,7 +17,7 @@
 #include "naomi/naomi.h"
 
 #include <string.h>
-#include "dc\mem\sb.h"
+#include "dc/mem/sb.h"
 
 //to avoid including windows.h
 #define EXCEPTION_EXECUTE_HANDLER       1

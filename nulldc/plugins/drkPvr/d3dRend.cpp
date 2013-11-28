@@ -11,7 +11,7 @@
 #include <algorithm>
 #include "d3dRend.h"
 #include "windows.h"
-//#include "gl\gl.h"
+//#include "gl/gl.h"
 #include "regs.h"
 #include <vector>
 //#include <xmmintrin.h>

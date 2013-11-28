@@ -1,16 +1,16 @@
 //#include "shil_compile_slow.h"
 
 #include "types.h"
-#include "dc\sh4\shil\shil.h"
+#include "dc/sh4/shil/shil.h"
 #include <assert.h>
-#include "emitter\emitter.h"
+#include "emitter/emitter.h"
 
-#include "dc\sh4\shil\shil_ce.h"
-#include "dc\sh4\sh4_registers.h"
-#include "dc\sh4\rec_v1\blockmanager.h"
-#include "dc\sh4\sh4_opcode_list.h"
-#include "dc\mem\sh4_mem.h"
-#include "emitter\regalloc\x86_sseregalloc.h"
+#include "dc/sh4/shil/shil_ce.h"
+#include "dc/sh4/sh4_registers.h"
+#include "dc/sh4/rec_v1/blockmanager.h"
+#include "dc/sh4/sh4_opcode_list.h"
+#include "dc/mem/sh4_mem.h"
+#include "emitter/regalloc/x86_sseregalloc.h"
 
 #include "shil_compiler_base.h"
 

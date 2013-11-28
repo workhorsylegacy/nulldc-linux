@@ -102,7 +102,7 @@ typedef  DWORD PFCTOCAPI PfcFreeTocFP(SPfcToc* pstToc);
 // =======
 //
 // #include "stdafx.h"
-// #include "..\pfctoc.h"
+// #include "../pfctoc.h"
 // 
 // int main(int, char*)
 // {

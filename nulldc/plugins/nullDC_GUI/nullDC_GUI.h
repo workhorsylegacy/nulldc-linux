@@ -1,7 +1,7 @@
 #pragma once
 
-#include "nullDC\plugins\plugin_header.h"
-#include "nullDC\plugins\gui_plugin_header.h"
+#include "nullDC/plugins/plugin_header.h"
+#include "nullDC/plugins/gui_plugin_header.h"
 
 #include <windows.h>
 #include <windowsx.h>

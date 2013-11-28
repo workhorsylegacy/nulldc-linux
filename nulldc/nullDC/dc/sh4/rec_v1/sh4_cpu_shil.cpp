@@ -4,7 +4,7 @@
 #include "dc/sh4/sh4_opcode_list.h"
 #include "dc/sh4/sh4_registers.h"
 #include "dc/sh4/shil/shil.h"
-#include "log\logging_interface.h"
+#include "log/logging_interface.h"
 #include <assert.h>
 
 #undef sh4op
@@ -1997,9 +1997,9 @@ void shil_DynarecInit()
 #undef iNimp
 #define iNimp(op,info) rec_shil_iNimp(pc,op,info)
 
-#include "dc\sh4\sh4_cpu_arith.h"
-#include "dc\sh4\sh4_cpu_branch.h"
-#include "dc\sh4\sh4_cpu_logic.h"
-#include "dc\sh4\sh4_cpu_movs.h"
-#include "dc\sh4\sh4_cpu_loadstore.h"
+#include "dc/sh4/sh4_cpu_arith.h"
+#include "dc/sh4/sh4_cpu_branch.h"
+#include "dc/sh4/sh4_cpu_logic.h"
+#include "dc/sh4/sh4_cpu_movs.h"
+#include "dc/sh4/sh4_cpu_loadstore.h"
 #endif
