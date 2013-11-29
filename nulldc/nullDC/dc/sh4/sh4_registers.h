@@ -8,7 +8,7 @@ union mac_type
 	u64 full;
 };
 
-__declspec(align(32)) extern f32 sin_table[0x10000+0x4000];
+ALIGN_MEM(32) extern f32 sin_table[0x10000+0x4000];
 
 struct Sh4RegContext
 {
@@ -33,8 +33,8 @@ struct Sh4RegContext
 };
 void GenerateSinCos();
 void CleanupSinCos();
-__declspec(align(64)) extern u32 r[16];
-__declspec(align(64)) extern u32 r_bank[8];
+ALIGN_MEM(64) extern u32 r[16];
+ALIGN_MEM(64) extern u32 r_bank[8];
 
 extern u32 gbr,ssr,spc,sgr,dbr,vbr;
 extern u32 pr,fpul;
@@ -45,8 +45,8 @@ extern StatusReg sr;
 
 extern fpscr_type fpscr;
 
-extern __declspec(align(64)) f32 xf[16];
-extern __declspec(align(64)) f32 fr[16];
+extern ALIGN_MEM(64) f32 xf[16];
+extern ALIGN_MEM(64) f32 fr[16];
 
 
 extern u32*  xf_hex,*fr_hex;

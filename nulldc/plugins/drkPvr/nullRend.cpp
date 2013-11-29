@@ -91,7 +91,7 @@ namespace SWRenderer
 	}
 	__m128 _mm_load_ps_r(float a,float b,float c,float d)
 	{
-		static __declspec(align(128)) float v[4];
+		static ALIGN_MEM(128) float v[4];
 		v[0]=a;
 		v[1]=b;
 		v[2]=c;
@@ -126,7 +126,7 @@ namespace SWRenderer
 	}
 	//use that someday
 
-	__declspec(align(32)) u32 tempCol[640*480*2];
+	ALIGN_MEM(32) u32 tempCol[640*480*2];
 	void VBlank()
 	{
 		//present the vram to FB
@@ -319,7 +319,7 @@ namespace SWRenderer
 	};
 	
 
-	IPs __declspec(align(64)) ip;
+	IPs ALIGN_MEM(64) ip;
 
 
 	
@@ -490,8 +490,8 @@ namespace SWRenderer
 		ip.Setup(v1,v2,v3,minx,miny,q);
 		__m128 y_ps=_mm_cvtepi32_ps(_mm_broadcast(miny));
 		__m128 minx_ps=_mm_cvtepi32_ps(_mm_load_scaled(minx-q,1));
-		static __declspec(align(16)) float ones_ps[4]={1,1,1,1};
-		static __declspec(align(16)) float q_ps[4]={q,q,q,q};
+		static ALIGN_MEM(16) float ones_ps[4]={1,1,1,1};
+		static ALIGN_MEM(16) float q_ps[4]={q,q,q,q};
 
 		// Loop through blocks
 		for(int y = spany; y > 0; y-=q)
@@ -630,8 +630,8 @@ next_y:
 			return 255;
 		else return v;
 	}
-	__declspec(align(16)) static f32 FaceBaseColor[4];
-	__declspec(align(16)) static f32 FaceOffsColor[4];
+	ALIGN_MEM(16) static f32 FaceBaseColor[4];
+	ALIGN_MEM(16) static f32 FaceOffsColor[4];
 
 	//Vertex Decoding-Converting
 	struct VertexDecoder

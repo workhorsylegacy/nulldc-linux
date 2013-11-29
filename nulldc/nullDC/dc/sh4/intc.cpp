@@ -105,17 +105,17 @@ const InterptSourceList_Entry InterruptSourceList[]=
 
 //dynamicaly built
 //Maps siid -> EventID
-__declspec(align(64)) u16 InterruptEnvId[32]=
+ALIGN_MEM(64) u16 InterruptEnvId[32]=
 {
 	0
 };
 //dynamicaly built
 //Maps piid -> 1<<siid
-__declspec(align(64)) u32 InterruptBit[32] = 
+ALIGN_MEM(64) u32 InterruptBit[32] = 
 {
 	0
 };
-__declspec(align(64)) u32 InterruptLevelBit[16]=
+ALIGN_MEM(64) u32 InterruptLevelBit[16]=
 {
 	0
 };

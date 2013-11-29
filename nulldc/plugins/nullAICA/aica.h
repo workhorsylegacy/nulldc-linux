@@ -2,6 +2,7 @@
 #include "nullAICA.h"
 #include "audiostream.h"
 #include "assert.h"
+#include "../common/portable.h"
 
 #define SCIEB_addr 0x289C
 #define SCIPD_addr (0x289C+4)

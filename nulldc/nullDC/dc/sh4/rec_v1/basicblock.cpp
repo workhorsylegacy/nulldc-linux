@@ -237,7 +237,7 @@ u32 ret_cache_total=0;
 #define RET_CACHE_PTR_MASK_OR ( RET_CACHE_SZ*2 )
 #define RET_CACHE_STACK_OFFSET_A (RET_CACHE_SZ)
 #define RET_CACHE_STACK_OFFSET_B (RET_CACHE_SZ+4)
-/*__declspec(align(512)) //must be 16* size
+/*ALIGN_MEM(512) //must be 16* size
 struct 
 {
 	u32 waste[RET_CACHE_SIZE];//force top bit to 1

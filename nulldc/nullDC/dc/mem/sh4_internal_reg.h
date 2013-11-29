@@ -4,18 +4,18 @@
 #define OnChipRAM_SIZE (0x2000)
 #define OnChipRAM_MASK (OnChipRAM_SIZE-1)
 
-extern __declspec(align(64)) u8 sq_both[64];
+extern ALIGN_MEM(64) u8 sq_both[64];
 
-extern __declspec(align(32)) RegisterStruct CCN[20];
-extern __declspec(align(32)) RegisterStruct UBC[20];
-extern __declspec(align(32)) RegisterStruct BSC[20];
-extern __declspec(align(32)) RegisterStruct DMAC[20];
-extern __declspec(align(32)) RegisterStruct CPG[20];
-extern __declspec(align(32)) RegisterStruct RTC[20];
-extern __declspec(align(32)) RegisterStruct INTC[20];
-extern __declspec(align(32)) RegisterStruct TMU[20];
-extern __declspec(align(32)) RegisterStruct SCI[20];
-extern __declspec(align(32)) RegisterStruct SCIF[20];
+extern ALIGN_MEM(32) RegisterStruct CCN[20];
+extern ALIGN_MEM(32) RegisterStruct UBC[20];
+extern ALIGN_MEM(32) RegisterStruct BSC[20];
+extern ALIGN_MEM(32) RegisterStruct DMAC[20];
+extern ALIGN_MEM(32) RegisterStruct CPG[20];
+extern ALIGN_MEM(32) RegisterStruct RTC[20];
+extern ALIGN_MEM(32) RegisterStruct INTC[20];
+extern ALIGN_MEM(32) RegisterStruct TMU[20];
+extern ALIGN_MEM(32) RegisterStruct SCI[20];
+extern ALIGN_MEM(32) RegisterStruct SCIF[20];
 
 /*
 //Region P4

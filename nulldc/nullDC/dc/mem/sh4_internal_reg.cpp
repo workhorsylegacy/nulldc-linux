@@ -18,24 +18,24 @@
 #include "mmu.h"
 
 //64bytes of sq
-__declspec(align(64)) u8 sq_both[64];
+ALIGN_MEM(64) u8 sq_both[64];
 
 //i know , its because of templates :)
 #pragma warning( disable : 4127 /*4244*/)
 
-__declspec(align(32)) u8 OnChipRAM[OnChipRAM_SIZE];
+ALIGN_MEM(32) u8 OnChipRAM[OnChipRAM_SIZE];
 //All registers are 4 byte alligned
 
-__declspec(align(32)) RegisterStruct CCN[20];
-__declspec(align(32)) RegisterStruct UBC[20];
-__declspec(align(32)) RegisterStruct BSC[20];
-__declspec(align(32)) RegisterStruct DMAC[20];
-__declspec(align(32)) RegisterStruct CPG[20];
-__declspec(align(32)) RegisterStruct RTC[20];
-__declspec(align(32)) RegisterStruct INTC[20];
-__declspec(align(32)) RegisterStruct TMU[20];
-__declspec(align(32)) RegisterStruct SCI[20];
-__declspec(align(32)) RegisterStruct SCIF[20];
+ALIGN_MEM(32) RegisterStruct CCN[20];
+ALIGN_MEM(32) RegisterStruct UBC[20];
+ALIGN_MEM(32) RegisterStruct BSC[20];
+ALIGN_MEM(32) RegisterStruct DMAC[20];
+ALIGN_MEM(32) RegisterStruct CPG[20];
+ALIGN_MEM(32) RegisterStruct RTC[20];
+ALIGN_MEM(32) RegisterStruct INTC[20];
+ALIGN_MEM(32) RegisterStruct TMU[20];
+ALIGN_MEM(32) RegisterStruct SCI[20];
+ALIGN_MEM(32) RegisterStruct SCIF[20];
 
 
 

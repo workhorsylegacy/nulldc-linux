@@ -16,7 +16,7 @@
 #include "../../naomi/naomi.h"
 #endif
 
-__declspec(align(32)) RegisterStruct sb_regs[0x540];
+ALIGN_MEM(32) RegisterStruct sb_regs[0x540];
 
 
 //(addr>= 0x005F6800) && (addr<=0x005F7CFF) -> 0x1500 bytes -> 0x540 possible registers , 125 actualy exist olny

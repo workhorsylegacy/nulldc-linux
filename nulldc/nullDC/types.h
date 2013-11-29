@@ -3,6 +3,7 @@
 #define NO_MMU
 
 //Basic types & stuff
+#include "../common/portable.h"
 #include "plugins/plugin_header.h"
 
 //SHUT UP M$ COMPILER !@#!@$#

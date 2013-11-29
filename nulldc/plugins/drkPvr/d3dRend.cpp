@@ -3434,10 +3434,10 @@ nl:
 		}
 	}
 
-	__declspec(align(16)) static f32 FaceBaseColor[4];
-	__declspec(align(16)) static f32 FaceOffsColor[4];
-	__declspec(align(16)) static f32 SFaceBaseColor[4];
-	__declspec(align(16)) static f32 SFaceOffsColor[4];
+	ALIGN_MEM(16) static f32 FaceBaseColor[4];
+	ALIGN_MEM(16) static f32 FaceOffsColor[4];
+	ALIGN_MEM(16) static f32 SFaceBaseColor[4];
+	ALIGN_MEM(16) static f32 SFaceOffsColor[4];
 
 #ifdef MODVOL
 	ModTriangle* lmr=0;

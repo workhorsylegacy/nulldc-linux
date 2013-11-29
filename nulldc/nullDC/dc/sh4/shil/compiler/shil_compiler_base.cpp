@@ -50,7 +50,7 @@ typedef void FASTCALL shil_compileFP(shil_opcode* op);
 bool inited=false;
 
 //[R|W][sz][M/F][addr]
-__declspec(align(64))
+ALIGN_MEM(64)
 void* mio_pvt[2][4][2][8];
 
 /*
@@ -2095,11 +2095,11 @@ void FASTCALL shil_compile_div32(shil_opcode* op)
 //Fpu consts
 #define pi (3.14159265f)
 
-__declspec(align(16)) u32 ps_not_data[4]={0x80000000,0x80000000,0x80000000,0x80000000};
-__declspec(align(16)) u32 ps_and_data[4]={0x7FFFFFFF,0x7FFFFFFF,0x7FFFFFFF,0x7FFFFFFF};
+ALIGN_MEM(16) u32 ps_not_data[4] = { 0x80000000, 0x80000000, 0x80000000, 0x80000000 };
+ALIGN_MEM(16) u32 ps_and_data[4] = { 0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF };
 
-__declspec(align(16)) float mm_1[4]={1.0f,1.0f,1.0f,1.0f};
-//__declspec(align(16)) float fsca_fpul_adj[4]={((2*pi)/65536.0f),((2*pi)/65536.0f),((2*pi)/65536.0f),((2*pi)/65536.0f)};
+ALIGN_MEM(16) float mm_1[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+// ALIGN_MEM(16) float fsca_fpul_adj[4]={((2*pi)/65536.0f),((2*pi)/65536.0f),((2*pi)/65536.0f),((2*pi)/65536.0f)};
 
 void sse_reg_to_reg(shil_opcode* op,x86_opcode_class op_cl)
 {
