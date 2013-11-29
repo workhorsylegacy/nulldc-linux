@@ -125,7 +125,7 @@ void Init_Update()
 		{
 		case CTL_TYPE_JOYSTICK_SDL:
 			  {
-				  if(!SDL_JoystickOpened(joysticks[i].ID))
+				  //if(!SDL_JoystickOpened(joysticks[i].ID))
 					  joysticks[i].controllertype = CTL_TYPE_KEYBOARD;
 			  }
 			  break;
@@ -604,7 +604,7 @@ int Search_Devices()
 			joyinfo[i].NumBalls		= SDL_JoystickNumBalls(joyinfo[i].joy);
 			joyinfo[i].NumHats		= SDL_JoystickNumHats(joyinfo[i].joy);	
 			
-			AnsiToWide( joyinfo[i].Name, SDL_JoystickName(i) );
+			AnsiToWide(joyinfo[i].Name, SDL_JoystickName(joyinfo[i].joy));
 			
 			wprintf(L"\t[%d] %s. ", i, joyinfo[i].Name);
 			

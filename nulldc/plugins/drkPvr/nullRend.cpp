@@ -16,7 +16,7 @@ volatile bool render_restart;
 #include <emmintrin.h>
 
 using namespace TASplitter;
-#pragma comment(lib, "sdl.lib") 
+#pragma comment(lib, "SDL2.lib") 
 
 //SW rendering .. yay (?)
 namespace SWRenderer

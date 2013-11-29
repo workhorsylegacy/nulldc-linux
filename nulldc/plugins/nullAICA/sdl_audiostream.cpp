@@ -4,7 +4,7 @@
 
 #ifdef _INCLUDE_SDL
 #include <SDL.h>
-#pragma comment(lib, "sdl.lib") 
+#pragma comment(lib, "SDL2.lib") 
 
 /* Prototype of our callback function */
 void sdl_fill_audio(void *userdata, Uint8 *stream, int len);

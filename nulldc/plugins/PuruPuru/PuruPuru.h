@@ -21,7 +21,7 @@
 
 #include <SDL.h>
 #include <SDL_haptic.h>
-#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDL2.lib")
 
 #include <XInput.h>
 #pragma comment(lib, "Xinput.lib")

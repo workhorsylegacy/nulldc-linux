@@ -752,7 +752,7 @@ bool GetInputSDL(HWND hDlg, int buttonid, int controller)
 		wsprintf(format, L"-1", pressed);
 	SetDlgItemText(hDlg, buttonid, format);
 
-	if(SDL_JoystickOpened(joysticks[controller].ID))
+	//if(SDL_JoystickOpened(joysticks[controller].ID))
 		SDL_JoystickClose(joy);
 
 	return true;
