@@ -2,6 +2,7 @@
 #include "dsp.h"
 #include "mem.h"
 #include <math.h>
+#include "../common/portable.h"
 #undef FAR
 
 //#define CLIP_WARN
@@ -328,8 +329,8 @@ struct ChannelEx
 	struct
 	{
 		s32 val;
-		__forceinline s32 GetValue() { return val>>AEG_STEP_BITS;}
-		__forceinline void SetValue(u32 aegb) { val=aegb<<AEG_STEP_BITS; }
+		INLINE s32 GetValue() { return val>>AEG_STEP_BITS;}
+		INLINE void SetValue(u32 aegb) { val=aegb<<AEG_STEP_BITS; }
 
 		_EG_state state;
 
@@ -357,7 +358,7 @@ struct ChannelEx
 		u8 plfo_shft;
 		void (FASTCALL* alfo_calc)(ChannelEx* ch);
 		void (FASTCALL* plfo_calc)(ChannelEx* ch);
-		__forceinline void Step(ChannelEx* ch) { counter--;if (counter==0) { state++; counter=start_value; alfo_calc(ch);plfo_calc(ch); } }
+		INLINE void Step(ChannelEx* ch) { counter--;if (counter==0) { state++; counter=start_value; alfo_calc(ch);plfo_calc(ch); } }
 		void Reset(ChannelEx* ch) { state=0; counter=start_value; alfo_calc(ch); plfo_calc(ch); }
 		void SetStartValue(u32 nv) { start_value=nv;counter=start_value; }
 	} lfo;
@@ -382,7 +383,7 @@ struct ChannelEx
 	{
 		enabled=true;
 	}
-	__forceinline SampleType InterpolateSample()
+	INLINE SampleType InterpolateSample()
 	{
 		SampleType rv;
 		u32 fp=step.fp;
@@ -391,7 +392,7 @@ struct ChannelEx
 
 		return rv;
 	}
-	__forceinline void Step()
+	INLINE void Step()
 	{
 		if (!enabled)
 			return;
@@ -437,11 +438,11 @@ struct ChannelEx
 		StepStream(this);
 		lfo.Step(this);
 	}
-	__forceinline void Generate()
+	INLINE void Generate()
 	{
 		Step();
 	}
-	__forceinline static void GenerateAll()
+	INLINE static void GenerateAll()
 	{
 		for (int i=0;i<64;i++)
 		{
@@ -732,7 +733,7 @@ struct ChannelEx
 	} 
 };
 
-__forceinline SampleType DecodeADPCM(u32 sample,s32 prev,s32& quant)
+INLINE SampleType DecodeADPCM(u32 sample,s32 prev,s32& quant)
 {
 	s32 sign=1-((sample>>3) << 1);
 	u32 data=sample&7;
@@ -747,7 +748,7 @@ __forceinline SampleType DecodeADPCM(u32 sample,s32 prev,s32& quant)
 }
 
 template<s32 PCMS,bool last>
-__forceinline void FASTCALL StepDecodeSample(ChannelEx* ch,u32 CA)
+INLINE void FASTCALL StepDecodeSample(ChannelEx* ch,u32 CA)
 {
 	if (!last && PCMS<2)
 		return ;

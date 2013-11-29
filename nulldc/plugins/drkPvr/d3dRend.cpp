@@ -1315,7 +1315,7 @@ bool operator<(const PolyParam &left, const PolyParam &right)
 		last_ps_mode=-1;
 	}
 	//for fixed pipeline
-	__forceinline
+	INLINE
 	void SetGPState_fp(PolyParam* gp)
 	{
 		if (gp->pcw.Texture)
@@ -1754,7 +1754,7 @@ __error_out:
 		}
 	}
 	float cur_pal_index[4]={0,0,0,1};
-	__forceinline
+	INLINE
 	void SetGPState_ps(PolyParam* gp)
 	{
 		u32 mode=0;
@@ -1889,7 +1889,7 @@ __error_out:
 	};
 	//
 	template <u32 Type,bool FFunction,bool df,bool SortingEnabled>
-	__forceinline
+	INLINE
 	void SetGPState(PolyParam* gp,u32 cflip=0)
 	{	/*
 		if (gp->tsp.DstSelect ||
@@ -2001,7 +2001,7 @@ __error_out:
 		}
 	}
 	template <u32 Type,bool FFunction,bool SortingEnabled>
-	__forceinline
+	INLINE
 	void RendStrips(PolyParam* gp)
 	{
 			SetGPState<Type,FFunction,false,SortingEnabled>(gp);
@@ -3447,7 +3447,7 @@ nl:
 	struct VertexDecoder
 	{
 
-		__forceinline
+		INLINE
 		static void SetTileClip(u32 xmin,u32 ymin,u32 xmax,u32 ymax)
 		{
 			u32 rv=tileclip_val & 0xF0000000;
@@ -3457,13 +3457,13 @@ nl:
 			rv|=ymax<<17; //5 bits
 			tileclip_val=rv;
 		}
-		__forceinline
+		INLINE
 		static void TileClipMode(u32 mode)
 		{
 			tileclip_val=(tileclip_val&(~0xF0000000)) | (mode<<28);
 		}
 		//list handling
-		__forceinline
+		INLINE
 		static void StartList(u32 ListType)
 		{
 			if (ListType==ListType_Opaque)
@@ -3476,7 +3476,7 @@ nl:
 			CurrentPP=0;
 			vert_reappend=0;
 		}
-		__forceinline
+		INLINE
 		static void EndList(u32 ListType)
 		{
 			vert_reappend=0;
@@ -3522,39 +3522,39 @@ nl:
 	poly_float_color_(to,sat(pp->src##A),sat(pp->src##R),sat(pp->src##G),sat(pp->src##B))
 
 	//poly param handling
-	__forceinline
+	INLINE
 		static void FASTCALL AppendPolyParam0(TA_PolyParam0* pp)
 		{
 			glob_param_bdc;
 		}
-		__forceinline
+		INLINE
 		static void FASTCALL AppendPolyParam1(TA_PolyParam1* pp)
 		{
 			glob_param_bdc;
 			poly_float_color(FaceBaseColor,FaceColor);
 		}
-		__forceinline
+		INLINE
 		static void FASTCALL AppendPolyParam2A(TA_PolyParam2A* pp)
 		{
 			glob_param_bdc;
 		}
-		__forceinline
+		INLINE
 		static void FASTCALL AppendPolyParam2B(TA_PolyParam2B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor);
 			poly_float_color(FaceOffsColor,FaceOffset);
 		}
-		__forceinline
+		INLINE
 		static void FASTCALL AppendPolyParam3(TA_PolyParam3* pp)
 		{
 			glob_param_bdc;
 		}
-		__forceinline
+		INLINE
 		static void FASTCALL AppendPolyParam4A(TA_PolyParam4A* pp)
 		{
 			glob_param_bdc;
 		}
-		__forceinline
+		INLINE
 		static void FASTCALL AppendPolyParam4B(TA_PolyParam4B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor0);
@@ -3563,7 +3563,7 @@ nl:
 		//Poly Strip handling
 		//We unite Strips together by dupplicating the [last,first].On odd sized strips
 		//a second [first] vert is needed to make sure Culling works fine :)
-		__forceinline
+		INLINE
 		static void StartPolyStrip()
 		{
 			if (vert_reappend)
@@ -3586,7 +3586,7 @@ nl:
 				vert_reappend=(Vertex*)tarc.verts.ptr;
 			}
 		}
-		__forceinline
+		INLINE
 		static void EndPolyStrip()
 		{
 			if (vert_reappend)
@@ -3707,7 +3707,7 @@ nl:
 
 
 		//(Non-Textured, Packed Color)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex0(TA_Vertex0* vtx)
 		{
 			vert_cvt_base;
@@ -3718,7 +3718,7 @@ nl:
 		}
 
 		//(Non-Textured, Floating Color)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex1(TA_Vertex1* vtx)
 		{
 			vert_cvt_base;
@@ -3729,7 +3729,7 @@ nl:
 		}
 
 		//(Non-Textured, Intensity)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex2(TA_Vertex2* vtx)
 		{
 			vert_cvt_base;
@@ -3738,7 +3738,7 @@ nl:
 		}
 
 		//(Textured, Packed Color)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex3(TA_Vertex3* vtx)
 		{
 			vert_cvt_base;
@@ -3753,7 +3753,7 @@ nl:
 		}
 
 		//(Textured, Packed Color, 16bit UV)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex4(TA_Vertex4* vtx)
 		{
 			vert_cvt_base;
@@ -3768,7 +3768,7 @@ nl:
 		}
 
 		//(Textured, Floating Color)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex5A(TA_Vertex5A* vtx)
 		{
 			vert_cvt_base;
@@ -3779,7 +3779,7 @@ nl:
 
 			vert_uv_32(u,v);
 		}
-		__forceinline
+		INLINE
 		static void AppendPolyVertex5B(TA_Vertex5B* vtx)
 		{
 			vert_res_base;
@@ -3789,7 +3789,7 @@ nl:
 		}
 
 		//(Textured, Floating Color, 16bit UV)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex6A(TA_Vertex6A* vtx)
 		{
 			vert_cvt_base;
@@ -3800,7 +3800,7 @@ nl:
 
 			vert_uv_16(u,v);
 		}
-		__forceinline
+		INLINE
 		static void AppendPolyVertex6B(TA_Vertex6B* vtx)
 		{
 			vert_res_base;
@@ -3810,7 +3810,7 @@ nl:
 		}
 
 		//(Textured, Intensity)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex7(TA_Vertex7* vtx)
 		{
 			vert_cvt_base;
@@ -3822,7 +3822,7 @@ nl:
 		}
 
 		//(Textured, Intensity, 16bit UV)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex8(TA_Vertex8* vtx)
 		{
 			vert_cvt_base;
@@ -3835,7 +3835,7 @@ nl:
 		}
 
 		//(Non-Textured, Packed Color, with Two Volumes)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex9(TA_Vertex9* vtx)
 		{
 			vert_cvt_base;
@@ -3846,7 +3846,7 @@ nl:
 		}
 
 		//(Non-Textured, Intensity,	with Two Volumes)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex10(TA_Vertex10* vtx)
 		{
 			vert_cvt_base;
@@ -3855,7 +3855,7 @@ nl:
 		}
 
 		//(Textured, Packed Color,	with Two Volumes)	
-		__forceinline
+		INLINE
 		static void AppendPolyVertex11A(TA_Vertex11A* vtx)
 		{
 			vert_cvt_base;
@@ -3868,7 +3868,7 @@ nl:
 
 			vert_uv_32(u0,v0);
 		}
-		__forceinline
+		INLINE
 		static void AppendPolyVertex11B(TA_Vertex11B* vtx)
 		{
 			vert_res_base;
@@ -3876,7 +3876,7 @@ nl:
 		}
 
 		//(Textured, Packed Color, 16bit UV, with Two Volumes)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex12A(TA_Vertex12A* vtx)
 		{
 			vert_cvt_base;
@@ -3889,7 +3889,7 @@ nl:
 
 			vert_uv_16(u0,v0);
 		}
-		__forceinline
+		INLINE
 		static void AppendPolyVertex12B(TA_Vertex12B* vtx)
 		{
 			vert_res_base;
@@ -3897,7 +3897,7 @@ nl:
 		}
 
 		//(Textured, Intensity,	with Two Volumes)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex13A(TA_Vertex13A* vtx)
 		{
 			vert_cvt_base;
@@ -3907,7 +3907,7 @@ nl:
 
 			vert_uv_32(u0,v0);
 		}
-		__forceinline
+		INLINE
 		static void AppendPolyVertex13B(TA_Vertex13B* vtx)
 		{
 			vert_res_base;
@@ -3915,7 +3915,7 @@ nl:
 		}
 
 		//(Textured, Intensity, 16bit UV, with Two Volumes)
-		__forceinline
+		INLINE
 		static void AppendPolyVertex14A(TA_Vertex14A* vtx)
 		{
 			vert_cvt_base;
@@ -3925,7 +3925,7 @@ nl:
 
 			vert_uv_16(u0,v0);
 		}
-		__forceinline
+		INLINE
 		static void AppendPolyVertex14B(TA_Vertex14B* vtx)
 		{
 			vert_res_base;
@@ -3933,7 +3933,7 @@ nl:
 		}
 
 		//Sprites
-		__forceinline
+		INLINE
 		static void AppendSpriteParam(TA_SpriteParam* spr)
 		{
 			//printf("Sprite\n");
@@ -3967,7 +3967,7 @@ nl:
 		cv[indx].u	=	f16(sv->u_name);\
 		cv[indx].v	=	f16(sv->v_name);
 		//Sprite Vertex Handlers
-		__forceinline
+		INLINE
 		static void AppendSpriteVertexA(TA_Sprite1A* sv)
 		{
 			if (CurrentPP->count)
@@ -4048,7 +4048,7 @@ nl:
             P.u = A_u + k1 * AB_u + k2 * AC_u;
 			P.v = A_v + k1 * AB_v + k2 * AC_v;
 		}
-		__forceinline
+		INLINE
 		static void AppendSpriteVertexB(TA_Sprite1B* sv)
 		{
 			vert_res_base;
@@ -4110,7 +4110,7 @@ nl:
 			}
 			*/
 		}
-		__forceinline
+		INLINE
 		static void AppendModVolVertexA(TA_ModVolA* mvv)
 		{
 		#ifdef MODVOL
@@ -4131,7 +4131,7 @@ nl:
 			//lmr_count++;
 		#endif	
 		}
-		__forceinline
+		INLINE
 		static void AppendModVolVertexB(TA_ModVolB* mvv)
 		{
 		#ifdef MODVOL
@@ -4144,13 +4144,13 @@ nl:
 		}
 
 		//Misc
-		__forceinline
+		INLINE
 		static void ListCont()
 		{
 			//printf("LC : TA OL base = 0x%X\n",TA_OL_BASE);
 			SetCurrentTARC(TA_ISP_BASE);
 		}
-		__forceinline
+		INLINE
 		static void ListInit()
 		{
 			//printf("LI : TA OL base = 0x%X\n",TA_OL_BASE);
@@ -4161,7 +4161,7 @@ nl:
 			tarc.global_param_op.Append();
 			BGPoly=tarc.verts.Append(4);
 		}
-		__forceinline
+		INLINE
 		static void SoftReset()
 		{
 		}

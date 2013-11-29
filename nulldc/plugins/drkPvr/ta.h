@@ -87,7 +87,7 @@ namespace TASplitter
 		//part : 0 fill all data , 1 fill upper 32B , 2 fill lower 32B
 		//Poly decoder , will be moved to pvr code
 		template <u32 poly_type,u32 part,bool StripEnd>
-		__forceinline
+		INLINE
 		static Ta_Dma* FASTCALL ta_handle_poly(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			TA_VertexParam* vp=(TA_VertexParam*)data;

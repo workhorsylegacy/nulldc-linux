@@ -139,26 +139,26 @@ struct PixelBuffer
 		p_buffer_start=p_current_line=p_current_pixel=(u32*)data;
 		pixels_per_line=ppl_bytes/sizeof(u32);
 	}
-	__forceinline void prel(u32 x,u32 value)
+	INLINE void prel(u32 x,u32 value)
 	{
 		p_current_pixel[x]=value;
 	}
 
-	__forceinline void prel(u32 x,u32 y,u32 value)
+	INLINE void prel(u32 x,u32 y,u32 value)
 	{
 		p_current_pixel[y*pixels_per_line+x]=value;
 	}
 
-	__forceinline void rmovex(u32 value)
+	INLINE void rmovex(u32 value)
 	{
 		p_current_pixel+=value;
 	}
-	__forceinline void rmovey(u32 value)
+	INLINE void rmovey(u32 value)
 	{
 		p_current_line+=pixels_per_line*value;
 		p_current_pixel=p_current_line;
 	}
-	__forceinline void amove(u32 x_m,u32 y_m)
+	INLINE void amove(u32 x_m,u32 y_m)
 	{
 		//p_current_pixel=p_buffer_start;
 		p_current_line=p_buffer_start+pixels_per_line*y_m;
@@ -205,7 +205,7 @@ const u32 unpack_1_to_8[2]={0,0xFF};
 	ARGB8888( unpack_4_to_8_tw[(word&0xF000)>>(12)],unpack_4_to_8_tw[(word&0xF00)>>(8)],unpack_4_to_8_tw[(word&0xF0)>>(4)],unpack_4_to_8_tw[(word&0xF)] )
 
 template<class PixelPacker>
-__forceinline u32 YUV422(s32 Y,s32 Yu,s32 Yv)
+INLINE u32 YUV422(s32 Y,s32 Yu,s32 Yv)
 {
 	Yu-=128;
 	Yv-=128;
@@ -227,7 +227,7 @@ u32 FASTCALL twiddle_fast(u32 x,u32 y,u32 x_sz,u32 y_sz);
 //pixel packers !
 struct pp_dx
 {
-	__forceinline 
+	INLINE 
 		static u32 pack(u8 A,u8 R,u8 G,u8 B)
 	{
 		return ( ((A)<<24) | ((R)<<16) | ((G)<<8) | ((B)<<0));
@@ -235,7 +235,7 @@ struct pp_dx
 };
 struct pp_gl
 {
-	__forceinline 
+	INLINE 
 		static u32 pack(u8 A,u8 R,u8 G,u8 B)
 	{
 		return ( ((A)<<24) | ((B)<<16) | ((G)<<8) | ((R)<<0));
@@ -248,7 +248,7 @@ struct name \
 { \
 	static const u32 xpp=x;\
 	static const u32 ypp=y;	\
-	__forceinline static void FASTCALL Convert(PixelBuffer* pb,u8* data) \
+	INLINE static void FASTCALL Convert(PixelBuffer* pb,u8* data) \
 {
 
 #define pixelcvt_end } }

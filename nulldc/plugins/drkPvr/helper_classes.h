@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../common/x86/x86_mem.hpp"
+#include "../common/portable.h"
 #include <vector>
 using namespace std;
 
@@ -26,7 +27,7 @@ public :
 	u32 last_size_index;
 	u32 avg_sz;
 	
-	__declspec(noinline) void resize(u32 min_size=1)
+	NOINLINE void resize(u32 min_size=1)
 	{
 		//verify(size!=0x000004d7);
 		u32 new_size=used+4+min_size;
@@ -52,17 +53,17 @@ public :
 			resize(pre_alloc);
 	}
 
-	__forceinline T* LastPtr()
+	INLINE T* LastPtr()
 	{
 		return &data[used-1];
 	}
-	__forceinline T* Append()
+	INLINE T* Append()
 	{
 		if (used==size)
 			resize();
 		return &data[used++];
 	}
-	__forceinline T* Append(u32 count)
+	INLINE T* Append(u32 count)
 	{
 		if ((used+count)>=size)
 			resize(count);
@@ -114,7 +115,7 @@ public :
 private:
 	u32 freesz;
 	
-	__declspec(noinline) void GetChunk(u32 ac)
+	NOINLINE void GetChunk(u32 ac)
 	{
 		if (ptr!=0)
 		{
@@ -239,7 +240,7 @@ public :
 	u8* ptr;
 	static const u32 ItemsPerChunk=ChunkSize/sizeof(T);
 private:
-	__declspec(noinline) u8* NextChunk()
+	NOINLINE u8* NextChunk()
 	{		
 		u8* nptr=GetBuffer()-FreeItems*sizeof(T);
 		FreeItems+=ItemsPerChunk;
@@ -247,7 +248,7 @@ private:
 		allocate_list_ptr->push_back(nptr);
 		return nptr;
 	}
-	__declspec(noinline) void PrevChunk()
+	NOINLINE void PrevChunk()
 	{		
 		FreeBuffer(allocate_list_ptr->back());
 		allocate_list_ptr->pop_back();
