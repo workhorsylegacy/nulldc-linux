@@ -84,8 +84,6 @@ void SaveSettings();
 
 int cfgGetInt(char* key,int def);
 
-#define THREADCALL __stdcall
-
 typedef  u32 THREADCALL ThreadEntryFP(void* param);
 typedef void* THREADHANDLE;
 

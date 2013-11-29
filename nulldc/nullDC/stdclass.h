@@ -17,7 +17,6 @@ u32 fastrand();
  
 //Windoze code
 //Threads
-#define THREADCALL __stdcall
 
 typedef  u32 THREADCALL ThreadEntryFP(void* param);
 typedef void* THREADHANDLE;

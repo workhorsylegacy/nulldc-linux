@@ -440,19 +440,19 @@ u8 EncodeDisp(u32 disp,x86_mrm_t* to,u8 flags)
 	verify(false);
 	return 0;
 }
-__declspec(dllexport) x86_mrm_t x86_mrm(x86_reg base)
+DLLEXPORT x86_mrm_t x86_mrm(x86_reg base)
 {
 	return x86_mrm(base,NO_REG,sib_scale_1,0);
 }
-__declspec(dllexport) x86_mrm_t x86_mrm(x86_reg base,x86_ptr disp)
+DLLEXPORT x86_mrm_t x86_mrm(x86_reg base,x86_ptr disp)
 {
 	return x86_mrm(base,NO_REG,sib_scale_1,disp);
 }
-__declspec(dllexport) x86_mrm_t x86_mrm(x86_reg index,x86_sib_scale scale,x86_ptr disp)
+DLLEXPORT x86_mrm_t x86_mrm(x86_reg index,x86_sib_scale scale,x86_ptr disp)
 {
 	return x86_mrm(NO_REG,index,scale,disp);
 }
-__declspec(dllexport) x86_mrm_t x86_mrm(x86_reg base,x86_reg index)
+DLLEXPORT x86_mrm_t x86_mrm(x86_reg base,x86_reg index)
 {
 	return x86_mrm(base,index,sib_scale_1,0);
 }

@@ -25,17 +25,6 @@
 #pragma warning( disable : 4100)
 
 
-#define EXPORT extern "C" __declspec(dllexport)
-
-#define EXPORT_CALL __stdcall
-
-
-
-#ifndef CDECL
-#define CDECL __cdecl
-#endif
-
-
 
 
 //intc function pointer and enums

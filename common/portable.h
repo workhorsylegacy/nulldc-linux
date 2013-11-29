@@ -66,9 +66,29 @@ typedef wchar_t wchar;
 
 // Fastcall
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-#define FASTCALL __fastcall
+	#define FASTCALL __fastcall
 #else
-#define FASTCALL 
+	#define FASTCALL 
+
+#endif
+
+// Export
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+	#define DLLEXPORT __declspec(dllexport)
+	#define EXPORT extern "C" __declspec(dllexport)
+	#define EXPORT_CALL __stdcall
+	#define THREADCALL __stdcall
+	#define CDECL __cdecl
+#else
+	#define DLLEXPORT
+
+	#define EXPORT
+
+	#define EXPORT_CALL
+
+	#define THREADCALL
+
+	#define CDECL
 
 #endif
 

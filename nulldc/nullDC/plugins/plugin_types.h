@@ -21,12 +21,6 @@ struct VersionNumber
 	};
 };
 
-#define EXPORT extern "C" __declspec(dllexport)
-
-#define EXPORT_CALL __stdcall
-
-#define C_CALL __cdecl
-
 #define DC_PLATFORM_MASK		7
 #define DC_PLATFORM_NORMAL		0   /* Works, for the most part */
 #define DC_PLATFORM_DEV_UNIT	1	/* This is missing hardware */
