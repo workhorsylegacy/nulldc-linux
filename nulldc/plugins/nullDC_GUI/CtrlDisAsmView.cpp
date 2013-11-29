@@ -300,7 +300,7 @@ void CtrlDisAsmView::onPaint(WPARAM wParam, LPARAM lParam)
 				swscanf(mojs+2,L"%08X",&offs);
 				branches[numBranches].src=rowY1 + rowHeight/2;
 				branches[numBranches].srcAddr=address/align;
-				branches[numBranches++].dst=(int)(rowY1+((__int64)offs-(__int64)address)*rowHeight/align + rowHeight/2);
+				branches[numBranches++].dst=(int)(rowY1+((s64)offs-(s64)address)*rowHeight/align + rowHeight/2);
 			//	sprintf(desc,"-->%s", debugger->getDescription(offs));
 				SetTextColor(hdc,0x600060);
 			}

@@ -17,7 +17,7 @@ typedef struct _track {
 	int sector;
 	int sectors;
 	int pregap;
-	__int64 offset;
+	s64 offset;
 } strack;
 
 typedef struct _session

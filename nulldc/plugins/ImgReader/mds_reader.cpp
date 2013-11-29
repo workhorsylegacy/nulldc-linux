@@ -183,7 +183,7 @@ bool parse_mds(wchar *mds_filename,bool verbose)
 			int smth6 = read_binary(int, mds_content, datablock_offset+0x001c);
 			int smth7 = read_binary(int, mds_content, datablock_offset+0x0020);
 			int sector = read_binary(int, mds_content, datablock_offset+0x0024);
-			__int64 offset = read_binary(__int64, mds_content, datablock_offset+0x0028);
+			s64 offset = read_binary(s64, mds_content, datablock_offset+0x0028);
 			int pregap = read_binary(int, mds_content, extrablock_offset+0x0000);
 			int sectors = read_binary(int, mds_content, extrablock_offset+0x0004);
 			if(verbose)
@@ -235,7 +235,7 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 
 
     int nrg_signature;
-	__int64 nrg_trailer_offset=0;
+	s64 nrg_trailer_offset=0;
 	int oldformat;
 
 	fseek(nrg_file,-12,SEEK_END);
@@ -283,7 +283,7 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 	nsessions=1;
     
     // find relative offsets for different blocks
-    __int64 offs = 0;
+    s64 offs = 0;
 
     // CUEX is 64-bit variant of CUES, same goes for DAOX vs. DAOI and ETN2 vs. ETNF.
     // DAO is DiscAtOnce, ETN is TrackAtOnce. SINF is Session Information, and MTYP is Media Type.
@@ -294,8 +294,8 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
     
 	struct _block {
 		struct info {
-			__int64 offset;
-			__int64 size;
+			s64 offset;
+			s64 size;
 		} infos[255];
 		int found;
 	} block[10];
@@ -438,8 +438,8 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 			entry = 1; // entry 0 is block-header entry so we start on entry 1
 			for(;;)
 			{
-				__int64 cue_offset;
-				__int64 dao_offset;
+				s64 cue_offset;
+				s64 dao_offset;
 				if(oldformat)
 				{
 					cue_offset = block[CUES].infos[sess].offset;
@@ -472,8 +472,8 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 				byteswap(&sector_size,2);
 				int mode = read_binary(unsigned char, nrg_content, dao_offset-12+entry*42+14);
 
-				__int64 start_offset;
-				__int64 end_offset;
+				s64 start_offset;
+				s64 end_offset;
 	    
 				if(oldformat)
 				{
@@ -484,8 +484,8 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 				}
 				else
 				{
-					start_offset = read_binary(__int64, nrg_content, dao_offset-12+entry*42+26);
-					end_offset = read_binary(__int64, nrg_content, dao_offset-12+entry*42+34);
+					start_offset = read_binary(s64, nrg_content, dao_offset-12+entry*42+26);
+					end_offset = read_binary(s64, nrg_content, dao_offset-12+entry*42+34);
 					byteswap(&start_offset,8);
 					byteswap(&end_offset,8);
 				}
@@ -517,8 +517,8 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 	                        
 			for(entry=0;entry<tracks_in_session;entry++)
 			{
-				__int64 offset;
-				__int64 size;
+				s64 offset;
+				s64 size;
 				int mode;
 				int sector;
 
@@ -534,8 +534,8 @@ bool parse_nrg(wchar*nrg_filename,bool verbose)
 				}
 				else
 				{
-					offset = read_binary(__int64, nrg_content, block[ETN2].infos[sess].offset+8+entry*32+0);
-					size = read_binary(__int64, nrg_content, block[ETN2].infos[sess].offset+8+entry*32+8);
+					offset = read_binary(s64, nrg_content, block[ETN2].infos[sess].offset+8+entry*32+0);
+					size = read_binary(s64, nrg_content, block[ETN2].infos[sess].offset+8+entry*32+8);
 					mode = read_binary(unsigned char, nrg_content, block[ETN2].infos[sess].offset+8+entry*32+19);
 					sector = read_binary(int, nrg_content, block[ETN2].infos[sess].offset+8+entry*32+20);
 					byteswap(&size,8);

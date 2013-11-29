@@ -1,11 +1,16 @@
 #pragma once
-typedef signed __int8 int8;
-typedef signed __int16 int16;
-typedef signed __int32 int32;
-typedef signed __int64 int64;
-typedef unsigned __int8 uint8;
-typedef unsigned __int16 uint16;
-typedef unsigned __int32 uint32;
-typedef unsigned __int64 uint64;
+
+#include <stdint.h>
+
+typedef int8_t  s8;
+typedef int16_t s16;
+typedef int32_t s32;
+typedef int64_t s64;
+
+typedef uint8_t  u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
+
 typedef unsigned char uchar;
 typedef signed char schar;

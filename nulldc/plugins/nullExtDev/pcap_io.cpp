@@ -58,7 +58,7 @@ int GetMACaddress(char *adapter, mac_address* addr)
 
 int gettimeofday (struct timeval *tv, void* tz)
 {
-  unsigned __int64 ns100; /*time since 1 Jan 1601 in 100ns units */
+  u64 ns100; /*time since 1 Jan 1601 in 100ns units */
 
   GetSystemTimeAsFileTime((LPFILETIME)&ns100);
   tv->tv_usec = (long) ((ns100 / 10L) % 1000000L);
