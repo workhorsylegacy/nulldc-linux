@@ -1301,7 +1301,7 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 					while( i >=0)
 					{
 						
-						swprintf(fn,L"%sscreenshot_%d.bmp",ep,i);
+						swprintf(fn, WCHAR_LEN(fn), L"%sscreenshot_%d.bmp", ep, i);
 
 						
 						FILE* tf=_tfopen(fn,L"rb");
@@ -1692,9 +1692,9 @@ refresh:
 ///////////////////////////////////////////////////////////////////////
 
 wchar szBuf[256];	// more than big enough for this
-wchar *xs( u32 x ) { swprintf(szBuf, L"%X", x); return szBuf; }
-wchar *fls( float f ) { swprintf(szBuf, L"%f", f); return szBuf; }
-wchar *x8s( u32 x ) { swprintf(szBuf, L"%08X", x); return szBuf; }
+wchar *xs(u32 x) { swprintf(szBuf, WCHAR_LEN(szBuf), L"%X", x); return szBuf; }
+wchar *fls(float f) { swprintf(szBuf, WCHAR_LEN(szBuf), L"%f", f); return szBuf; }
+wchar *x8s(u32 x) { swprintf(szBuf, WCHAR_LEN(szBuf), L"%08X", x); return szBuf; }
 
 f32 GetXf(u32 r)
 {
@@ -1793,20 +1793,20 @@ void RefreshDebugger(HWND hDlg)
 			IsDlgButtonChecked(hDlg, IDC_FPSEL2) ? (2) : (1) ;
 
 	wchar szFPU[1024];
-	swprintf(szFPU, L"FPU Regs\n========\nFPSCR: %08X \nFPUL: %08X\n", Sh4GetRegister(reg_fpscr), Sh4GetRegister(reg_fpul));
+	swprintf(szFPU, WCHAR_LEN(szFPU), L"FPU Regs\n========\nFPSCR: %08X \nFPUL: %08X\n", Sh4GetRegister(reg_fpscr), Sh4GetRegister(reg_fpul));
 
 	switch( fpm &3 )	// IDC_FPSEL
 	{
 	case 3:	// Vector: XMTX | FV
 		if(fpm&4) {
-			swprintf(szBuf, L"XMTX\n"
+			swprintf(szBuf, WCHAR_LEN(szBuf), L"XMTX\n"
 				L"(%.5f\t%.5f\t%.5f\t%.5f)\n" L"(%.5f\t%.5f\t%.5f\t%.5f)\n"
 				L"(%.5f\t%.5f\t%.5f\t%.5f)\n" L"(%.5f\t%.5f\t%.5f\t%.5f)\n\n",
 				GetXf(0), GetXf(4), GetXf(8), GetXf(12), GetXf(1), GetXf(5), GetXf(9), GetXf(13),
 				GetXf(2), GetXf(6), GetXf(10), GetXf(14), GetXf(3), GetXf(7), GetXf(11), GetXf(15) );
 			_tcscat(szFPU,szBuf);
 		} else {
-			swprintf(szBuf,
+			swprintf(szBuf, WCHAR_LEN(szBuf), 
 				L"FV0 :\n%.5f\t%.5f\t%.5f\t%.5f\n" L"FV4 :\n%.5f\t%.5f\t%.5f\t%.5f\n"
 				L"FV8 :\n%.5f\t%.5f\t%.5f\t%.5f\n" L"FV12:\n%.5f\t%.5f\t%.5f\t%.5f\n\n",
 				GetFr(0), GetFr(1), GetFr(2), GetFr(3),	GetFr(4), GetFr(5), GetFr(6), GetFr(7),
@@ -1817,7 +1817,7 @@ void RefreshDebugger(HWND hDlg)
 
 	case 2:	// Double: XD | DR
 		for( u32 i=0; i<8; i++ ) {
-			swprintf(szBuf, L" %s%02d :%+G \n", (fpm&4)?L"XD":L"DR", (i), ((fpm&4)? dbGetXD(i) : dbGetDR(i)) );
+			swprintf(szBuf, WCHAR_LEN(szBuf), L" %s%02d :%+G \n", (fpm & 4) ? L"XD" : L"DR", (i), ((fpm & 4) ? dbGetXD(i) : dbGetDR(i)));
 			wcscat(szFPU,szBuf);
 		}
 	break;
@@ -1825,8 +1825,8 @@ void RefreshDebugger(HWND hDlg)
 	case 1:	// Single: XF | FR
 	default:	// default to single precision mode | wtf is the first entry non working for ?
 		for( u32 i=0; i<16; i+=2 ) {
-			swprintf(szBuf, L" %s%02d :%+G \n", ((fpm&4)?L"XF":L"FR"), (i+0), ((fpm&4)? GetXf(i+0) : GetFr(i+0)) );	_tcscat(szFPU,szBuf);
-			swprintf(szBuf, L" %s%02d :%+G \n", ((fpm&4)?L"XF":L"FR"), (i+1), ((fpm&4)? GetXf(i+1) : GetFr(i+1)) );	_tcscat(szFPU,szBuf);
+			swprintf(szBuf, WCHAR_LEN(szBuf), L" %s%02d :%+G \n", ((fpm & 4) ? L"XF" : L"FR"), (i + 0), ((fpm & 4) ? GetXf(i + 0) : GetFr(i + 0)));	_tcscat(szFPU, szBuf);
+			swprintf(szBuf, WCHAR_LEN(szBuf), L" %s%02d :%+G \n", ((fpm & 4) ? L"XF" : L"FR"), (i + 1), ((fpm & 4) ? GetXf(i + 1) : GetFr(i + 1)));	_tcscat(szFPU, szBuf);
 		}
 	break;
 	}

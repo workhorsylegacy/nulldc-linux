@@ -232,7 +232,7 @@ bool AddToPluginList(wchar* dll)
 			if (info.maple.devices[i].Type==MDT_EndOfList)
 				break;
 			t.id=i;
-			swprintf(t.dll,_T("%s:%d"),load_info.dll,i);
+			swprintf(t.dll, WCHAR_LEN(t.dll), _T("%s:%d"), load_info.dll, i);
 			maple_device_definition* mdd=&t;
 			memcpy(mdd,&info.maple.devices[i],sizeof(maple_device_definition));
 
@@ -562,7 +562,7 @@ void cm_MampleSubEmpty(u32 root,u32 port,u32 subport)
 		if (MapleDeviceList_cached[i].Type!=MDT_Sub)
 			continue;
 		wchar text[512];
-		swprintf(text,_T("Attach %s"),MapleDeviceList_cached[i].Name);
+		swprintf(text, WCHAR_LEN(text), _T("Attach %s"), MapleDeviceList_cached[i].Name);
 		//Attach NAME
 		u32 menu=libgui.AddMenuItem(root,-1,text,menu_handle_attach_sub,0);
 		MenuItem mi;
@@ -645,7 +645,7 @@ void cm_MampleMainEmpty(u32 root,u32 port)
 		if (MapleDeviceList_cached[i].Type!=MDT_Main)
 			continue;
 		wchar text[512];
-		swprintf(text,_T("Attach %s"),MapleDeviceList_cached[i].Name);
+		swprintf(text, WCHAR_LEN(text), _T("Attach %s"), MapleDeviceList_cached[i].Name);
 		//Attach NAME
 		u32 menu=libgui.AddMenuItem(root,-1,text,menu_handle_attach_main,0);
 		MenuItem mi;
@@ -669,7 +669,7 @@ void cm_MampleMainUsed(u32 root,u32 port,u32 flags)
 			if (flags & (1<<i))
 			{
 				wchar temp[512];
-				swprintf(temp,_T("Subdevice %d"),i+1);
+				swprintf(temp, WCHAR_LEN(temp), _T("Subdevice %d"), i + 1);
 				u32 sdr=libgui.AddMenuItem(root,-1,temp,0,0);
 				MenuIDs.Maple_port[port][i]=sdr;
 				cm_MampleSubEmpty(sdr,port,i);

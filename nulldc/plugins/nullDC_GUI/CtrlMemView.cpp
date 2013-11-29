@@ -218,7 +218,7 @@ void CtrlMemView::onPaint(WPARAM wParam, LPARAM lParam)
 		int rowY2 = rect.bottom/2 + rowHeight*i + rowHeight/2;
 
 		wchar temp[256];
-		swprintf(temp,L"%08x",address);
+		swprintf(temp, WCHAR_LEN(temp), L"%08x", address);
 
 		//SelectObject(hdc,currentBrush);
 		Rectangle(hdc,0,rowY1,16,rowY2);
@@ -253,13 +253,13 @@ void CtrlMemView::onPaint(WPARAM wParam, LPARAM lParam)
 		case MV_SYMBOLS:
 			SetTextColor(hdc,0x0000FF);
 			//int fn = address&3;//Debugger_GetSymbolNum(address);
-			swprintf(temp,L"MV_SYMBOLS !!!");
-	//		sprintf(temp, "%s (0x%x b)", Debugger_GetSymbolName(fn),Debugger_GetSymbolSize(fn));
+			swprintf(temp, WCHAR_LEN(temp), L"MV_SYMBOLS !!!");
+	//		sprintf(temp, TEMP_LEN, "%s (0x%x b)", Debugger_GetSymbolName(fn),Debugger_GetSymbolSize(fn));
 			TextOut(hdc,200,rowY1,temp,(int)wcslen(temp));
 
 			SetTextColor(hdc,0x0000000);
 			UINT value = 0xBADC0D3;//ReadMem(address,4);//CMemory::ReadUnchecked_U32(address);
-			swprintf(temp, L"%08x", value );
+			swprintf(temp, WCHAR_LEN(temp), L"%08x", value);
 		//	sprintf(temp, "%08x [%s]", value, Debugger_GetSymbolName(Debugger_GetSymbolNum(value)));
 			TextOut(hdc,70,rowY1,temp,(int)wcslen(temp));
 		break;

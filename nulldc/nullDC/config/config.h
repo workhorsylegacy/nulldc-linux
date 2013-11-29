@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.h"
+#include "../common/portable.h"
 
 /*
 **	cfg* prototypes, if you pass NULL to a cfgSave* it will wipe out the section

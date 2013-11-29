@@ -59,7 +59,7 @@ struct prof_info
 
 	u64 cd;
 
-	void ToText(wchar* dest, prof_stats* stats)
+	void ToText(wchar* dest, size_t DEST_LEN, prof_stats* stats)
 	{
 		cd = CycleDiff();
 
@@ -79,35 +79,35 @@ struct prof_info
 			stats->avg_count[i][EFFSCEAS] += (effsceas(stats->avg_count[i][TICKS],cd) - stats->avg_count[i][EFFSCEAS]) / stats->avg_counter;
 		}
 	
-		dest+=swprintf(dest,_T("\nGFX  cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("\nGFX  cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[GFX_TC],cd)/1000.0f, percent(current_count[GFX_TC],total_tc)/100.0f,		
 			stats->avg_count[GFX_TC][EFFSCEAS]/1000.0f, stats->avg_count[GFX_TC][PERCENT]/100.0f,		
 			stats->max_count[GFX_TC][EFFSCEAS]/1000.0f, stats->max_count[GFX_TC][PERCENT]/100.0f);
-		dest+=swprintf(dest,_T("AICA cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("AICA cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[AICA_TC],cd)/1000.0f, percent(current_count[AICA_TC],total_tc)/100.0f,		
 			stats->avg_count[AICA_TC][EFFSCEAS]/1000.0f, stats->avg_count[AICA_TC][PERCENT]/100.0f,		
 			stats->max_count[AICA_TC][EFFSCEAS]/1000.0f, stats->max_count[AICA_TC][PERCENT]/100.0f);
-		dest+=swprintf(dest,_T("ARM  cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("ARM  cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[ARM_TC],cd)/1000.0f, percent(current_count[ARM_TC],total_tc)/100.0f,		
 			stats->avg_count[ARM_TC][EFFSCEAS]/1000.0f, stats->avg_count[ARM_TC][PERCENT]/100.0f,		
 			stats->max_count[ARM_TC][EFFSCEAS]/1000.0f, stats->max_count[ARM_TC][PERCENT]/100.0f);
-		dest+=swprintf(dest,_T("GDR  cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("GDR  cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[GDROM_TC],cd)/1000.0f, percent(current_count[GDROM_TC],total_tc)/100.0f,		
 			stats->avg_count[GDROM_TC][EFFSCEAS]/1000.0f, stats->avg_count[GDROM_TC][PERCENT]/100.0f,		
 			stats->max_count[GDROM_TC][EFFSCEAS]/1000.0f, stats->max_count[GDROM_TC][PERCENT]/100.0f);		
-		dest+=swprintf(dest,_T("MAIN cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("MAIN cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[MAIN_TC],cd)/1000.0f, percent(current_count[MAIN_TC],total_tc)/100.0f,		
 			stats->avg_count[MAIN_TC][EFFSCEAS]/1000.0f, stats->avg_count[MAIN_TC][PERCENT]/100.0f,		
 			stats->max_count[MAIN_TC][EFFSCEAS]/1000.0f, stats->max_count[MAIN_TC][PERCENT]/100.0f);
-		dest+=swprintf(dest,_T("LOOP cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("LOOP cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[DYNA_LOOP_TC],cd)/1000.0f, percent(current_count[DYNA_LOOP_TC],total_tc)/100.0f,		
 			stats->avg_count[DYNA_LOOP_TC][EFFSCEAS]/1000.0f, stats->avg_count[DYNA_LOOP_TC][PERCENT]/100.0f,		
 			stats->max_count[DYNA_LOOP_TC][EFFSCEAS]/1000.0f, stats->max_count[DYNA_LOOP_TC][PERCENT]/100.0f);
-		dest+=swprintf(dest,_T("DYNA cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
+		dest += swprintf(dest, DEST_LEN, _T("DYNA cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%\n"),
 			effsceas(current_count[DYNA_TC],cd)/1000.0f, percent(current_count[DYNA_TC],total_tc)/100.0f,		
 			stats->avg_count[DYNA_TC][EFFSCEAS]/1000.0f, stats->avg_count[DYNA_TC][PERCENT]/100.0f,		
 			stats->max_count[DYNA_TC][EFFSCEAS]/1000.0f, stats->max_count[DYNA_TC][PERCENT]/100.0f);
-		dest+=swprintf(dest,_T("REST cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%"),
+		dest += swprintf(dest, DEST_LEN, _T("REST cur %.3f, %5.1f%% | avg %.3f, %5.1f%% | max %.3f, %5.1f%%"),
 			effsceas(current_count[REST_TC],cd)/1000.0f, percent(current_count[REST_TC],total_tc)/100.0f,		
 			stats->avg_count[REST_TC][EFFSCEAS]/1000.0f, stats->avg_count[REST_TC][PERCENT]/100.0f,		
 			stats->max_count[REST_TC][EFFSCEAS]/1000.0f, stats->max_count[REST_TC][PERCENT]/100.0f);

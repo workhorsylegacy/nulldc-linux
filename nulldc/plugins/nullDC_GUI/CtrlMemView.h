@@ -22,6 +22,7 @@
 
 #include "DebugInterface.h"
 #include "SH4DbgInterface.h"
+#include "../common/portable.h"
 
 void* GetWindowPtr(HWND hWnd,int nIndex);
 void SetWindowPtr( HWND hWnd,int nIndex,void* dwNewLong);

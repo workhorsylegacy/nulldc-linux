@@ -197,13 +197,14 @@ extern u32 no_interrupts,yes_interrupts;
 
 		 //Update Stats if needed
 		 if (info.total_tc>MAX_TICK_COUNT)
-		 {			 			 
-			 wchar temp[1024];			 
+		 {
+			 const size_t TEMP_LEN = 1024;
+			 wchar temp[TEMP_LEN];
 
 			 memcpy(&profile_info,&info,sizeof(prof_info));			 			 	 
 			 memset(&info,0,sizeof(prof_info));			 			 
 
-			 profile_info.ToText(temp, &stats);
+			 profile_info.ToText(temp, TEMP_LEN, &stats);
 			 wprintf(_T("%s \n"),temp);
 			 
 			 if ( yes_interrupts+no_interrupts)

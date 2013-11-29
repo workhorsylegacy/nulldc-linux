@@ -2,6 +2,7 @@
 #include "types.h"
 #include "gui_plugin_header.h"
 #include "dc/sh4/sh4_if.h"
+#include "../common/portable.h"
 
 //Plugin handling functions :)
 struct nullDC_plugin

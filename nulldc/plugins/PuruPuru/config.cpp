@@ -143,9 +143,9 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 				wchar temp[512];				
 				
 				if(xoyinfo[x].connected)				
-					swprintf(temp, sizeof(temp), L"XInput[%d]: Connected", x);	
+					swprintf(temp, WCHAR_LEN(temp), L"XInput[%d]: Connected", x);
 				else
-					swprintf(temp, sizeof(temp), L"XInput[%d]: Not connected", x);						
+					swprintf(temp, WCHAR_LEN(temp), L"XInput[%d]: Not connected", x);
 
 				SendMessage(CB, CB_ADDSTRING, 0, (LPARAM)temp);
 			}

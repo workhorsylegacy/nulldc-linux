@@ -9,6 +9,7 @@
 //#define _HAS_LGLCD_ 1
 
 #include "nullDC/plugins/plugin_header.h"
+#include "../common/portable.h"
 #include <memory.h>
 #include <math.h>
 #include <random>
@@ -3107,7 +3108,7 @@ s32 FASTCALL CreateMain(maple_device_instance* inst,u32 id,u32 flags,u32 rootmen
 	wchar temp[512];
 	if (id<=1)
 	{
-		swprintf(temp,sizeof(temp),L"Config keys for Player %d",(inst->port>>6)+1);
+		swprintf(temp, WCHAR_LEN(temp), L"Config keys for Player %d", (inst->port >> 6) + 1);
 		u32 ckid=host.AddMenuItem(rootmenu,-1,temp,config_keys,0);
 		MenuItem mi;
 		mi.PUser=inst;

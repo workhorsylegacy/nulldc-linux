@@ -238,7 +238,7 @@ s32 FASTCALL CreateMain(maple_device_instance* inst, u32 id, u32 flags, u32 root
 #endif
 		
 	wchar temp[512];
-	swprintf(temp, sizeof(temp), L"Config keys for Player %d", (inst->port >> 6) + 1);	
+	swprintf(temp, WCHAR_LEN(temp), L"Config keys for Player %d", (inst->port >> 6) + 1);
 	u32 ckid = host.AddMenuItem(rootmenu, -1, temp, ConfigMenuCallback, 0);
 
 	// Set the user defined pointer for the menu to the device instance, so we can tell for which port the menu was called ;)	

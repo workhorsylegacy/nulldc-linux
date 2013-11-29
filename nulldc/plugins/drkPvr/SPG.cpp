@@ -157,7 +157,7 @@ void FASTCALL spgUpdatePvr(u32 cycles)
 					mode=L"VGA";
 				}
 
-				swprintf(fpsStr,256,L"%s/%c - %4.2f%% - VPS: %4.2f(%s%s%4.2f) RPS: %4.2f Vert: %4.2f%c Sh4: %4.2f mhz", 
+				swprintf(fpsStr, WCHAR_LEN(fpsStr), L"%s/%c - %4.2f%% - VPS: %4.2f(%s%s%4.2f) RPS: %4.2f Vert: %4.2f%c Sh4: %4.2f mhz",
 					emu_name,'n',spd_cpu*100/200,spd_vbs,
 					mode,res,fullvbs,
 					spd_fps,mv,mv_c, spd_cpu);

@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "../common/portable.h"
+
 class SH4DebugInterface : public DebugInterface
 {
 public:

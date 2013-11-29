@@ -242,7 +242,7 @@ void CtrlDisAsmView::onPaint(WPARAM wParam, LPARAM lParam)
 		int rowY1 = rect.bottom/2 + rowHeight*i - rowHeight/2;
 		int rowY2 = rect.bottom/2 + rowHeight*i + rowHeight/2;
 		wchar temp[256];
-		swprintf(temp,L"%08X",address);
+		swprintf(temp, WCHAR_LEN(temp), L"%08X", address);
 
 		TCHAR desc[256]=L"";
 		wcscpy(desc,debugger->getDescription(address));	// do this before getColor()

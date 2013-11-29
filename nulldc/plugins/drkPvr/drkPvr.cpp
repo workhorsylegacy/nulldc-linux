@@ -90,7 +90,7 @@ public:
 					MenuItem t;
 					emu.GetMenuItem(items[i].id,&t,MIM_Text);
 					wchar temp[512];
-					swprintf(temp,512,format,items[i].ex_name==0?t.Text:items[i].ex_name);
+					swprintf(temp, WCHAR_LEN(temp), format, items[i].ex_name == 0 ? t.Text : items[i].ex_name);
 					t.Text=temp;
 					emu.SetMenuItem(root_menu,&t,MIM_Text);
 				}

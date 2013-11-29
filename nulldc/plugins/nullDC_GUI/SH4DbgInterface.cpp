@@ -160,7 +160,7 @@ wchar *SH4DebugInterface::getDescription(unsigned int address)
 		last=address;
 
 	u32 dwOp = ReadMem16(address);
-	u32 sz=swprintf(szDesc, L"0x%04X      ", dwOp);
+	u32 sz = swprintf(szDesc, WCHAR_LEN(szDesc), L"0x%04X      ", dwOp);
 	GetSymbName(address,&szDesc[sz],false);
 	/*
 	if(!bElfLoaded || ((symindex>>16)==0) )

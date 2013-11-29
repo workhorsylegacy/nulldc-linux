@@ -299,10 +299,10 @@ bool cfgOpen()
 	free(tmpPath);
 
 	if (cfgPath[0]==0)
-		swprintf(cfgPath,L"%snullDC.cfg", appPath);
+		swprintf(cfgPath, WCHAR_LEN(cfgPath), L"%snullDC.cfg", appPath);
 
-	swprintf(dataPath,L"%sdata\\", appPath);
-	swprintf(pluginPath,L"%splugins\\", appPath);
+	swprintf(dataPath, WCHAR_LEN(dataPath), L"%sdata\\", appPath);
+	swprintf(pluginPath, WCHAR_LEN(pluginPath), L"%splugins\\", appPath);
 
 	ConfigSection* cs= cfgdb.GetEntry(L"emu");
 
@@ -437,7 +437,7 @@ s32 EXPORT_CALL cfgLoadInt(const wchar * Section, const wchar * Key,s32 Default)
 {
 	wchar temp_d[30];
 	wchar temp_o[30];
-	swprintf(temp_d,L"%d",Default);
+	swprintf(temp_d, WCHAR_LEN(temp_d), L"%d", Default);
 	cfgLoadStr(Section,Key,temp_o,temp_d);
 	return _wtoi(temp_o);
 }
@@ -445,7 +445,7 @@ s32 EXPORT_CALL cfgLoadInt(const wchar * Section, const wchar * Key,s32 Default)
 void EXPORT_CALL cfgSaveInt(const wchar * Section, const wchar * Key, s32 Int)
 {
 	wchar tmp[32];
-	swprintf(tmp,L"%d", Int);
+	swprintf(tmp, WCHAR_LEN(tmp), L"%d", Int);
 	cfgSaveStr(Section,Key,tmp);
 }
 void cfgSetVitual(const wchar * Section, const wchar * Key, const wchar * String)

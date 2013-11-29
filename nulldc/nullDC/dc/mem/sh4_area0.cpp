@@ -155,7 +155,7 @@ struct MemChip
 		wchar temp[512];
 		wchar names[512];
 		wcscpy(names,names_ro);
-		swprintf(base,512,L"%s",root);
+		swprintf(base, WCHAR_LEN(base), L"%s", root);
 
 		wchar* curr=names;
 		wchar* next;
@@ -165,11 +165,11 @@ struct MemChip
 			if(next) *next=0;
 			if (curr[0]=='%')
 			{
-				swprintf(temp,512,L"%s%s%s",base,prefix,curr+1);
+				swprintf(temp, WCHAR_LEN(temp), L"%s%s%s", base, prefix, curr + 1);
 			}
 			else
 			{
-				swprintf(temp,512,L"%s%s",base,curr);
+				swprintf(temp, WCHAR_LEN(temp), L"%s%s", base, curr);
 			}
 			
 			curr=next+1;
@@ -188,7 +188,7 @@ struct MemChip
 	{
 		wchar path[512];
 
-		swprintf(path,512,L"%s%s%s",root,prefix,name_ro);
+		swprintf(path, WCHAR_LEN(path), L"%s%s%s", root, prefix, name_ro);
 		Save(path);
 
 		wprintf(L"Saved %s as %s\n\n",path,title);

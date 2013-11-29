@@ -30,5 +30,7 @@
 	#define NOINLINE noinline
 #endif
 
+// length
+#define WCHAR_LEN(X) sizeof(X) / sizeof(wchar_t)
 
 #endif
