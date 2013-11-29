@@ -122,7 +122,7 @@ float4 TextureLookup_Palette_Bilinear_ko(float4 uv)
 //same as below, but uses fewer sm2 opcodes so that the damn shader can fit on 2_0 cards
 float fdecp(float flt,out float e)
 {
-	float lg2=_log2(flt);	//ie , 2.5
+	float lg2=log2(flt);	//ie , 2.5
 	float frc=frac(lg2);	//ie , 0.5
 	e=lg2-frc;				//ie , 2.5-0.5=2 (exp)
 	return pow(2,frc);		//2^0.5 (manitsa)
@@ -130,11 +130,11 @@ float fdecp(float flt,out float e)
 /*
 float fdecp(float flt,out float e)
 {
-	//float fogexp=floor(_log2(foginvW));				//0 ... 7
+	//float fogexp=floor(log2(foginvW));				//0 ... 7
 	//float fogexp_pow=pow(2,fogexp);					//0 ... 128
 	//float fogman=(foginvW/fogexp_pow);				//[1,2) mantissa bits. that is 1.m
 
-	e=floor(_log2(flt));
+	e=floor(log2(flt));
 	float powe=pow(2,e);
 	return (w/powx);
 }
