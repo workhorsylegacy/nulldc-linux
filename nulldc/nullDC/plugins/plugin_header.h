@@ -38,6 +38,13 @@ typedef uint64_t u64;
 typedef float f32;
 typedef double f64;
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+	#define FASTCALL __fastcall
+#else
+	#define FASTCALL
+
+#endif
+
 #ifdef _M_X64
 #undef X86
 #define X64
@@ -56,7 +63,6 @@ typedef wchar_t wchar;
 #define EXPORT extern "C" __declspec(dllexport)
 
 #define EXPORT_CALL __stdcall
-#define FASTCALL __fastcall
 
 
 

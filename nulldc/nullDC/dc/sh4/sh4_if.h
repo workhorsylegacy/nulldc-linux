@@ -196,7 +196,7 @@ typedef bool IsCpuRunningFP();
 typedef u32 GetRegisterFP(Sh4RegType reg);
 typedef void SetRegisterFP(Sh4RegType reg,u32 value);
 typedef cResetEvent* GetArmResetEventFP();
-typedef void __fastcall sh4_int_RaiseExeptionFP(u32 ExeptionCode,u32 VectorAddress);
+typedef void FASTCALL sh4_int_RaiseExeptionFP(u32 ExeptionCode,u32 VectorAddress);
 
 
 

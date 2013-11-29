@@ -109,7 +109,7 @@ _negme:
 }*/
 
 //float format is ?
-static UINT16 __fastcall PACK(INT32 val)
+static UINT16 FASTCALL PACK(INT32 val)
 {
 	UINT32 temp;
 	int sign,exponent,k;
@@ -135,7 +135,7 @@ static UINT16 __fastcall PACK(INT32 val)
 	return (UINT16)val;
 }
 
-static INT32 __fastcall UNPACK(UINT16 val)
+static INT32 FASTCALL UNPACK(UINT16 val)
 {
 	int sign,exponent,mantissa;
 	INT32 uval;

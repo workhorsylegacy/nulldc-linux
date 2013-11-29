@@ -97,7 +97,7 @@ void ITLB_Sync(u32 entry)
 }
 
 u32 mmu_error_TT;
-void fastcall mmu_raise_exeption(u32 mmu_error,u32 address,u32 am)
+void FASTCALL mmu_raise_exeption(u32 mmu_error,u32 address,u32 am)
 {
 	printf_mmu("mmu_raise_exeption -> pc = 0x%X : ",pc);
 	CCN_TEA=address;
@@ -206,7 +206,7 @@ bool mmu_match(u32 va,CCN_PTEH_type Address,CCN_PTEL_type Data)
 	return false;
 }
 //Do a full lookup on the UTLB entry's
-u32 fastcall mmu_full_lookup(u32 va,u32& idx,u32& rv)
+u32 FASTCALL mmu_full_lookup(u32 va,u32& idx,u32& rv)
 {
 	CCN_MMUCR.URC++;
 	if (CCN_MMUCR.URB==CCN_MMUCR.URC)
@@ -249,7 +249,7 @@ u32 fastcall mmu_full_lookup(u32 va,u32& idx,u32& rv)
 }
 
 //Simple QACR translation for mmu (when AT is off)
-u32 fastcall mmu_QACR_SQ(u32 va)
+u32 FASTCALL mmu_QACR_SQ(u32 va)
 {
 	u32 QACR;
 	
@@ -262,7 +262,7 @@ u32 fastcall mmu_QACR_SQ(u32 va)
 	return QACR+va;
 }
 template<u32 translation_type>
-u32 fastcall mmu_full_SQ(u32 va,u32& rv)
+u32 FASTCALL mmu_full_SQ(u32 va,u32& rv)
 {
 
 	if ((va&3) || (CCN_MMUCR.SQMD==1 && sr.MD==0))
@@ -307,7 +307,7 @@ u32 fastcall mmu_full_SQ(u32 va,u32& rv)
 	return MMU_ERROR_NONE;
 }
 template<u32 translation_type>
-u32 fastcall mmu_data_translation(u32 va,u32& rv)
+u32 FASTCALL mmu_data_translation(u32 va,u32& rv)
 {
 	//*opt notice* this could be only checked for writes, as reads are invalid
 	if ((va&0xFC000000)==0xE0000000)
@@ -372,7 +372,7 @@ u32 fastcall mmu_data_translation(u32 va,u32& rv)
 	return MMU_ERROR_NONE;
 }
 
-u32 fastcall mmu_instruction_translation(u32 va,u32& rv)
+u32 FASTCALL mmu_instruction_translation(u32 va,u32& rv)
 {
 	if ((sr.MD==0) && (va&0x80000000)!=0)
 	{
@@ -483,7 +483,7 @@ void MMU_Term()
 {
 }
 
-u8 __fastcall mmu_ReadMem8(u32 adr)
+u8 FASTCALL mmu_ReadMem8(u32 adr)
 {
 	u32 addr;
 	u32 tv=mmu_data_translation<MMU_TT_DREAD>(adr,addr);
@@ -495,7 +495,7 @@ u8 __fastcall mmu_ReadMem8(u32 adr)
 	return 0;
 }
 
-u16 __fastcall mmu_ReadMem16(u32 adr)
+u16 FASTCALL mmu_ReadMem16(u32 adr)
 {
 	if (adr&1)
 	{
@@ -511,7 +511,7 @@ u16 __fastcall mmu_ReadMem16(u32 adr)
 
 	return 0;
 }
-u16 __fastcall mmu_IReadMem16(u32 adr)
+u16 FASTCALL mmu_IReadMem16(u32 adr)
 {
 	if (adr&1)
 	{
@@ -528,7 +528,7 @@ u16 __fastcall mmu_IReadMem16(u32 adr)
 	return 0;
 }
 
-u32 __fastcall mmu_ReadMem32(u32 adr)
+u32 FASTCALL mmu_ReadMem32(u32 adr)
 {
 	if (adr&3)
 	{
@@ -544,7 +544,7 @@ u32 __fastcall mmu_ReadMem32(u32 adr)
 
 	return 0;
 }
-u64 __fastcall mmu_ReadMem64(u32 adr)
+u64 FASTCALL mmu_ReadMem64(u32 adr)
 {
 	if (adr&7)
 	{
@@ -563,7 +563,7 @@ u64 __fastcall mmu_ReadMem64(u32 adr)
 	return 0;
 }
 
-void __fastcall mmu_WriteMem8(u32 adr,u8 data)
+void FASTCALL mmu_WriteMem8(u32 adr,u8 data)
 {
 	u32 addr;
 	u32 tv=mmu_data_translation<MMU_TT_DWRITE>(adr,addr);
@@ -576,7 +576,7 @@ void __fastcall mmu_WriteMem8(u32 adr,u8 data)
 		mmu_raise_exeption(tv,adr,MMU_TT_DWRITE);
 }
 
-void __fastcall mmu_WriteMem16(u32 adr,u16 data)
+void FASTCALL mmu_WriteMem16(u32 adr,u16 data)
 {
 	if (adr&1)
 	{
@@ -593,7 +593,7 @@ void __fastcall mmu_WriteMem16(u32 adr,u16 data)
 	else
 		mmu_raise_exeption(tv,adr,MMU_TT_DWRITE);
 }
-void __fastcall mmu_WriteMem32(u32 adr,u32 data)
+void FASTCALL mmu_WriteMem32(u32 adr,u32 data)
 {
 	if (adr&3)
 	{
@@ -610,7 +610,7 @@ void __fastcall mmu_WriteMem32(u32 adr,u32 data)
 	else
 		mmu_raise_exeption(tv,adr,MMU_TT_DWRITE);
 }
-void __fastcall mmu_WriteMem64(u32 adr,u64 data)
+void FASTCALL mmu_WriteMem64(u32 adr,u64 data)
 {
 	if (adr&7)
 	{
@@ -628,7 +628,7 @@ void __fastcall mmu_WriteMem64(u32 adr,u64 data)
 		mmu_raise_exeption(tv,adr,MMU_TT_DWRITE);
 }
 
-bool __fastcall mmu_TranslateSQW(u32& adr)
+bool FASTCALL mmu_TranslateSQW(u32& adr)
 {
 #ifndef NO_MMU
 

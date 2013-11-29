@@ -48,7 +48,7 @@ void DynaPrintLinkEnd();
 void DumpBlockMappings();
 LARGE_INTEGER total_compile;
 u32 CompiledSRCsz=0;
-CompiledBlockInfo*  __fastcall CompileCode(u32 pc)
+CompiledBlockInfo*  FASTCALL CompileCode(u32 pc)
 {
 	LARGE_INTEGER comp_time_start,comp_time_end;
 	CompiledBlockInfo* cblock=0;
@@ -75,11 +75,11 @@ CompiledBlockInfo*  __fastcall CompileCode(u32 pc)
 	
 	return cblock;
 }
-BasicBlockEP* __fastcall CompileCodePtr()
+BasicBlockEP* FASTCALL CompileCodePtr()
 {
 	return CompileCode(pc)->Code;
 }
-INLINE BasicBlockEP * __fastcall GetRecompiledCodePointer(u32 pc)
+INLINE BasicBlockEP * FASTCALL GetRecompiledCodePointer(u32 pc)
 {
 	return FindCode(pc);
 }
@@ -103,7 +103,7 @@ void naked CompileAndRunCode()
 	}
 }
 
-void __fastcall rec_sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress)
+void FASTCALL rec_sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress)
 {
 }
 void rec_sh4_ResetCache()
@@ -111,7 +111,7 @@ void rec_sh4_ResetCache()
 	SuspendAllBlocks();
 }
 //asm version
-BasicBlockEP* __fastcall FindCode_full(u32 address,CompiledBlockInfo* fastblock);
+BasicBlockEP* FASTCALL FindCode_full(u32 address,CompiledBlockInfo* fastblock);
 
 extern u32 fast_lookups;
 u32 old_esp;

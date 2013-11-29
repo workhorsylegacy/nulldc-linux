@@ -51,7 +51,7 @@ bool _vmem_translate(u32 addr,unat& entry_or_fptr)
 }
 /*
 template<typename T>
-T __fastcall _vmem_readt(u32 addr)
+T FASTCALL _vmem_readt(u32 addr)
 {
 	unat data_ptr;
 	if (_vmem_translate(addr,data_ptr))
@@ -75,7 +75,7 @@ T __fastcall _vmem_readt(u32 addr)
 }
 
 template<typename T>
-void __fastcall _vmem_writet(u32 addr,T data)
+void FASTCALL _vmem_writet(u32 addr,T data)
 {
 	unat data_ptr;
 	if (_vmem_translate(addr,data_ptr))
@@ -101,25 +101,25 @@ void __fastcall _vmem_writet(u32 addr,T data)
 
 //ReadMem/WriteMem functions
 //ReadMem
-u8 fastcall _vmem_ReadMem8(u32 addr) 
+u8 FASTCALL _vmem_ReadMem8(u32 addr) 
 {
 	unat data_ptr;
 	return (_vmem_translate(addr,data_ptr)) ? (u8)(*(_vmem_ReadMem8FP**)((u8*)_vmem_RF8+data_ptr))(addr) : *(u8*)data_ptr;
 }
 
-u16 fastcall _vmem_ReadMem16(u32 addr)
+u16 FASTCALL _vmem_ReadMem16(u32 addr)
 { 
 	unat data_ptr;
 	return (_vmem_translate(addr,data_ptr)) ? (u16)(*(_vmem_ReadMem16FP**)((u8*)_vmem_RF16+data_ptr))(addr) : *(u16*)data_ptr;
 }
 
-u32 fastcall _vmem_ReadMem32(u32 addr)
+u32 FASTCALL _vmem_ReadMem32(u32 addr)
 { 
 	unat data_ptr;
 	return (_vmem_translate(addr,data_ptr)) ? (u32)(*(_vmem_ReadMem32FP**)((u8*)_vmem_RF32+data_ptr))(addr) : *(u32*)data_ptr;
 }
 
-u64 fastcall _vmem_ReadMem64(u32 addr)
+u64 FASTCALL _vmem_ReadMem64(u32 addr)
 {
 	unat data_ptr;
 
@@ -133,7 +133,7 @@ u64 fastcall _vmem_ReadMem64(u32 addr)
 }
 
 //WriteMem
-void fastcall _vmem_WriteMem8(u32 addr,u8 data)
+void FASTCALL _vmem_WriteMem8(u32 addr,u8 data)
 {
 	unat data_ptr;
 
@@ -146,7 +146,7 @@ void fastcall _vmem_WriteMem8(u32 addr,u8 data)
 	*(u8*)data_ptr = data;
 }
 
-void fastcall _vmem_WriteMem16(u32 addr,u16 data)
+void FASTCALL _vmem_WriteMem16(u32 addr,u16 data)
 {
 	unat data_ptr;
 
@@ -159,7 +159,7 @@ void fastcall _vmem_WriteMem16(u32 addr,u16 data)
 	*(u16*)data_ptr = data;
 }
 
-void fastcall _vmem_WriteMem32(u32 addr,u32 data)
+void FASTCALL _vmem_WriteMem32(u32 addr,u32 data)
 {
 	unat data_ptr;
 
@@ -172,7 +172,7 @@ void fastcall _vmem_WriteMem32(u32 addr,u32 data)
 	*(u32*)data_ptr = data;
 }
 
-void fastcall _vmem_WriteMem64(u32 addr,u64 data)
+void FASTCALL _vmem_WriteMem64(u32 addr,u64 data)
 {
 	unat data_ptr;
 
@@ -193,31 +193,31 @@ void fastcall _vmem_WriteMem64(u32 addr,u64 data)
 //phew .. that was lota asm code ;) lets go back to C :D
 //default mem handlers ;)
 //defualt read handlers
-u8 fastcall _vmem_ReadMem8_not_mapped(u32 addresss)
+u8 FASTCALL _vmem_ReadMem8_not_mapped(u32 addresss)
 {
 	log("[sh4]Read8 from 0x%X, not mapped [_vmem default handler]\n",addresss);
 	return (u8)MEM_ERROR_RETURN_VALUE;
 }
-u16 fastcall _vmem_ReadMem16_not_mapped(u32 addresss)
+u16 FASTCALL _vmem_ReadMem16_not_mapped(u32 addresss)
 {
 	log("[sh4]Read16 from 0x%X, not mapped [_vmem default handler]\n",addresss);
 	return (u16)MEM_ERROR_RETURN_VALUE;
 }
-u32 fastcall _vmem_ReadMem32_not_mapped(u32 addresss)
+u32 FASTCALL _vmem_ReadMem32_not_mapped(u32 addresss)
 {
 	log("[sh4]Read32 from 0x%X, not mapped [_vmem default handler]\n",addresss);
 	return (u32)MEM_ERROR_RETURN_VALUE;
 }
 //defualt write handers
-void fastcall _vmem_WriteMem8_not_mapped(u32 addresss,u8 data)
+void FASTCALL _vmem_WriteMem8_not_mapped(u32 addresss,u8 data)
 {
 	log("[sh4]Write8 to 0x%X=0x%X, not mapped [_vmem default handler]\n",addresss,data);
 }
-void fastcall _vmem_WriteMem16_not_mapped(u32 addresss,u16 data)
+void FASTCALL _vmem_WriteMem16_not_mapped(u32 addresss,u16 data)
 {
 	log("[sh4]Write16 to 0x%X=0x%X, not mapped [_vmem default handler]\n",addresss,data);
 }
-void fastcall _vmem_WriteMem32_not_mapped(u32 addresss,u32 data)
+void FASTCALL _vmem_WriteMem32_not_mapped(u32 addresss,u32 data)
 {
 	log("[sh4]Write32 to 0x%X=0x%X, not mapped [_vmem default handler]\n",addresss,data);
 }

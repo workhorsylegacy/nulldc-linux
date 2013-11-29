@@ -99,14 +99,14 @@ void map_area4(u32 base)
 //AREA 5	--	Ext. Device
 //Read Ext.Device
 template <u32 sz,class T>
-T __fastcall ReadMem_extdev_T(u32 addr)
+T FASTCALL ReadMem_extdev_T(u32 addr)
 {
 	return (T)libExtDevice.ReadMem_A5(addr,sz);
 }
 
 //Write Ext.Device
 template <u32 sz,class T>
-void __fastcall WriteMem_extdev_T(u32 addr,T data)
+void FASTCALL WriteMem_extdev_T(u32 addr,T data)
 {
 	libExtDevice.WriteMem_A5(addr,data,sz);
 }
@@ -328,7 +328,7 @@ bool IsOnRam(u32 addr)
 	return false;
 }
 
-u32 __fastcall GetRamPageFromAddress(u32 RamAddress)
+u32 FASTCALL GetRamPageFromAddress(u32 RamAddress)
 {
 	verify(IsOnRam(RamAddress));
 	return (RamAddress & RAM_MASK)/PAGE_SIZE;

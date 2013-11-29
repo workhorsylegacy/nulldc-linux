@@ -2,9 +2,9 @@
 #include "aica.h"
 
 template<int sz,typename T>
-T fastcall ReadMemArm(u32 addr);
+T FASTCALL ReadMemArm(u32 addr);
 template<int sz,typename T>
-void fastcall WriteMemArm(u32 addr,T data);
+void FASTCALL WriteMemArm(u32 addr,T data);
 
 #define arm_ReadMem8 ReadMemArm<1,u8>
 #define arm_ReadMem16 ReadMemArm<2,u16>

@@ -37,7 +37,7 @@ void e68k_AcceptInterrupt()
 
 //Reg reads from arm side ..
 template <u32 sz,class T>
-inline T fastcall arm_ReadReg(u32 addr)
+inline T FASTCALL arm_ReadReg(u32 addr)
 {
 	addr&=0x7FFF;
 	if (addr==REG_L)
@@ -48,7 +48,7 @@ inline T fastcall arm_ReadReg(u32 addr)
 		return arm_params.ReadMem_aica_reg(addr,sz);
 }		
 template <u32 sz,class T>
-inline void fastcall arm_WriteReg(u32 addr,T data)
+inline void FASTCALL arm_WriteReg(u32 addr,T data)
 {
 	addr&=0x7FFF;
 	if (addr==REG_L)
@@ -82,7 +82,7 @@ void term_mem()
 #define ACCESS_MASK (ARAM_MASK-(sz-1))
 
 template<int sz,typename T>
-T fastcall ReadMemArm(u32 addr)
+T FASTCALL ReadMemArm(u32 addr)
 {
 	addr&=0x00FFFFFF;
 	if (addr<0x800000)
@@ -105,7 +105,7 @@ T fastcall ReadMemArm(u32 addr)
 }
 
 template<int sz,typename T>
-void fastcall WriteMemArm(u32 addr,T data)
+void FASTCALL WriteMemArm(u32 addr,T data)
 {
 	addr&=0x00FFFFFF;
 	if (addr<0x800000)

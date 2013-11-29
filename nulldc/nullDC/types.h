@@ -157,8 +157,12 @@ using namespace std;
 
 #define dbgbreak __debugbreak(); 
 
-#define fastcall __fastcall
-#define FASTCALL __fastcall
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+	#define FASTCALL __fastcall
+#else
+	#define FASTCALL 
+
+#endif
 
 #ifndef NO_VERIFY
 #define verify(x) if(!(x)){ msgboxf(_T("Verify Failed  : ") _T(#x) _T("\n in %s -> %s : %d \n"),MBX_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}

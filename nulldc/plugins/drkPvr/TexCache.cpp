@@ -6,12 +6,12 @@ u32 detwiddle[2][8][1024];
 //output : address in the xyxyxyxy format
 //U : x resolution , V : y resolution
 //twidle works on 64b words
-u32 fastcall twiddle_fast(u32 x,u32 y,u32 bcx,u32 bcy)
+u32 FASTCALL twiddle_fast(u32 x,u32 y,u32 bcx,u32 bcy)
 {
 	return detwiddle[0][bcy][x]+detwiddle[1][bcx][y];
 }
 
-u32 fastcall twiddle_razi_(u32 x,u32 y,u32 x_sz,u32 y_sz)
+u32 FASTCALL twiddle_razi_(u32 x,u32 y,u32 x_sz,u32 y_sz)
 {
 	u32 rv=0;//low 2 bits are directly passed  -> needs some misc stuff to work.However
 			 //Pvr internaly maps the 64b banks "as if" they were twidled :p

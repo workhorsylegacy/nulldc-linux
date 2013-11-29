@@ -50,14 +50,14 @@ void MMU_Init();
 void MMU_Reset(bool Manual);
 void MMU_Term();
 
-u8 __fastcall mmu_ReadMem8(u32 addr);
-u16 __fastcall mmu_ReadMem16(u32 addr);
-u16 __fastcall mmu_IReadMem16(u32 addr);
-u32 __fastcall mmu_ReadMem32(u32 addr);
-u64 __fastcall mmu_ReadMem64(u32 addr);
+u8 FASTCALL mmu_ReadMem8(u32 addr);
+u16 FASTCALL mmu_ReadMem16(u32 addr);
+u16 FASTCALL mmu_IReadMem16(u32 addr);
+u32 FASTCALL mmu_ReadMem32(u32 addr);
+u64 FASTCALL mmu_ReadMem64(u32 addr);
 
-void __fastcall mmu_WriteMem8(u32 addr,u8 data);
-void __fastcall mmu_WriteMem16(u32 addr,u16 data);
-void __fastcall mmu_WriteMem32(u32 addr,u32 data);
-void __fastcall mmu_WriteMem64(u32 addr,u64 data);
-bool __fastcall mmu_TranslateSQW(u32& addr);
+void FASTCALL mmu_WriteMem8(u32 addr,u8 data);
+void FASTCALL mmu_WriteMem16(u32 addr,u16 data);
+void FASTCALL mmu_WriteMem32(u32 addr,u32 data);
+void FASTCALL mmu_WriteMem64(u32 addr,u64 data);
+bool FASTCALL mmu_TranslateSQW(u32& addr);

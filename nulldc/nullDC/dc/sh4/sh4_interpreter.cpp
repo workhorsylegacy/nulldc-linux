@@ -110,7 +110,7 @@ void naked sh4_int_exept_hook()
 		jmp [sh4_exept_next];
 	}
 }
-void __fastcall sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress)
+void FASTCALL sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress)
 {
 	if (sh4_exept_raised)
 	{
@@ -490,7 +490,7 @@ u32 aica_sample_cycles=0;
 //slow update is 448*16=7168  cycles
 
 //14336 Cycles
-void __fastcall VerySlowUpdate()
+void FASTCALL VerySlowUpdate()
 {
 	rtc_cycles-=14336;
 	if (rtc_cycles<=0)
@@ -506,7 +506,7 @@ void __fastcall VerySlowUpdate()
 	FreeSuspendedBlocks();
 }
 //7168 Cycles
-void __fastcall SlowUpdate()
+void FASTCALL SlowUpdate()
 {
 	#if DC_PLATFORM!=DC_PLATFORM_NAOMI
 		UpdateGDRom();
@@ -523,7 +523,7 @@ void __fastcall SlowUpdate()
 void aica_periodical(u32 cycl);
 void maple_periodical(u32 cycl);
 
-void __fastcall MediumUpdate()
+void FASTCALL MediumUpdate()
 {
 	#if 0
 	if(!GetAsyncKeyState(DEV_TOOL_FAST_FW_KEY))
@@ -552,7 +552,7 @@ void __fastcall MediumUpdate()
 
 //448 Cycles
 //as of 7/2/2k8 this is fixed to 448 cycles
-int __fastcall UpdateSystem()
+int FASTCALL UpdateSystem()
 {		
 	UpdateTMU(448);
 	UpdatePvr(448);

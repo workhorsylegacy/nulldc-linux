@@ -1,6 +1,13 @@
 //#include "types.h"
 //#include "x86_emitter.h"
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+	#define FASTCALL __fastcall
+#else
+	#define FASTCALL 
+
+#endif
+
 /*
 	--x86 is such a fucked cpu arch--
 	->for 32b mode , x64 is not supported atm<-
@@ -168,7 +175,7 @@ struct encoded_type
 
 struct x86_opcode;
 
-typedef void __fastcall x86_opcode_encoderFP(x86_block* block,const x86_opcode* op,encoded_type* p1,encoded_type* p2,u32 p3);
+typedef void FASTCALL x86_opcode_encoderFP(x86_block* block,const x86_opcode* op,encoded_type* p1,encoded_type* p2,u32 p3);
 
 //enc_param_none is alower w/ params set to implicit registers (ie , mov eax,xxxx is enc_imm , pg1:pg_EAX , pg2:pg_imm
 
@@ -185,7 +192,7 @@ struct x86_opcode
 };
 
 //mod|reg|rm
-void __fastcall encode_modrm(x86_block* block,encoded_type* mrm, u32 extra)
+void FASTCALL encode_modrm(x86_block* block, encoded_type* mrm, u32 extra)
 {
 	if (mrm->type != pg_ModRM)
 	{
@@ -208,7 +215,7 @@ void __fastcall encode_modrm(x86_block* block,encoded_type* mrm, u32 extra)
 }
 #ifdef X64
 //x64 stuff
-void __fastcall encode_rex(x86_block* block,encoded_type* mrm,u32 mrm_reg,u32 ofe=0)
+void FASTCALL encode_rex(x86_block* block,encoded_type* mrm,u32 mrm_reg,u32 ofe=0)
 {
 	u32 flags = (ofe>>3) & 1; //opcode field extention
 
@@ -232,7 +239,7 @@ void __fastcall encode_rex(x86_block* block,encoded_type* mrm,u32 mrm_reg,u32 of
 
 //Encoding function (partialy) specialised by templates to gain speed :)
 template < enc_param enc_1,enc_imm enc_2,u32 sz,x86_operand_size enc_op_size>
-void __fastcall x86_encode_opcode_tmpl(x86_block* block, const x86_opcode* op, encoded_type* p1,encoded_type* p2,u32 p3)
+void FASTCALL x86_encode_opcode_tmpl(x86_block* block, const x86_opcode* op, encoded_type* p1, encoded_type* p2, u32 p3)
 {
 	//printf("Encoding : ");
 

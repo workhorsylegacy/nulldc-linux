@@ -25,8 +25,8 @@ pginfo GetPageInfo(u32 address);
 #define FindBlock FindBlock_fast
 #define FindCode FindCode_fast
 
-CompiledBlockInfo* __fastcall FindBlock_fast(u32 address);
-BasicBlockEP* __fastcall FindCode_fast(u32 address);
+CompiledBlockInfo* FASTCALL FindBlock_fast(u32 address);
+BasicBlockEP* FASTCALL FindCode_fast(u32 address);
 
 void RegisterBlock(CompiledBlockInfo* block);
 void UnRegisterBlock(CompiledBlockInfo* block);
@@ -35,10 +35,10 @@ CompiledBlockInfo* bm_ReverseLookup(void* code_ptr);
 void FreeSuspendedBlocks();
 
 CompiledBlockInfo* FindOrRecompileBlock(u32 pc);
-void __fastcall SuspendBlock(CompiledBlockInfo* block);
-void __fastcall SuspendAllBlocks();
-void __fastcall _SuspendAllBlocks();
-CompiledBlockInfo* __fastcall FindBlock_full_compile(u32 address,CompiledBlockInfo* fastblock);
+void FASTCALL SuspendBlock(CompiledBlockInfo* block);
+void FASTCALL SuspendAllBlocks();
+void FASTCALL _SuspendAllBlocks();
+CompiledBlockInfo* FASTCALL FindBlock_full_compile(u32 address,CompiledBlockInfo* fastblock);
 
 void InitBlockManager();
 void ResetBlockManager();

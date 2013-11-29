@@ -14,7 +14,7 @@
 #include <math.h>
 #include <float.h>
 
-#define sh4op(str) void __fastcall str (u32 op)
+#define sh4op(str) void FASTCALL str (u32 op)
 #define GetN(str) ((str>>8) & 0xf)
 #define GetM(str) ((str>>4) & 0xf)
 #define GetImm4(str) ((str>>0) & 0xf)

@@ -360,7 +360,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 					{sr=w;}\
 					format(&pbt,(u8*)&params.vram[sa],sr,h);
 
-	typedef void fastcall texture_handler_FP(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+	typedef void FASTCALL texture_handler_FP(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 
 	/*
 	texture_handler_FP* texture_handlers[8] = 
@@ -601,7 +601,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 	TexCacheList<TextureCacheData> TexCache;
 	TexCacheList<TextureCacheData> TexCache_Discard;
 
-	TextureCacheData* __fastcall GenText(TSP tsp,TCW tcw,TextureCacheData* tf)
+	TextureCacheData* FASTCALL GenText(TSP tsp,TCW tcw,TextureCacheData* tf)
 	{
 		//generate texture	
 		tf->w=8<<tsp.TexU;
@@ -616,7 +616,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 		return tf;
 	}
 
-	TextureCacheData* __fastcall GenText(TSP tsp,TCW tcw)
+	TextureCacheData* FASTCALL GenText(TSP tsp,TCW tcw)
 	{
 		//add new entry to tex cache
 		TextureCacheData* tf = &TexCache.Add(0)->data;
@@ -656,7 +656,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 		return false;
 	}
 
-	IDirect3DTexture9* __fastcall GetTexture(TSP tsp,TCW tcw)
+	IDirect3DTexture9* FASTCALL GetTexture(TSP tsp,TCW tcw)
 	{	
 		if (!is_fmt_supported(tsp,tcw)) {
 			return 0;
@@ -1214,7 +1214,7 @@ bool operator<(const PolyParam &left, const PolyParam &right)
 	}
 
 	std::vector<TA_context> rcnt;
-	u32 fastcall FindRC(u32 addr)
+	u32 FASTCALL FindRC(u32 addr)
 	{
 		for (u32 i=0;i<rcnt.size();i++)
 		{
@@ -1225,7 +1225,7 @@ bool operator<(const PolyParam &left, const PolyParam &right)
 		}
 		return 0xFFFFFFFF;
 	}
-	void fastcall SetCurrentTARC(u32 addr)
+	void FASTCALL SetCurrentTARC(u32 addr)
 	{
 		addr&=0xF00000;
 		//return;
@@ -1253,7 +1253,7 @@ bool operator<(const PolyParam &left, const PolyParam &right)
 			rcnt.push_back(tarc);
 		}
 	}
-	void fastcall SetCurrentPVRRC(u32 addr)
+	void FASTCALL SetCurrentPVRRC(u32 addr)
 	{
 		addr&=0xF00000;
 		//return;
@@ -3523,39 +3523,39 @@ nl:
 
 	//poly param handling
 	__forceinline
-		static void fastcall AppendPolyParam0(TA_PolyParam0* pp)
+		static void FASTCALL AppendPolyParam0(TA_PolyParam0* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam1(TA_PolyParam1* pp)
+		static void FASTCALL AppendPolyParam1(TA_PolyParam1* pp)
 		{
 			glob_param_bdc;
 			poly_float_color(FaceBaseColor,FaceColor);
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2A(TA_PolyParam2A* pp)
+		static void FASTCALL AppendPolyParam2A(TA_PolyParam2A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2B(TA_PolyParam2B* pp)
+		static void FASTCALL AppendPolyParam2B(TA_PolyParam2B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor);
 			poly_float_color(FaceOffsColor,FaceOffset);
 		}
 		__forceinline
-		static void fastcall AppendPolyParam3(TA_PolyParam3* pp)
+		static void FASTCALL AppendPolyParam3(TA_PolyParam3* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4A(TA_PolyParam4A* pp)
+		static void FASTCALL AppendPolyParam4A(TA_PolyParam4A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4B(TA_PolyParam4B* pp)
+		static void FASTCALL AppendPolyParam4B(TA_PolyParam4B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor0);
 		}

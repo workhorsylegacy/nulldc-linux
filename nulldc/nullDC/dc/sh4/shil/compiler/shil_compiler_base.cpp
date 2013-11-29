@@ -45,7 +45,7 @@ x86_opcode_class SetCC[] =
 	op_setg ,//r/m8 = 0F 9F /0
 };
 
-typedef void __fastcall shil_compileFP(shil_opcode* op);
+typedef void FASTCALL shil_compileFP(shil_opcode* op);
 
 bool inited=false;
 
@@ -129,7 +129,7 @@ u32 IsInFReg(u32 reg)
 
 //Common opcode handling code
 //reg to reg
-void fastcall op_reg_to_reg(shil_opcode* op,x86_opcode_class op_cl)
+void FASTCALL op_reg_to_reg(shil_opcode* op,x86_opcode_class op_cl)
 {
 	assert(FLAG_32==(op->flags & 3));
 	assert(0==(op->flags & (FLAG_IMM2)));
@@ -179,7 +179,7 @@ void fastcall op_reg_to_reg(shil_opcode* op,x86_opcode_class op_cl)
 }
 
 //imm to reg
-void fastcall op_imm_to_reg(shil_opcode* op,x86_opcode_class op_cl)
+void FASTCALL op_imm_to_reg(shil_opcode* op,x86_opcode_class op_cl)
 {
 	assert(FLAG_32==(op->flags & 3));
 	assert(op->flags & FLAG_IMM1);
@@ -197,7 +197,7 @@ void fastcall op_imm_to_reg(shil_opcode* op,x86_opcode_class op_cl)
 		x86e->Emit(op_cl,GetRegPtr(op->reg1),op->imm1);
 }
 //reg
-void fastcall op_reg(shil_opcode* op,x86_opcode_class op_cl)
+void FASTCALL op_reg(shil_opcode* op,x86_opcode_class op_cl)
 {
 	assert(FLAG_32==(op->flags & 3));
 	assert(0==(op->flags & FLAG_IMM1));
@@ -780,13 +780,13 @@ void emit_vmem_write(x86_reg reg_addr,u8 reg_data,u32 sz)
 //shil opcode handlers
 
 //Default handler , should never be called
-void __fastcall shil_compile_nimp(shil_opcode* op)
+void FASTCALL shil_compile_nimp(shil_opcode* op)
 {
 	log("*********SHIL \"%s\" not recompiled*********\n",GetShilName((shil_opcodes)op->opcode));
 }
 
 //mov32/64 reg,reg/imm
-void __fastcall shil_compile_mov(shil_opcode* op)
+void FASTCALL shil_compile_mov(shil_opcode* op)
 {
 	u32 size=op->flags&3;
 	assert(op->flags & FLAG_REG1);//reg1 has to be used on mov :)
@@ -981,7 +981,7 @@ void __fastcall shil_compile_mov(shil_opcode* op)
 
 
 //movex8/16 reg32,zx/sx reg8/16
-void __fastcall shil_compile_movex(shil_opcode* op)
+void FASTCALL shil_compile_movex(shil_opcode* op)
 {
 	u32 size=op->flags&3;
 	assert(op->flags & (FLAG_REG1|FLAG_REG2));	//reg1 , reg2 has to be used on movex :)
@@ -1050,7 +1050,7 @@ void __fastcall shil_compile_movex(shil_opcode* op)
 }
 //shil_ifb opcode
 //calls interpreter to emulate the opcode
-void __fastcall shil_compile_shil_ifb(shil_opcode* op)
+void FASTCALL shil_compile_shil_ifb(shil_opcode* op)
 {
 
 	//if opcode needs pc , save it
@@ -1066,7 +1066,7 @@ void __fastcall shil_compile_shil_ifb(shil_opcode* op)
 
 //shift based
 //swap8/16 reg32
-void __fastcall shil_compile_swap(shil_opcode* op)
+void FASTCALL shil_compile_swap(shil_opcode* op)
 {
 	u32 size=op->flags&3;
 	
@@ -1092,63 +1092,63 @@ void __fastcall shil_compile_swap(shil_opcode* op)
 	}
 }
 //shl reg32,imm , set flags
-void __fastcall shil_compile_shl(shil_opcode* op)
+void FASTCALL shil_compile_shl(shil_opcode* op)
 {
 	op_imm_to_reg(op,op_shl32);
 }
 //shr reg32,imm , set flags
-void __fastcall shil_compile_shr(shil_opcode* op)
+void FASTCALL shil_compile_shr(shil_opcode* op)
 {
 	op_imm_to_reg(op,op_shr32);
 }
 //sar reg32,imm , set flags
-void __fastcall shil_compile_sar(shil_opcode* op)
+void FASTCALL shil_compile_sar(shil_opcode* op)
 {
 	op_imm_to_reg(op,op_sar32);
 }
 //rotates
 //rcl reg32, CF is set before calling
-void __fastcall shil_compile_rcl(shil_opcode* op)
+void FASTCALL shil_compile_rcl(shil_opcode* op)
 {
 	op_reg(op,op_rcl32);
 }
 //rcr reg32, CF is set before calling
-void __fastcall shil_compile_rcr(shil_opcode* op)
+void FASTCALL shil_compile_rcr(shil_opcode* op)
 {
 	op_reg(op,op_rcr32);
 }
 //ror reg32
-void __fastcall shil_compile_ror(shil_opcode* op)
+void FASTCALL shil_compile_ror(shil_opcode* op)
 {
 	op_reg(op,op_ror32);
 }
 //rol reg32
-void __fastcall shil_compile_rol(shil_opcode* op)
+void FASTCALL shil_compile_rol(shil_opcode* op)
 {
 	op_reg(op,op_rol32);
 }
 //neg
-void __fastcall shil_compile_neg(shil_opcode* op)
+void FASTCALL shil_compile_neg(shil_opcode* op)
 {
 	op_reg(op,op_neg32);
 }
 //not
-void __fastcall shil_compile_not(shil_opcode* op)
+void FASTCALL shil_compile_not(shil_opcode* op)
 {
 	op_reg(op,op_not32);
 }
 //xor reg32,reg32/imm32
-void __fastcall shil_compile_xor(shil_opcode* op)
+void FASTCALL shil_compile_xor(shil_opcode* op)
 {
 	op_reg_to_reg(op,op_xor32);
 }
 //or reg32,reg32/imm32
-void __fastcall shil_compile_or(shil_opcode* op)
+void FASTCALL shil_compile_or(shil_opcode* op)
 {
 	op_reg_to_reg(op,op_or32);
 }
 //and reg32,reg32/imm32
-void __fastcall shil_compile_and(shil_opcode* op)
+void FASTCALL shil_compile_and(shil_opcode* op)
 {
 	op_reg_to_reg(op,op_and32);
 }
@@ -1392,7 +1392,7 @@ void roml(x86_reg reg,x86_Label* lbl,u32* offset_Edit,x86_reg fast_reg,u32 fast_
 	x86e->Emit(op_and32,ECX,0x1FFFFFFF);
 }
 const x86_opcode_class rm_table[4]={op_movsx8to32,op_movsx16to32,op_mov32,op_movlps};
-void __fastcall shil_compile_readm(shil_opcode* op)
+void FASTCALL shil_compile_readm(shil_opcode* op)
 {
 	u32 size=op->flags&3;
 
@@ -1493,7 +1493,7 @@ void __fastcall shil_compile_readm(shil_opcode* op)
 	roml_patch_list.push_back(t);
 }
 const x86_opcode_class wm_table[4]={op_mov8,op_mov16,op_mov32,op_movlps};
-void __fastcall shil_compile_writem(shil_opcode* op)
+void FASTCALL shil_compile_writem(shil_opcode* op)
 {
 	//sse_WBF(op->reg1);//Write back possibly readed reg
 	u32 size=op->flags&3;
@@ -1713,7 +1713,7 @@ void apply_roml_patches()
 	roml_patch_list.clear();
 }
 //save-loadT
-void __fastcall shil_compile_SaveT(shil_opcode* op)
+void FASTCALL shil_compile_SaveT(shil_opcode* op)
 {
 	assert(op->flags & FLAG_IMM1);//imm1
 	assert(0==(op->flags & (FLAG_IMM2|FLAG_REG1|FLAG_REG2)));//no imm2/r1/r2
@@ -1742,7 +1742,7 @@ void __fastcall shil_compile_SaveT(shil_opcode* op)
 	//x86e->Emit(op_xor32,EAX,EAX);
 
 }
-void __fastcall shil_compile_LoadT(shil_opcode* op)
+void FASTCALL shil_compile_LoadT(shil_opcode* op)
 {
 	assert(op->flags & FLAG_IMM1);//imm1
 	assert(0==(op->flags & (FLAG_IMM2|FLAG_REG1|FLAG_REG2)));//no imm2/r1/r2
@@ -1763,7 +1763,7 @@ void __fastcall shil_compile_LoadT(shil_opcode* op)
 	}
 }
 //cmp-test
-void __fastcall shil_compile_cmp(shil_opcode* op)
+void FASTCALL shil_compile_cmp(shil_opcode* op)
 {
 	assert(FLAG_32==(op->flags & 3));
 	if (op->flags & FLAG_IMM1)
@@ -1801,7 +1801,7 @@ void __fastcall shil_compile_cmp(shil_opcode* op)
 		//eflags is used w/ combination of SaveT
 	}
 }
-void __fastcall shil_compile_test(shil_opcode* op)
+void FASTCALL shil_compile_test(shil_opcode* op)
 {
 	assert(FLAG_32==(op->flags & 3));
 	if (op->flags & FLAG_IMM1)
@@ -1838,26 +1838,26 @@ void __fastcall shil_compile_test(shil_opcode* op)
 }
 
 //add-sub
-void __fastcall shil_compile_add(shil_opcode* op)
+void FASTCALL shil_compile_add(shil_opcode* op)
 {
 	op_reg_to_reg(op,op_add32);
 }
-void __fastcall shil_compile_adc(shil_opcode* op)
+void FASTCALL shil_compile_adc(shil_opcode* op)
 {
 	op_reg_to_reg(op,op_adc32);
 }
-void __fastcall shil_compile_sub(shil_opcode* op)
+void FASTCALL shil_compile_sub(shil_opcode* op)
 {
 	op_reg_to_reg(op,op_sub32);
 }
 
 //left over from older code
-void __fastcall shil_compile_jcond(shil_opcode* op)
+void FASTCALL shil_compile_jcond(shil_opcode* op)
 {
 	log("jcond ... heh not implemented\n");
 	assert(false);
 }
-void __fastcall shil_compile_jmp(shil_opcode* op)
+void FASTCALL shil_compile_jmp(shil_opcode* op)
 {
 	log("jmp ... heh not implemented\n");
 }
@@ -1884,7 +1884,7 @@ void load_with_ze16(x86_gpr_reg to,u8 from)
 		x86e->Emit(op_movzx16to32, to,(u16*)GetRegPtr(from));
 }
 //mul16/32/64 reg,reg
-void __fastcall shil_compile_mul(shil_opcode* op)
+void FASTCALL shil_compile_mul(shil_opcode* op)
 {
 	u32 sz=op->flags&3;
 
@@ -1972,7 +1972,7 @@ u64 FASTCALL shil_helper_slowdiv32(u32 r3,u32 r2, u32 r1)
 
 	return ((u64)r3<<32)|r1;//EAX=r1, EDX=r3 
 }
-void __fastcall shil_compile_div32(shil_opcode* op)
+void FASTCALL shil_compile_div32(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM2)));
 
@@ -2145,7 +2145,7 @@ void sse_reg_to_reg(shil_opcode* op,x86_opcode_class op_cl)
 
 //#define SSE_s(op,sseop) sse_reg_to_reg(op,sseop);
 //simple opcodes
-void __fastcall shil_compile_fadd(shil_opcode* op)
+void FASTCALL shil_compile_fadd(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;
@@ -2161,7 +2161,7 @@ void __fastcall shil_compile_fadd(shil_opcode* op)
 		assert(false);
 	}
 }
-void __fastcall shil_compile_fsub(shil_opcode* op)
+void FASTCALL shil_compile_fsub(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;
@@ -2178,7 +2178,7 @@ void __fastcall shil_compile_fsub(shil_opcode* op)
 	}
 }
 
-void __fastcall shil_compile_fmul(shil_opcode* op)
+void FASTCALL shil_compile_fmul(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;
@@ -2195,7 +2195,7 @@ void __fastcall shil_compile_fmul(shil_opcode* op)
 	}
 }
 
-void __fastcall shil_compile_fdiv(shil_opcode* op)
+void FASTCALL shil_compile_fdiv(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;
@@ -2213,7 +2213,7 @@ void __fastcall shil_compile_fdiv(shil_opcode* op)
 }
 
 //binary opcodes
-void __fastcall shil_compile_fneg(shil_opcode* op)
+void FASTCALL shil_compile_fneg(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2241,7 +2241,7 @@ void __fastcall shil_compile_fneg(shil_opcode* op)
 	}
 }
 
-void __fastcall shil_compile_fabs(shil_opcode* op)
+void FASTCALL shil_compile_fabs(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2270,8 +2270,8 @@ void __fastcall shil_compile_fabs(shil_opcode* op)
 }
 
 //pref !
-void __fastcall do_pref(u32 Dest);
-void __fastcall shil_compile_pref(shil_opcode* op)
+void FASTCALL do_pref(u32 Dest);
+void FASTCALL shil_compile_pref(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_REG2|FLAG_IMM2)));
 	assert(op->flags & (FLAG_REG1|FLAG_IMM1));
@@ -2303,7 +2303,7 @@ void __fastcall shil_compile_pref(shil_opcode* op)
 }
 
 //complex opcodes
-void __fastcall shil_compile_fcmp(shil_opcode* op)
+void FASTCALL shil_compile_fcmp(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;
@@ -2333,7 +2333,7 @@ void __fastcall shil_compile_fcmp(shil_opcode* op)
 	}
 }
 
-void __fastcall shil_compile_fmac(shil_opcode* op)
+void FASTCALL shil_compile_fmac(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;
@@ -2382,7 +2382,7 @@ void __fastcall shil_compile_fmac(shil_opcode* op)
 }
 
 
-void __fastcall shil_compile_fsqrt(shil_opcode* op)
+void FASTCALL shil_compile_fsqrt(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2411,7 +2411,7 @@ void __fastcall shil_compile_fsqrt(shil_opcode* op)
 		assert(false);
 	}
 }
-void __fastcall shil_compile_fsrra(shil_opcode* op)
+void FASTCALL shil_compile_fsrra(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2464,7 +2464,7 @@ void __fastcall shil_compile_fsrra(shil_opcode* op)
 	}
 }
 
-void __fastcall shil_compile_floatfpul(shil_opcode* op)
+void FASTCALL shil_compile_floatfpul(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2485,7 +2485,7 @@ void __fastcall shil_compile_floatfpul(shil_opcode* op)
 	}
 }
 f32 sse_ftrc_saturate=0x7FFFFFBF;//1.11111111111111111111111 << 31
-void __fastcall shil_compile_ftrc(shil_opcode* op)
+void FASTCALL shil_compile_ftrc(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2523,7 +2523,7 @@ void __fastcall shil_compile_ftrc(shil_opcode* op)
 }
 
 //Mixed opcodes (sse & x87)
-void __fastcall shil_compile_fsca(shil_opcode* op)
+void FASTCALL shil_compile_fsca(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2577,7 +2577,7 @@ void __fastcall shil_compile_fsca(shil_opcode* op)
 	}
 }
 //Vector opcodes ;)
-void __fastcall shil_compile_ftrv(shil_opcode* op)
+void FASTCALL shil_compile_ftrv(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2|FLAG_REG2)));
 	u32 sz=op->flags & 3;
@@ -2641,7 +2641,7 @@ void __fastcall shil_compile_ftrv(shil_opcode* op)
 	}
 }
 
-void __fastcall shil_compile_fipr(shil_opcode* op)
+void FASTCALL shil_compile_fipr(shil_opcode* op)
 {
 	assert(0==(op->flags & (FLAG_IMM1|FLAG_IMM2)));
 	u32 sz=op->flags & 3;

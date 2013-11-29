@@ -13,4 +13,4 @@ void rec_Sh4_int_Init();
 void rec_Sh4_int_Term();
 bool rec_Sh4_int_IsCpuRunning();  
 void rec_sh4_ResetCache();
-void __fastcall rec_sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress);
+void FASTCALL rec_sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress);

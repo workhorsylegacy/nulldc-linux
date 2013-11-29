@@ -428,7 +428,7 @@ void WriteFlash(u32 addr,u32 data,u32 sz) { sys_nvmem.Write(addr,data,sz); }
 //use unified size handler for registers
 //it realy makes no sense to use different size handlers on em -> especialy when we can use templates :p
 template<u32 sz, class T, u32 b_start,u32 b_end>
-T __fastcall ReadMem_area0(u32 addr)
+T FASTCALL ReadMem_area0(u32 addr)
 {
 	addr &= 0x01FFFFFF;//to get rid of non needed bits
 	const u32 base_start=b_start & 0x01FF;
@@ -513,7 +513,7 @@ T __fastcall ReadMem_area0(u32 addr)
 }
 
 template<u32 sz, class T, u32 b_start,u32 b_end>
-void  __fastcall WriteMem_area0(u32 addr,T data)
+void  FASTCALL WriteMem_area0(u32 addr,T data)
 {
 	addr &= 0x01FFFFFF;//to get rid of non needed bits
 

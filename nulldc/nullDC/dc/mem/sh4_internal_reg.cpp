@@ -145,7 +145,7 @@ INLINE void RegSWrite(RegisterStruct* reg,u32 offset,u32 data)
 //Region P4
 //Read P4
 template <u32 sz,class T>
-T __fastcall ReadMem_P4(u32 addr)
+T FASTCALL ReadMem_P4(u32 addr)
 {
 	/*if (((addr>>26)&0x7)==7)
 	{
@@ -237,7 +237,7 @@ T __fastcall ReadMem_P4(u32 addr)
 bool mmu_match(u32 va,CCN_PTEH_type Address,CCN_PTEL_type Data);
 //Write P4
 template <u32 sz,class T>
-void __fastcall WriteMem_P4(u32 addr,T data)
+void FASTCALL WriteMem_P4(u32 addr,T data)
 {
 	/*if (((addr>>26)&0x7)==7)
 	{
@@ -386,7 +386,7 @@ void __fastcall WriteMem_P4(u32 addr,T data)
 //TODO : replace w/ mem mapped array
 //Read SQ
 template <u32 sz,class T>
-T __fastcall ReadMem_sq(u32 addr)
+T FASTCALL ReadMem_sq(u32 addr)
 {
 	if (sz!=4)
 	{
@@ -402,7 +402,7 @@ T __fastcall ReadMem_sq(u32 addr)
 
 //Write SQ
 template <u32 sz,class T>
-void __fastcall WriteMem_sq(u32 addr,T data)
+void FASTCALL WriteMem_sq(u32 addr,T data)
 {
 	if (sz!=4)
 		log("Store Queue Error , olny 4 byte writes are possible[x%X=0x%X]\n",addr,data);
@@ -428,7 +428,7 @@ void __fastcall WriteMem_sq(u32 addr,T data)
 //***********
 //Read Area7
 template <u32 sz,class T,u32 map_base>
-T __fastcall ReadMem_area7(u32 addr)
+T FASTCALL ReadMem_area7(u32 addr)
 {
 	addr&=0x1FFFFFFF;
 	switch (map_base & 0x1FFF)
@@ -578,7 +578,7 @@ T __fastcall ReadMem_area7(u32 addr)
 
 //Write Area7
 template <u32 sz,class T,u32 map_base>
-void __fastcall WriteMem_area7(u32 addr,T data)
+void FASTCALL WriteMem_area7(u32 addr,T data)
 {
 	addr&=0x1FFFFFFF;
 	switch (map_base & 0x1FFF)
@@ -741,7 +741,7 @@ void __fastcall WriteMem_area7(u32 addr,T data)
 //***********
 //Read OCR
 template <u32 sz,class T>
-T __fastcall ReadMem_area7_OCR_T(u32 addr)
+T FASTCALL ReadMem_area7_OCR_T(u32 addr)
 {
 	if (CCN_CCR.ORA)
 	{
@@ -766,7 +766,7 @@ T __fastcall ReadMem_area7_OCR_T(u32 addr)
 
 //Write OCR
 template <u32 sz,class T>
-void __fastcall WriteMem_area7_OCR_T(u32 addr,T data)
+void FASTCALL WriteMem_area7_OCR_T(u32 addr,T data)
 {
 	if (CCN_CCR.ORA)
 	{

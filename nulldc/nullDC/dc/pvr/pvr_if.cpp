@@ -246,34 +246,34 @@ void pvr_writereg_TA(u32 addr,u32 data,u32 sz)
 //vram 32-64b
 
 //read
-u8 __fastcall pvr_read_area1_8(u32 addr)
+u8 FASTCALL pvr_read_area1_8(u32 addr)
 {
 	log("8 bit vram reads are not possible\n");
 	return 0;
 }
 
-u16 __fastcall pvr_read_area1_16(u32 addr)
+u16 FASTCALL pvr_read_area1_16(u32 addr)
 {
 	addr =vramlock_ConvOffset32toOffset64(addr);
 	return *(u16*)&vram[addr];
 }
-u32 __fastcall pvr_read_area1_32(u32 addr)
+u32 FASTCALL pvr_read_area1_32(u32 addr)
 {
 	addr =vramlock_ConvOffset32toOffset64(addr);
 	return *(u32*)&vram[addr];
 }
 
 //write
-void __fastcall pvr_write_area1_8(u32 addr,u8 data)
+void FASTCALL pvr_write_area1_8(u32 addr,u8 data)
 {
 	log("8 bit vram writes are not possible\n");
 }
-void __fastcall pvr_write_area1_16(u32 addr,u16 data)
+void FASTCALL pvr_write_area1_16(u32 addr,u16 data)
 {
 	addr=vramlock_ConvOffset32toOffset64(addr);
 	*(u16*)&vram[addr]=data;
 }
-void __fastcall pvr_write_area1_32(u32 addr,u32 data)
+void FASTCALL pvr_write_area1_32(u32 addr,u32 data)
 {
 	addr=vramlock_ConvOffset32toOffset64(addr);
 	*(u32*)&vram[addr]=data;

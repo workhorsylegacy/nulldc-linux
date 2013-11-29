@@ -177,7 +177,7 @@ void RewriteBasicBlockCond(CompiledBlockInfo* cBB)
 }
 
 //Compile block and return pointer to it's code
-void* __fastcall bb_link_compile_inject_TF(CompiledBlockInfo* ptr)
+void* FASTCALL bb_link_compile_inject_TF(CompiledBlockInfo* ptr)
 {
 	CompiledBlockInfo* target= FindOrRecompileBlock(ptr->TF_next_addr);
 
@@ -194,7 +194,7 @@ void* __fastcall bb_link_compile_inject_TF(CompiledBlockInfo* ptr)
 	return target->Code;
 }
 
-void* __fastcall bb_link_compile_inject_TT(CompiledBlockInfo* ptr)
+void* FASTCALL bb_link_compile_inject_TT(CompiledBlockInfo* ptr)
 {
 	CompiledBlockInfo* target= FindOrRecompileBlock(ptr->TT_next_addr);
 
@@ -300,7 +300,7 @@ void ret_cache_reset()
 		ret_cache_base[i].cBB=0;
 	}
 }
-void __fastcall CheckBlock(CompiledBlockInfo* block)
+void FASTCALL CheckBlock(CompiledBlockInfo* block)
 {
 	verify(block->cpu_mode_tag==fpscr.PR_SZ);
 	//verify(block->size==pc);
@@ -768,7 +768,7 @@ void BasicBlock::CalculateLockFlags()
 }
 extern u32 CompiledSRCsz;
 
-CompiledBlockInfo*  __fastcall CompileBasicBlock(u32 pc)
+CompiledBlockInfo*  FASTCALL CompileBasicBlock(u32 pc)
 {
 
 	CompiledBlockInfo* rv;

@@ -400,7 +400,7 @@ void bm_GetStats(bm_stats* stats)
 
 }
 bool reset_cache=false;
-void __fastcall _SuspendAllBlocks();
+void FASTCALL _SuspendAllBlocks();
 //this should not be called from a running block , or it cloud crash
 //free's suspended blocks
 void FreeSuspendedBlocks()
@@ -430,9 +430,9 @@ u32 luk=0;
 u32 r_value=0x112;
 
 void CompileAndRunCode();
-CompiledBlockInfo* __fastcall FindBlock_full(u32 address,CompiledBlockInfo* fastblock);
+CompiledBlockInfo* FASTCALL FindBlock_full(u32 address,CompiledBlockInfo* fastblock);
 //Block lookups
-CompiledBlockInfo* __fastcall FindBlock_fast(u32 address)
+CompiledBlockInfo* FASTCALL FindBlock_fast(u32 address)
 {
 #ifdef BLOCK_LUT_GUESS
 	CompiledBlockInfo* fastblock;
@@ -455,8 +455,8 @@ CompiledBlockInfo* __fastcall FindBlock_fast(u32 address)
 #endif
 
 }
-CompiledBlockInfo*  __fastcall CompileCode(u32 pc);
-CompiledBlockInfo* __fastcall FindBlock_full_compile(u32 address,CompiledBlockInfo* fastblock)
+CompiledBlockInfo*  FASTCALL CompileCode(u32 pc);
+CompiledBlockInfo* FASTCALL FindBlock_full_compile(u32 address,CompiledBlockInfo* fastblock)
 {
 	CompiledBlockInfo* thisblock;
 
@@ -495,7 +495,7 @@ CompiledBlockInfo* __fastcall FindBlock_full_compile(u32 address,CompiledBlockIn
 #endif
 	return thisblock;
 }
-CompiledBlockInfo* __fastcall FindBlock_full(u32 address,CompiledBlockInfo* fastblock)
+CompiledBlockInfo* FASTCALL FindBlock_full(u32 address,CompiledBlockInfo* fastblock)
 {
 	CompiledBlockInfo* thisblock;
 
@@ -535,9 +535,9 @@ CompiledBlockInfo* __fastcall FindBlock_full(u32 address,CompiledBlockInfo* fast
 	return thisblock;
 }
 
-BasicBlockEP* __fastcall FindCode_full(u32 address,CompiledBlockInfo* fastblock);
+BasicBlockEP* FASTCALL FindCode_full(u32 address,CompiledBlockInfo* fastblock);
 //Code lookups
-BasicBlockEP* __fastcall FindCode_fast(u32 address)
+BasicBlockEP* FASTCALL FindCode_fast(u32 address)
 {
 #ifdef BLOCK_LUT_GUESS
 	CompiledBlockInfo* fastblock;
@@ -560,7 +560,7 @@ BasicBlockEP* __fastcall FindCode_fast(u32 address)
 #endif
 
 }
-BasicBlockEP* __fastcall FindCode_full(u32 address,CompiledBlockInfo* fastblock)
+BasicBlockEP* FASTCALL FindCode_full(u32 address,CompiledBlockInfo* fastblock)
 {
 	CompiledBlockInfo* thisblock;
 
@@ -748,7 +748,7 @@ void UnRegisterBlock(CompiledBlockInfo* block)
 //called to suspend a block
 //can be called from a mem invalidation
 void CBBs_BlockSuspended(CompiledBlockInfo* block,u32* sp);
-void __fastcall SuspendBlock_exept(CompiledBlockInfo* block,u32* sp)
+void FASTCALL SuspendBlock_exept(CompiledBlockInfo* block,u32* sp)
 {
 	//remove the block from :
 	//
@@ -767,18 +767,18 @@ void __fastcall SuspendBlock_exept(CompiledBlockInfo* block,u32* sp)
 	//add it to the "to be suspended" list
 	SuspendedBlocks.Add(block);
 }
-void __fastcall SuspendAllBlocks()
+void FASTCALL SuspendAllBlocks()
 {
 	reset_cache=true;
 }
-void __fastcall _SuspendAllBlocks()
+void FASTCALL _SuspendAllBlocks()
 {
 	log("Reseting Dynarec Cache...\n");
 	ResetBlocks(false);
 	reset_cache=false;
 }
 //called from a manualy invalidated block
-void __fastcall SuspendBlock(CompiledBlockInfo* block)
+void FASTCALL SuspendBlock(CompiledBlockInfo* block)
 {
 	//remove the block from :
 	//

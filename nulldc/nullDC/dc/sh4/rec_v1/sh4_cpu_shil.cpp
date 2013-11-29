@@ -13,7 +13,7 @@
 
 shil_stream* ilst;
 
-#define sh4op(str) void  __fastcall rec_shil_##str (u32 op,u32 pc,BasicBlock* bb)
+#define sh4op(str) void  FASTCALL rec_shil_##str (u32 op,u32 pc,BasicBlock* bb)
 
 #define GetN(str) ((str>>8) & 0xf)
 #define GetM(str) ((str>>4) & 0xf)
@@ -364,7 +364,7 @@ u32 MatchDiv32(u32 pc , Sh4RegType &reg1,Sh4RegType &reg2 , Sh4RegType &reg3)
 	
 	return match;
 }
-bool __fastcall MatchDiv32u(u32 op,u32 pc)
+bool FASTCALL MatchDiv32u(u32 op,u32 pc)
 {
 	div_som_reg1=NoReg;
 	div_som_reg2=NoReg;
@@ -383,7 +383,7 @@ bool __fastcall MatchDiv32u(u32 op,u32 pc)
 		return false;
 }
 
-bool __fastcall MatchDiv32s(u32 op,u32 pc)
+bool FASTCALL MatchDiv32s(u32 op,u32 pc)
 {
 	u32 n = GetN(op);
 	u32 m = GetM(op);
@@ -1723,7 +1723,7 @@ sh4op(sh4_bpt_op)
 	return;
 } 
 
-bool __fastcall Scanner_FindSOM(u32 opcode,u32 pc,u32* SOM)
+bool FASTCALL Scanner_FindSOM(u32 opcode,u32 pc,u32* SOM)
 { 
 	if (opcode ==0x0019)
 	{

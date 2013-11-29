@@ -120,7 +120,7 @@ __declspec(align(64)) u32 InterruptLevelBit[16]=
 	0
 };
 void FASTCALL RaiseInterrupt_(InterruptID intr);
-bool fastcall Do_Interrupt(u32 intEvn);
+bool FASTCALL Do_Interrupt(u32 intEvn);
 bool Do_Exeption(u32 lvl, u32 expEvn, u32 CallVect);
 int Check_Ints();
 bool HandleSH4_exept(InterruptID expt);
@@ -168,7 +168,7 @@ bool SRdecode()
 	return (interrupt_vpend&interrupt_vmask)>decoded_srimask;
 }
 
-void fastcall VirtualInterrupt(u32 id)
+void FASTCALL VirtualInterrupt(u32 id)
 {
 	if (id)
 	{
@@ -297,7 +297,7 @@ bool HandleSH4_exept(InterruptID expt)
 	}
 }
 
-bool fastcall Do_Interrupt(u32 intEvn)
+bool FASTCALL Do_Interrupt(u32 intEvn)
 {
 	printf_except("Interrupt : 0x%04x,0x%08x\n",intEvn,pc);
 	verify(sr.BL==0);

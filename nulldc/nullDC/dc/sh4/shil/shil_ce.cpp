@@ -6,7 +6,7 @@ u64 total_ops_removed=0;
 void CompileBasicBlock_slow_c(BasicBlock* block,u32 pass);
 u32 shil_optimise_pass_btp_main(BasicBlock* bb);
 
-#define shilh(name) bool __fastcall shil_ce_##name(shil_opcode* op,BasicBlock* bb,shil_stream* il)
+#define shilh(name) bool FASTCALL shil_ce_##name(shil_opcode* op,BasicBlock* bb,shil_stream* il)
 
 typedef shilh(FP);
 

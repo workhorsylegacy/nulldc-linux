@@ -42,8 +42,8 @@ namespace TASplitter
 
 	#include "ta_structs.h"
 
-	typedef Ta_Dma* fastcall TaListFP(Ta_Dma* data,Ta_Dma* data_end);
-	typedef u32 fastcall TaPolyParamFP(void* ptr);
+	typedef Ta_Dma* FASTCALL TaListFP(Ta_Dma* data,Ta_Dma* data_end);
+	typedef u32 FASTCALL TaPolyParamFP(void* ptr);
 
 
 	const HollyInterruptID ListEndInterrupt[5]=
@@ -75,7 +75,7 @@ namespace TASplitter
 
 		static bool StripStarted;
 
-		static void fastcall ta_list_start(u32 new_list)
+		static void FASTCALL ta_list_start(u32 new_list)
 		{
 			verify(CurrentList==ListType_None);
 			verify(ListIsFinished[new_list]==false);
@@ -88,7 +88,7 @@ namespace TASplitter
 		//Poly decoder , will be moved to pvr code
 		template <u32 poly_type,u32 part,bool StripEnd>
 		__forceinline
-		static Ta_Dma* fastcall ta_handle_poly(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_handle_poly(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			TA_VertexParam* vp=(TA_VertexParam*)data;
 			u32 rv=0;
@@ -160,19 +160,19 @@ namespace TASplitter
 		//Code Splitter/routers
 		
 		//helper function for dummy dma's.Handles 32B and then switches to ta_main for next data
-		static Ta_Dma* fastcall ta_dummy_32(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_dummy_32(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			TaCmd=ta_main;
 			return data+SZ32;
 		}
-		static Ta_Dma* fastcall ta_modvolB_32(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_modvolB_32(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			TA_decoder::AppendModVolVertexB((TA_ModVolB*)data);
 			TaCmd=ta_main;
 			return data+SZ32;
 		}
 		
-		static Ta_Dma* fastcall ta_mod_vol_data(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_mod_vol_data(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			TA_VertexParam* vp=(TA_VertexParam*)data;
 			if (data==data_end)
@@ -190,7 +190,7 @@ namespace TASplitter
 				return data+SZ64;
 			}
 		}
-		static Ta_Dma* fastcall ta_spriteB_data(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_spriteB_data(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			//32B more needed , 32B done :)
 			TaCmd=ta_main;
@@ -199,7 +199,7 @@ namespace TASplitter
 
 			return data+SZ32;
 		}
-		static Ta_Dma* fastcall ta_sprite_data(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_sprite_data(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			verify(data->pcw.ParaType==ParamType_Vertex_Parameter);
 			if (data==data_end)
@@ -225,7 +225,7 @@ namespace TASplitter
 		}
 
 		template <u32 poly_type,u32 poly_size>
-		static Ta_Dma* fastcall ta_poly_data(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_poly_data(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			__assume(data<=data_end);
 			if (StripStarted==false)
@@ -273,20 +273,20 @@ strip_end:
 		}
 
 				
-		static void fastcall AppendPolyParam2Full(Ta_Dma* pp)
+		static void FASTCALL AppendPolyParam2Full(Ta_Dma* pp)
 		{
 			TA_decoder::AppendPolyParam2A((TA_PolyParam2A*)&pp[0]);
 			TA_decoder::AppendPolyParam2B((TA_PolyParam2B*)&pp[1]);
 		}
 
-		static void fastcall AppendPolyParam4Full(Ta_Dma* pp)
+		static void FASTCALL AppendPolyParam4Full(Ta_Dma* pp)
 		{
 			TA_decoder::AppendPolyParam4A((TA_PolyParam4A*)&pp[0]);
 			TA_decoder::AppendPolyParam4B((TA_PolyParam4B*)&pp[1]);
 		}
 		//Second part of poly data
 		template <int t>
-		static Ta_Dma* fastcall ta_poly_B_32(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_poly_B_32(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			if (t==2)
 				TA_decoder::AppendPolyParam2B((TA_PolyParam2B*)data);
@@ -299,7 +299,7 @@ strip_end:
 
 public:
 #define group_EN() if (data->pcw.Group_En){ TA_decoder::TileClipMode(data->pcw.User_Clip);}
-		static Ta_Dma* fastcall ta_main(Ta_Dma* data,Ta_Dma* data_end)
+		static Ta_Dma* FASTCALL ta_main(Ta_Dma* data,Ta_Dma* data_end)
 		{
 			do
 			{
@@ -474,7 +474,7 @@ public:
 
 		*/
 		//helpers 0-14
-		static u32 fastcall poly_data_type_id(PCW pcw)
+		static u32 FASTCALL poly_data_type_id(PCW pcw)
 		{
 			if (pcw.Texture)
 			{
@@ -560,7 +560,7 @@ public:
 			return 0xFFFFFFFF;
 		}
 		//0-4 | 0x80
-		static u32 fastcall poly_header_type_size(PCW pcw)
+		static u32 FASTCALL poly_header_type_size(PCW pcw)
 		{
 			if (pcw.Volume == 0)
 			{

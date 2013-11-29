@@ -146,7 +146,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 					{sr=w;}\
 					format(&pbt,(u8*)&params.vram[sa],sr,h);
 
-	typedef void fastcall texture_handler_FP(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+	typedef void FASTCALL texture_handler_FP(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 
 	/*
 	texture_handler_FP* texture_handlers[8] = 
@@ -316,7 +316,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 	TA_context pvrrc;
 
 	std::vector<TA_context> rcnt;
-	u32 fastcall FindRC(u32 addr)
+	u32 FASTCALL FindRC(u32 addr)
 	{
 		for (u32 i=0;i<rcnt.size();i++)
 		{
@@ -327,7 +327,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 		}
 		return 0xFFFFFFFF;
 	}
-	void fastcall SetCurrentTARC(u32 addr)
+	void FASTCALL SetCurrentTARC(u32 addr)
 	{
 		addr&=0xF00000;
 		//return;
@@ -355,7 +355,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 			rcnt.push_back(tarc);
 		}
 	}
-	void fastcall SetCurrentPVRRC(u32 addr)
+	void FASTCALL SetCurrentPVRRC(u32 addr)
 	{
 		addr&=0xF00000;
 		//return;
@@ -701,39 +701,39 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 
 	//poly param handling
 	__forceinline
-		static void fastcall AppendPolyParam0(TA_PolyParam0* pp)
+		static void FASTCALL AppendPolyParam0(TA_PolyParam0* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam1(TA_PolyParam1* pp)
+		static void FASTCALL AppendPolyParam1(TA_PolyParam1* pp)
 		{
 			glob_param_bdc;
 			poly_float_color(FaceBaseColor,FaceColor);
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2A(TA_PolyParam2A* pp)
+		static void FASTCALL AppendPolyParam2A(TA_PolyParam2A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2B(TA_PolyParam2B* pp)
+		static void FASTCALL AppendPolyParam2B(TA_PolyParam2B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor);
 			poly_float_color(FaceOffsColor,FaceOffset);
 		}
 		__forceinline
-		static void fastcall AppendPolyParam3(TA_PolyParam3* pp)
+		static void FASTCALL AppendPolyParam3(TA_PolyParam3* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4A(TA_PolyParam4A* pp)
+		static void FASTCALL AppendPolyParam4A(TA_PolyParam4A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4B(TA_PolyParam4B* pp)
+		static void FASTCALL AppendPolyParam4B(TA_PolyParam4B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor0);
 		}

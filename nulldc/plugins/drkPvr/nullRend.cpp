@@ -660,39 +660,39 @@ next_y:
 	poly_float_color_(to,pp->src##A,pp->src##R,pp->src##G,pp->src##B)
 
 		__forceinline
-		static void fastcall AppendPolyParam0(TA_PolyParam0* pp)
+		static void FASTCALL AppendPolyParam0(TA_PolyParam0* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam1(TA_PolyParam1* pp)
+		static void FASTCALL AppendPolyParam1(TA_PolyParam1* pp)
 		{
 			glob_param_bdc;
 			poly_float_color(FaceBaseColor,FaceColor);
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2A(TA_PolyParam2A* pp)
+		static void FASTCALL AppendPolyParam2A(TA_PolyParam2A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2B(TA_PolyParam2B* pp)
+		static void FASTCALL AppendPolyParam2B(TA_PolyParam2B* pp)
 		{
 			poly_float_color(FaceBaseColor,FaceColor);
 			poly_float_color(FaceOffsColor,FaceOffset);
 		}
 		__forceinline
-		static void fastcall AppendPolyParam3(TA_PolyParam3* pp)
+		static void FASTCALL AppendPolyParam3(TA_PolyParam3* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4A(TA_PolyParam4A* pp)
+		static void FASTCALL AppendPolyParam4A(TA_PolyParam4A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4B(TA_PolyParam4B* pp)
+		static void FASTCALL AppendPolyParam4B(TA_PolyParam4B* pp)
 		{
 		
 		}
@@ -1184,37 +1184,37 @@ namespace NORenderer
 #define glob_param_bdc
 
 		__forceinline
-		static void fastcall AppendPolyParam0(TA_PolyParam0* pp)
+		static void FASTCALL AppendPolyParam0(TA_PolyParam0* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam1(TA_PolyParam1* pp)
+		static void FASTCALL AppendPolyParam1(TA_PolyParam1* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2A(TA_PolyParam2A* pp)
+		static void FASTCALL AppendPolyParam2A(TA_PolyParam2A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam2B(TA_PolyParam2B* pp)
+		static void FASTCALL AppendPolyParam2B(TA_PolyParam2B* pp)
 		{
 			
 		}
 		__forceinline
-		static void fastcall AppendPolyParam3(TA_PolyParam3* pp)
+		static void FASTCALL AppendPolyParam3(TA_PolyParam3* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4A(TA_PolyParam4A* pp)
+		static void FASTCALL AppendPolyParam4A(TA_PolyParam4A* pp)
 		{
 			glob_param_bdc;
 		}
 		__forceinline
-		static void fastcall AppendPolyParam4B(TA_PolyParam4B* pp)
+		static void FASTCALL AppendPolyParam4B(TA_PolyParam4B* pp)
 		{
 		
 		}

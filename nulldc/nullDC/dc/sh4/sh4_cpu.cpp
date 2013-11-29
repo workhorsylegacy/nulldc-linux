@@ -154,7 +154,7 @@ sh4op(i0000_nnnn_1011_0011)
 } 
 
 //pref @<REG_N>                 
-void __fastcall do_pref(u32 addr)
+void FASTCALL do_pref(u32 addr)
 {
 	u32* sq = (u32*)&sq_both[addr& 0x20];
 

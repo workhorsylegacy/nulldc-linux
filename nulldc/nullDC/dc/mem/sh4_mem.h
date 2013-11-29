@@ -4,7 +4,7 @@
 //main system mem
 extern VArray2 mem_b;
 
-#define MEMCALL __fastcall
+#define MEMCALL FASTCALL
 
 #include "_vmem.h"
 #include "mmu.h"
@@ -85,7 +85,7 @@ void GetMemInfo(u32 addr,u32 size,MemInfo* meminfo);
 bool IsOnRam(u32 addr);
 
 
-u32 __fastcall GetRamPageFromAddress(u32 RamAddress);
+u32 FASTCALL GetRamPageFromAddress(u32 RamAddress);
 
 #define 	ReadMemArrRet(arr,addr,sz)				\
 			{if (sz==1)								\

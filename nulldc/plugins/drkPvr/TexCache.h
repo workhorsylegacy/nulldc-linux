@@ -41,7 +41,7 @@ public:
 	}
 
 
-	TexEntryType* __fastcall Find(u32 tcw,u32 tsp)
+	TexEntryType* FASTCALL Find(u32 tcw,u32 tsp)
 	{
 		TexCacheEntry* pl= this->pfirst;
 		while (pl)
@@ -221,7 +221,7 @@ __forceinline u32 YUV422(s32 Y,s32 Yu,s32 Yv)
 	return ARGB8888(255,clamp(0,255,R),clamp(0,255,G),clamp(0,255,B));
 }
 
-u32 fastcall twiddle_fast(u32 x,u32 y,u32 x_sz,u32 y_sz);
+u32 FASTCALL twiddle_fast(u32 x,u32 y,u32 x_sz,u32 y_sz);
 #define twop twiddle_fast
 
 //pixel packers !
@@ -248,7 +248,7 @@ struct name \
 { \
 	static const u32 xpp=x;\
 	static const u32 ypp=y;	\
-	__forceinline static void fastcall Convert(PixelBuffer* pb,u8* data) \
+	__forceinline static void FASTCALL Convert(PixelBuffer* pb,u8* data) \
 {
 
 #define pixelcvt_end } }
@@ -477,7 +477,7 @@ pixelcvt_next(convPAL8_X_TW,2,4)
 pixelcvt_end;
 //hanlder functions
 template<class PixelConvertor>
-void fastcall texture_PL(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
+void FASTCALL texture_PL(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 {
 	u32 p=0;
 	pb->amove(0,0);
@@ -501,7 +501,7 @@ void fastcall texture_PL(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 	}
 }
 template <int bore_level>
-void fastcall texture_PL_RAW(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
+void FASTCALL texture_PL_RAW(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 {
 	u32 sz=Width*2;
 	Height>>=1;	//half
@@ -518,7 +518,7 @@ void fastcall texture_PL_RAW(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 }
 
 template<class PixelConvertor>
-void fastcall texture_TW(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
+void FASTCALL texture_TW(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 {
 	u32 p=0;
 	pb->amove(0,0);
@@ -545,7 +545,7 @@ void fastcall texture_TW(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 }
 
 template<class PixelConvertor>
-void fastcall texture_VQ(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
+void FASTCALL texture_VQ(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 {
 	p_in+=256*4*2;
 	u32 p=0;
@@ -574,26 +574,26 @@ void fastcall texture_VQ(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height)
 //We ask the compiler to generate the templates here
 //;)
 //planar formats !
-template void fastcall texture_PL<conv4444_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_PL<conv565_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_PL<conv1555_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_PL<convYUV_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_PL<conv4444_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_PL<conv565_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_PL<conv1555_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_PL<convYUV_PL<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 
 //twiddled formats !
-template void fastcall texture_TW<conv4444_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_TW<conv565_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_TW<conv1555_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_TW<convYUV_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_TW<convPAL4_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_TW<convPAL8_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_TW<conv4444_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_TW<conv565_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_TW<conv1555_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_TW<convYUV_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_TW<convPAL4_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_TW<convPAL8_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 
 //VQ formats !
-template void fastcall texture_VQ<conv4444_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_VQ<conv565_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_VQ<conv1555_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-template void fastcall texture_VQ<convYUV_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-//template void fastcall texture_VQ<convPAL4_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-//template void fastcall texture_VQ<convPAL8_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_VQ<conv4444_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_VQ<conv565_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_VQ<conv1555_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+template void FASTCALL texture_VQ<convYUV_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+//template void FASTCALL texture_VQ<convPAL4_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+//template void FASTCALL texture_VQ<convPAL8_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 
 //Planar
 #define argb1555to8888 texture_PL<conv1555_PL<pp_dx> >
@@ -621,15 +621,15 @@ template void fastcall texture_VQ<convYUV_TW<pp_dx> >(PixelBuffer* pb,u8* p_in,u
 //#define PAL8to8888_VQ  texture_VQ<convPAL8_TW<pp_dx> >
 
 /*
-void fastcall texture_VQ_argb565(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-void fastcall texture_VQ_argb1555(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-void fastcall texture_VQ_argb4444(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-void fastcall texture_VQ_YUV422(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-void fastcall texture_VQ_PAL4(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-void fastcall texture_VQ_PAL8(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_VQ_argb565(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_VQ_argb1555(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_VQ_argb4444(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_VQ_YUV422(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_VQ_PAL4(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_VQ_PAL8(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 */
 
-void fastcall texture_PAL4(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
-void fastcall texture_PAL8(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_PAL4(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
+void FASTCALL texture_PAL8(PixelBuffer* pb,u8* p_in,u32 Width,u32 Height);
 
 

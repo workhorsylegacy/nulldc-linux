@@ -13,13 +13,13 @@ void pvr_writereg_TA(u32 addr,u32 data,u32 sz);
 //vram 32-64b
 extern VArray2 vram;
 //read
-u8 __fastcall pvr_read_area1_8(u32 addr);
-u16 __fastcall pvr_read_area1_16(u32 addr);
-u32 __fastcall pvr_read_area1_32(u32 addr);
+u8 FASTCALL pvr_read_area1_8(u32 addr);
+u16 FASTCALL pvr_read_area1_16(u32 addr);
+u32 FASTCALL pvr_read_area1_32(u32 addr);
 //write
-void __fastcall pvr_write_area1_8(u32 addr,u8 data);
-void __fastcall pvr_write_area1_16(u32 addr,u16 data);
-void __fastcall pvr_write_area1_32(u32 addr,u32 data);
+void FASTCALL pvr_write_area1_8(u32 addr,u8 data);
+void FASTCALL pvr_write_area1_16(u32 addr,u16 data);
+void FASTCALL pvr_write_area1_32(u32 addr,u32 data);
 
 void pvr_Update(u32 cycles);
 

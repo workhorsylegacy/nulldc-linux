@@ -100,11 +100,11 @@ class BasicBlock: public CodeRegion
 
 
 
-void __fastcall basic_block_AddRef(CompiledBlockInfo* p_this,CompiledBlockInfo* block);
-void __fastcall basic_block_BlockWasSuspended(CompiledBlockInfo* p_this,CompiledBlockInfo* block);
-void __fastcall basic_block_ClearBlock(CompiledBlockInfo* p_this,CompiledBlockInfo* block);
-void __fastcall basic_block_Suspend(CompiledBlockInfo* p_this);
-void __fastcall basic_block_Free(CompiledBlockInfo* p_this);
+void FASTCALL basic_block_AddRef(CompiledBlockInfo* p_this,CompiledBlockInfo* block);
+void FASTCALL basic_block_BlockWasSuspended(CompiledBlockInfo* p_this,CompiledBlockInfo* block);
+void FASTCALL basic_block_ClearBlock(CompiledBlockInfo* p_this,CompiledBlockInfo* block);
+void FASTCALL basic_block_Suspend(CompiledBlockInfo* p_this);
+void FASTCALL basic_block_Free(CompiledBlockInfo* p_this);
 
 struct ret_cache_entry
 {
@@ -120,4 +120,4 @@ void ret_cache_reset();
 
 #define RET_CACHE_SZ (RET_CACHE_COUNT*RET_CACHE_ITEM_SIZE)
 
-CompiledBlockInfo*  __fastcall CompileBasicBlock(u32 pc);
+CompiledBlockInfo*  FASTCALL CompileBasicBlock(u32 pc);

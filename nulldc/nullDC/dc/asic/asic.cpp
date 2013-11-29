@@ -73,7 +73,7 @@ void RaiseAsicErr(HollyInterruptID inter)
 	asic_RL6Pending();
 }
 
-void fastcall asic_RaiseInterrupt(HollyInterruptID inter)
+void FASTCALL asic_RaiseInterrupt(HollyInterruptID inter)
 {
 	u8 m=(u8)(inter>>8);
 	switch(m)
@@ -89,7 +89,7 @@ void fastcall asic_RaiseInterrupt(HollyInterruptID inter)
 		break;
 	}
 }
-void fastcall asic_CancelInterrupt(HollyInterruptID inter)
+void FASTCALL asic_CancelInterrupt(HollyInterruptID inter)
 {
 	SB_ISTEXT&=~(1<<(u8)inter);
 	asic_RL2Pending();

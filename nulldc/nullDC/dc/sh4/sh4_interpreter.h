@@ -4,8 +4,8 @@
 #include "intc.h"
 
 #undef sh4op
-#define sh4op(str) void  __fastcall str (u32 op)
-typedef void (__fastcall OpCallFP) (u32 op);
+#define sh4op(str) void  FASTCALL str (u32 op)
+typedef void (FASTCALL OpCallFP) (u32 op);
 
 enum OpcodeType
 {
@@ -41,12 +41,12 @@ void Sh4_int_Reset(bool Manual);
 void Sh4_int_Init();
 void Sh4_int_Term();
 bool Sh4_int_IsCpuRunning();
-void __fastcall sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddr);
+void FASTCALL sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddr);
 u32 Sh4_int_GetRegister(Sh4RegType reg);
 void Sh4_int_SetRegister(Sh4RegType reg,u32 regdata);
 //Other things (mainly used by the cpu core
 bool ExecuteDelayslot();
 bool ExecuteDelayslot_RTE();
-int  __fastcall UpdateSystem();
+int  FASTCALL UpdateSystem();
 
 
