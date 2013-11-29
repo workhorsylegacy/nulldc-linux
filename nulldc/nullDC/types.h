@@ -20,7 +20,6 @@
 #define _CRT_SECURE_NO_DEPRECATE 
 
 //Basic types :)
-//#include "basic_types.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -81,32 +80,6 @@ using namespace std;
 
 #endif
 
-// Inline
-#if DEBUG
-	//force
-	#define INLINE
-
-	//sugest
-	#define SINLINE
-
-#elif defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	//force
-	#define INLINE __forceinline
-	//sugest
-	#define SINLINE __inline
-#else
-	//force
-	#define INLINE inline
-	//sugest
-	#define SINLINE inline
-#endif
-
-//no inline :)
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	#define NOINLINE __declspec(noinline)
-#else
-	#define NOINLINE noinline
-#endif
 
 #ifdef MEM_ERROR_BREAK
 	#ifdef X86
@@ -170,13 +143,6 @@ using namespace std;
 #define VER_SHORTNAME	VER_EMUNAME L" 1.0.4" _X_x_X_MMU_VER_STR
 
 #define dbgbreak __debugbreak(); 
-
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	#define FASTCALL __fastcall
-#else
-	#define FASTCALL 
-
-#endif
 
 #ifndef NO_VERIFY
 #define verify(x) if(!(x)){ msgboxf(_T("Verify Failed  : ") _T(#x) _T("\n in %s -> %s : %d \n"),MBX_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}

@@ -1,7 +1,7 @@
 #pragma once
 #define _PLUGIN_HEADER_
 
-#include <stdint.h>
+#include "../../../common/portable.h"
 
 //SHUT UP M$ COMPILER !@#!@$#
 #ifdef _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES
@@ -24,41 +24,6 @@
 //unused parameters
 #pragma warning( disable : 4100)
 
-//basic types
-typedef int8_t  s8;
-typedef int16_t s16;
-typedef int32_t s32;
-typedef int64_t s64;
-
-typedef uint8_t  u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef uint64_t u64;
-
-typedef float f32;
-typedef double f64;
-
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	#define FASTCALL __fastcall
-#else
-	#define FASTCALL
-
-#endif
-
-#ifdef _M_X64
-#undef X86
-#define X64
-#endif
-
-#ifdef X86
-typedef u32 unat;
-#endif
-
-#ifdef X64
-typedef u64 unat;
-#endif
-
-typedef wchar_t wchar;
 
 #define EXPORT extern "C" __declspec(dllexport)
 

@@ -405,7 +405,6 @@
     <ClInclude Include="naomi\naomi.h" />
     <ClInclude Include="naomi\naomi_regs.h" />
     <ClInclude Include="cl\cl.h" />
-    <ClInclude Include="basic_types.h" />
     <ClInclude Include="stdclass.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>

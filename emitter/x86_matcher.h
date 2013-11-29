@@ -1,12 +1,6 @@
 
 //included on x86_emitter.cpp
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	#define FASTCALL __fastcall
-#else
-	#define FASTCALL 
-
-#endif
 
 /*
 enum x86_op_params

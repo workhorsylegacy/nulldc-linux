@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../../common/portable.h"
+
 #ifndef _PLUGIN_HEADER_
 #error beef
 #endif
@@ -22,13 +24,6 @@ struct VersionNumber
 #define EXPORT extern "C" __declspec(dllexport)
 
 #define EXPORT_CALL __stdcall
-
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	#define FASTCALL __fastcall
-#else
-	#define FASTCALL
-
-#endif
 
 #define C_CALL __cdecl
 

@@ -1,13 +1,6 @@
 //#include "types.h"
 //#include "x86_emitter.h"
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
-	#define FASTCALL __fastcall
-#else
-	#define FASTCALL 
-
-#endif
-
 /*
 	--x86 is such a fucked cpu arch--
 	->for 32b mode , x64 is not supported atm<-

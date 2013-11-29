@@ -4,7 +4,7 @@
 #define _algo_hpp_
 
 #include "pvr_r.hpp"
-#include "../../nulldc/basic_types.h"
+#include "../common/portable.h"
 #include "../../nulldc/algo/algo.hpp"
 #include <vector>
 #include <algorithm>

@@ -515,7 +515,6 @@
     <ClInclude Include="cl\cl.h">
       <Filter>cl</Filter>
     </ClInclude>
-    <ClInclude Include="basic_types.h" />
     <ClInclude Include="stdclass.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="log\logging_interface.h">
