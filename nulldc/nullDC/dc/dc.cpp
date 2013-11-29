@@ -83,7 +83,7 @@ u32 THREADCALL emulation_thead(void* ptar)
 		GetCurrentProcess(),
 		&(HANDLE)hEmuThread, 
 		0,
-		FALSE,
+		false,
 		DUPLICATE_SAME_ACCESS);
 	init_Profiler(hEmuThread);
 

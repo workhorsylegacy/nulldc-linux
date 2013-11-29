@@ -43,7 +43,7 @@ void CtrlDisAsmView::deinit()
 	//UnregisterClass(szClassName, hInst)
 }
 
-BOOL CopyTextToClipboard(HWND hwnd, TCHAR *text)
+bool CopyTextToClipboard(HWND hwnd, TCHAR *text)
 {
 	OpenClipboard(hwnd);
 	EmptyClipboard();
@@ -51,7 +51,7 @@ BOOL CopyTextToClipboard(HWND hwnd, TCHAR *text)
 	if (hglbCopy == NULL) 
 	{ 
 		CloseClipboard(); 
-		return FALSE; 
+		return false; 
 	} 
 
 	// Lock the handle and copy the text to the buffer. 
@@ -62,7 +62,7 @@ BOOL CopyTextToClipboard(HWND hwnd, TCHAR *text)
 	GlobalUnlock(hglbCopy); 
 	SetClipboardData(CF_UNICODETEXT,hglbCopy);
 	CloseClipboard();
-	return TRUE;
+	return true;
 }
 
 LRESULT CALLBACK CtrlDisAsmView::wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -128,7 +128,7 @@ LRESULT CALLBACK CtrlDisAsmView::wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPA
 		ccp->onVScroll(wParam,lParam);
 		break;
 	case WM_ERASEBKGND:
-		return FALSE;
+		return false;
 	case WM_KEYDOWN:
 		ccp->onKeyDown(wParam,lParam);
 		break;
@@ -167,8 +167,8 @@ CtrlDisAsmView::CtrlDisAsmView(HWND _wnd)
 	wnd=_wnd;
 	SetWindowPtr(wnd, 0, this);
 	SetWindowLong(wnd, GWL_STYLE, GetWindowLong(wnd,GWL_STYLE) | WS_VSCROLL);
-	SetScrollRange(wnd, SB_VERT, -1,1,TRUE);
-	font = CreateFont(16,0,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,
+	SetScrollRange(wnd, SB_VERT, -1,1,true);
+	font = CreateFont(16,0,0,0,FW_DONTCARE,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,
 		L"Courier New");
 	curAddress=0;
 	rowHeight=16;
@@ -426,7 +426,7 @@ void CtrlDisAsmView::onKeyDown(WPARAM wParam, LPARAM lParam)
 
 void CtrlDisAsmView::redraw()
 {
-	InvalidateRect(wnd, NULL, FALSE);
+	InvalidateRect(wnd, NULL, false);
 	UpdateWindow(wnd); 
 }
 

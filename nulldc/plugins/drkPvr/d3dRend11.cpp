@@ -1421,7 +1421,7 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 		sd.OutputWindow = (HWND)emu.GetRenderTarget();
 		sd.SampleDesc.Count = 1;
 		sd.SampleDesc.Quality = 0;
-		sd.Windowed = TRUE;
+		sd.Windowed = true;
 
 		for( UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++ )
 		{

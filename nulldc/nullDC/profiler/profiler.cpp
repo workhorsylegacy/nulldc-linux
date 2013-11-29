@@ -187,7 +187,7 @@ extern u32 no_interrupts,yes_interrupts;
 		 cntx.ContextFlags= CONTEXT_FULL;
 		 
 		 {
-			BOOL test = GetThreadContext((HANDLE)param,&cntx);
+			bool test = GetThreadContext((HANDLE)param,&cntx);
 			verify(test);
 		 }
 

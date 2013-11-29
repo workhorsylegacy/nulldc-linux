@@ -16,7 +16,7 @@
 HINSTANCE PuruPuru_hInst = NULL;
 emu_info host;
 u32 current_port = 0;
-bool emulator_running  = FALSE;
+bool emulator_running  = false;
 
 Supported_Status Support;
 
@@ -30,14 +30,14 @@ RAWINPUTDEVICE Rid[1]; // RAW keyboard
 //////////////////////////////////////////////////////////////////////////////////////////
 // DllMain 
 // -------
-BOOL APIENTRY DllMain(	HINSTANCE hinstDLL,	// DLL module handle
+bool APIENTRY DllMain(	HINSTANCE hinstDLL,	// DLL module handle
 						DWORD dwReason,		// reason called
 						LPVOID lpvReserved)	// reserved
 {
 	InitCommonControls();
 	PuruPuru_hInst = hinstDLL;
 
-	return TRUE;
+	return true;
 }
 
 typedef INT_PTR CALLBACK dlgp( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam );
@@ -283,7 +283,7 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst, u32 id, u32 flags, u32 ro
 s32 FASTCALL Init(void* data, u32 id, maple_init_params* params)
 {
 	// Init input lib, this can also be done in Create*;	
-	emulator_running = TRUE;
+	emulator_running = true;
 	u32 port = ((maple_device_instance*)data)->port >> 6;
 	printf("PuruPuru -> Init [%d]\n", port);
 
@@ -325,7 +325,7 @@ void FASTCALL Term(void* data, u32 id)
 	u32 port = ((maple_device_instance*)data)->port >> 6;
 	//printf("PuruPuru -> Term [%d]\n", port);
 
-	emulator_running = FALSE;
+	emulator_running = false;
 
 	//kill whatever you did on Init()	
 }

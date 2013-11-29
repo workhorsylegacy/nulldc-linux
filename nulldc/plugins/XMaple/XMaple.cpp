@@ -27,13 +27,13 @@ void UpdateMenu(u32 parentmenu, maple_device_instance* inst, bool override);
 // win32 dlls gotta have it...
 HMODULE hModule;
 HINSTANCE hInstance;
-BOOL APIENTRY DllMain(HMODULE hModule,
+bool APIENTRY DllMain(HMODULE hModule,
 					  DWORD  ul_reason_for_call,
 					  LPVOID lpReserved)
 {
 	::hModule = hModule;
 	hInstance = (HINSTANCE)hModule;
-	return TRUE;
+	return true;
 }
 
 //Called when plugin is loaded by the emu, the param has some handy functions so i make a copy of it ;)

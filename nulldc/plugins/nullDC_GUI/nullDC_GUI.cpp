@@ -19,7 +19,7 @@ void LoadSettings()
 	settings.AlwaysOnTop=emu.ConfigLoadInt(L"nullDC_GUI",L"AlwaysOnTop",0) ? true : false;
 }
 
-BOOL APIENTRY DllMain( HMODULE hModule,
+bool APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
 					 )
@@ -33,7 +33,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	case DLL_PROCESS_DETACH:
 		break;
 	}
-    return TRUE;
+    return true;
 }
 int EXPORT_CALL guiMsgBox(wchar* text,int type)
 {

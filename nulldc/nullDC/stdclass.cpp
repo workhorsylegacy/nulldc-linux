@@ -134,8 +134,8 @@ cResetEvent::cResetEvent(bool State,bool Auto)
 {
 		hEvent = CreateEvent( 
         NULL,             // default security attributes
-		Auto?FALSE:TRUE,  // auto-reset event?
-		State?TRUE:FALSE, // initial state is State
+		Auto?false:true,  // auto-reset event?
+		State?true:false, // initial state is State
         NULL			  // unnamed object
         );
 }

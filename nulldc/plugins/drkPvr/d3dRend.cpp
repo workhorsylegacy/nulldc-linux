@@ -997,8 +997,8 @@ u32 vramlock_ConvOffset32toOffset64(u32 offset32)
 			r_set_state(R_CULLMODE,D3DCULL_NONE);
 			verifyc(dev->SetVertexDeclaration(vdecl_osd));
 			
-			r_set_state(R_ALPHABLENDENABLE,FALSE);
-			r_set_state(R_ZENABLE,FALSE);
+			r_set_state(R_ALPHABLENDENABLE,false);
+			r_set_state(R_ZENABLE,false);
 
 			//(dev->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,fsq,10*4));
 
@@ -1444,7 +1444,7 @@ bool operator<(const PolyParam &left, const PolyParam &right)
 		else
 		{
 			//Offset color is enabled olny if Texture is enabled ;)
-			r_set_state(R_SPECULARENABLE,FALSE);
+			r_set_state(R_SPECULARENABLE,false);
 			r_set_texture(0,NULL);
 		}
 	}
@@ -2124,24 +2124,24 @@ __error_out:
 		//r_set_state(R_ZFUNC,D3DCMP_ALWAYS);
 		r_set_state(R_SRCBLEND, D3DBLEND_SRCALPHA);
 		r_set_state(R_DESTBLEND, D3DBLEND_INVSRCALPHA);
-		r_set_state(R_ALPHABLENDENABLE,TRUE);
+		r_set_state(R_ALPHABLENDENABLE,true);
 		
-		r_set_state( R_ALPHATESTENABLE,  TRUE );
+		r_set_state( R_ALPHATESTENABLE,  true );
 		r_set_state( R_ALPHAREF,         0x08 );
 		r_set_state( R_ALPHAFUNC,  D3DCMP_GREATEREQUAL );
 		r_set_state( R_FILLMODE,   D3DFILL_SOLID );
 		r_set_state( R_CULLMODE,   D3DCULL_CCW );
-		r_set_state( R_STENCILENABLE,    FALSE );
-		r_set_state( R_CLIPPING,         TRUE );
-		r_set_state( R_CLIPPLANEENABLE,  FALSE );
+		r_set_state( R_STENCILENABLE,    false );
+		r_set_state( R_CLIPPING,         true );
+		r_set_state( R_CLIPPLANEENABLE,  false );
 		r_set_state( R_VERTEXBLEND,      D3DVBF_DISABLE );
-		r_set_state( R_INDEXEDVERTEXBLENDENABLE, FALSE );
-		r_set_state( R_FOGENABLE,        FALSE );
+		r_set_state( R_INDEXEDVERTEXBLENDENABLE, false );
+		r_set_state( R_FOGENABLE,        false );
 		r_set_state( R_COLORWRITEENABLE,
 		D3DCOLORWRITEENABLE_RED  | D3DCOLORWRITEENABLE_GREEN |
 		D3DCOLORWRITEENABLE_BLUE | D3DCOLORWRITEENABLE_ALPHA );
 
-		r_set_state( R_ZENABLE,FALSE);
+		r_set_state( R_ZENABLE,false);
 		
 		if (settings.OSD.ShowFPS)
 		{
@@ -2249,7 +2249,7 @@ __error_out:
 		if (mv_mode==0)	//normal trigs
 		{
 			//set states
-			verifyc(r_set_state(R_ZENABLE,TRUE));
+			verifyc(r_set_state(R_ZENABLE,true));
 			verifyc(r_set_state(R_STENCILWRITEMASK,2));	//write bit 1
 			verifyc(r_set_state(R_STENCILFUNC,D3DCMP_ALWAYS));	//allways pass
 			verifyc(r_set_state(R_STENCILPASS,D3DSTENCILOP_INVERT));	//flip bit 1
@@ -2292,7 +2292,7 @@ __error_out:
 			}
 
 			//common states :)
-			verifyc(r_set_state(R_ZENABLE,FALSE));	//no Z testing, we just want to sum up all of the modvol area ...
+			verifyc(r_set_state(R_ZENABLE,false));	//no Z testing, we just want to sum up all of the modvol area ...
 			verifyc(r_set_state(R_STENCILWRITEMASK,3));	//write 2 lower bits
 			verifyc(r_set_state(R_STENCILMASK,3));		//read 2 lower ones
 		}
@@ -2326,7 +2326,7 @@ __error_out:
 		// Clear the backbuffer to a blue color
 		//All of the screen is allways filled w/ smth , no need to clear the color buffer
 		//gives a nice speedup on large resolutions
-		r_set_state(R_SCISSORTESTENABLE, FALSE); 
+		r_set_state(R_SCISSORTESTENABLE, false); 
 		if (rtt || clear_rt==0)
 		{
 			verifyc(dev->Clear( 0, NULL, ZBufferCF  , D3DCOLOR_XRGB(0,0,0), 0.0f, 0 ));
@@ -2426,8 +2426,8 @@ __error_out:
 			r_set_state(R_TEXTUREFACTOR, 0xFFFFFFFF);
 
 			//Opaque
-			r_set_state(R_ALPHABLENDENABLE,FALSE);
-			r_set_state(R_ALPHATESTENABLE,FALSE);
+			r_set_state(R_ALPHABLENDENABLE,false);
+			r_set_state(R_ALPHATESTENABLE,false);
 
 			//Scale values have the sync values
 			//adjust em here for FB/AA/Stuff :)
@@ -2453,7 +2453,7 @@ __error_out:
 				current_scalef[1]=-(float)(FB_Y_CLIP.min/**scale_y*/);
 				current_scalef[2]=(float)(FB_X_CLIP.max+1)*0.5f*scale_x;
 				current_scalef[3]=-(float)((FB_Y_CLIP.max+1)*0.5f)/**scale_y*/;
-				r_set_state(R_SCISSORTESTENABLE, FALSE); 
+				r_set_state(R_SCISSORTESTENABLE, false); 
 			}
 			else
 			{
@@ -2466,7 +2466,7 @@ __error_out:
 				if (settings.Enhancements.AspectRatioMode==2 && FB_Y_CLIP.min==0 && FB_Y_CLIP.max==479 && FB_X_CLIP.min==0 && FB_X_CLIP.max==639)
 				{
 					//rendering to frame buffer and not scissoring anything [yes this is a hack to allow widescreen hack]
-					r_set_state(R_SCISSORTESTENABLE, FALSE); 
+					r_set_state(R_SCISSORTESTENABLE, false); 
 				}
 				else
 				{
@@ -2478,7 +2478,7 @@ __error_out:
 					srect.right=(int)(0.5f+(current_scalef[0]/(current_scalef[2]*x_scale_coef_aa)*fb_surf_desc.Width+((FB_X_CLIP.max+1)*fb_surf_desc.Width/(current_scalef[2]*x_scale_coef_aa))));
 
 					dev->SetScissorRect(&srect);
-					r_set_state(R_SCISSORTESTENABLE, TRUE); 
+					r_set_state(R_SCISSORTESTENABLE, true); 
 				}
 			}
 
@@ -2491,7 +2491,7 @@ __error_out:
 			//stencil modes
 			if (settings.Emulation.ModVolMode==MVM_NormalAndClip)
 			{
-				verifyc(r_set_state(R_STENCILENABLE,TRUE));
+				verifyc(r_set_state(R_STENCILENABLE,true));
 				verifyc(r_set_state(R_STENCILWRITEMASK,0xFF));				//write bit 7.I set em all here as a speed optimisation to minimise RMW operations
 				verifyc(r_set_state(R_STENCILFUNC,D3DCMP_ALWAYS));			//allways pass
 				verifyc(r_set_state(R_STENCILPASS,D3DSTENCILOP_REPLACE));	//flip bit 1
@@ -2501,7 +2501,7 @@ __error_out:
 			}
 			else
 			{
-				verifyc(r_set_state(R_STENCILENABLE,FALSE));
+				verifyc(r_set_state(R_STENCILENABLE,false));
 			}
 			
 
@@ -2519,7 +2519,7 @@ __error_out:
 			}
 
 			//Punch Through
-			r_set_state(R_ALPHATESTENABLE,TRUE);
+			r_set_state(R_ALPHATESTENABLE,true);
 
 			r_set_state(R_ALPHAFUNC,D3DCMP_GREATEREQUAL);
 
@@ -2551,23 +2551,23 @@ __error_out:
 					last *in*   : flip, merge*in* &clear from last merge
 					last *out*  : flip, merge*out* &clear from last merge
 					*/
-					r_set_state(R_ALPHABLENDENABLE,TRUE); //->BUG on nvdrivers (163 && 169 tested so far)
-					r_set_state(R_ALPHATESTENABLE,FALSE);
+					r_set_state(R_ALPHABLENDENABLE,true); //->BUG on nvdrivers (163 && 169 tested so far)
+					r_set_state(R_ALPHATESTENABLE,false);
 					r_set_state(R_COLORWRITEENABLE,0);
 
-					r_set_state(R_ZWRITEENABLE,FALSE);
+					r_set_state(R_ZWRITEENABLE,false);
 					verifyc(r_set_state(R_ZFUNC,D3DCMP_GREATER));
 					
 					//TODO: Find out what ZPixelShader was supposed to be doing.
 					verifyc(dev->SetPixelShader(ZPixelShader));
-					verifyc(r_set_state(R_STENCILENABLE,TRUE));
+					verifyc(r_set_state(R_STENCILENABLE,true));
 
 					//we WANT stencil to have all 1's here for bit 1
 					//set it as needed here :) -> not realy , we want em 0'd
 					
 					f32 fsq[] = {-640*8,-480*8,pvrrc.invW_min, -640*8,480*8,pvrrc.invW_min, 640*8,-480*8,pvrrc.invW_min, 640*8,480*8,pvrrc.invW_min};
 					/*
-					verifyc(r_set_state(R_ZENABLE,FALSE));						//Z doesnt matter
+					verifyc(r_set_state(R_ZENABLE,false));						//Z doesnt matter
 					verifyc(r_set_state(R_STENCILFUNC,D3DCMP_ALWAYS));			//allways pass
 					verifyc(r_set_state(R_STENCILWRITEMASK,3));					//write bit 1
 					verifyc(r_set_state(R_STENCILPASS,D3DSTENCILOP_REPLACE));	//Set to reference (2)
@@ -2594,7 +2594,7 @@ __error_out:
 						u32 mv_mode = ispc.DepthMode;
 						
 						//We read from Z buffer, but dont write :)
-						verifyc(r_set_state(R_ZENABLE,TRUE));
+						verifyc(r_set_state(R_ZENABLE,true));
 						//enable stenciling, and set bit 1 for mod vols that dont pass the Z test as closed ones (not even count of em)
 
 
@@ -2630,7 +2630,7 @@ __error_out:
 					}
 
 					//black out any stencil with '1'
-					r_set_state(R_ALPHABLENDENABLE,TRUE);
+					r_set_state(R_ALPHABLENDENABLE,true);
 					r_set_state(R_SRCBLEND, D3DBLEND_SRCALPHA);
 					r_set_state(R_DESTBLEND, D3DBLEND_INVSRCALPHA); 
 
@@ -2649,26 +2649,26 @@ __error_out:
 
 					verifyc(r_set_state(R_STENCILWRITEMASK,0));	//dont write to stencil
 
-					verifyc(r_set_state(R_ZENABLE,FALSE));
+					verifyc(r_set_state(R_ZENABLE,false));
 
 					verifyc(dev->SetPixelShader(ShadeColPixelShader));
 					//render a fullscreen quad
 
 					verifyc(dev->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,fsq,3*4));
 
-					verifyc(r_set_state(R_STENCILENABLE,FALSE));	//turn stencil off ;)
+					verifyc(r_set_state(R_STENCILENABLE,false));	//turn stencil off ;)
 				}
 				else if (settings.Emulation.ModVolMode==MVM_Volume)
 				{
 					//TODO: Find out what ZPixelShader was supposed to be doing.
 					verifyc(dev->SetPixelShader(ZPixelShader));
-					r_set_state(R_ALPHABLENDENABLE,TRUE);
+					r_set_state(R_ALPHABLENDENABLE,true);
 					r_set_state(R_SRCBLEND, D3DBLEND_SRCALPHA);
 					r_set_state(R_DESTBLEND, D3DBLEND_INVSRCALPHA); 
-					r_set_state(R_ALPHATESTENABLE,FALSE);
+					r_set_state(R_ALPHATESTENABLE,false);
 
-					r_set_state(R_ZENABLE,TRUE);
-					r_set_state(R_ZWRITEENABLE,FALSE);
+					r_set_state(R_ZENABLE,true);
+					r_set_state(R_ZWRITEENABLE,false);
 					r_set_state(R_CULLMODE,D3DCULL_NONE);
 
 					verifyc(dev->DrawPrimitiveUP(D3DPT_TRIANGLELIST,pvrrc.modtrig.used,pvrrc.modtrig.data,3*4));
@@ -2676,9 +2676,9 @@ __error_out:
 					
 				}
 
-				r_set_state(R_ZWRITEENABLE,TRUE);
-				r_set_state(R_ZENABLE,TRUE);
-				r_set_state(R_ALPHATESTENABLE,TRUE); 
+				r_set_state(R_ZWRITEENABLE,true);
+				r_set_state(R_ZENABLE,true);
+				r_set_state(R_ALPHATESTENABLE,true); 
 
 				dev->SetVertexDeclaration(vdecl);
 				dev->SetStreamSource(0,vb,0,sizeof(Vertex));
@@ -2687,12 +2687,12 @@ __error_out:
 				SetPS(1);
 			}
 
-			r_set_state(R_ALPHABLENDENABLE,TRUE);
+			r_set_state(R_ALPHABLENDENABLE,true);
 			r_set_state(R_ALPHAFUNC,D3DCMP_GREATER);
 			r_set_state(R_ALPHAREF,0);
 			
 			//Disable stencil (we don't support it on transcl. stuff anyway)
-			verifyc(r_set_state(R_STENCILENABLE,FALSE));
+			verifyc(r_set_state(R_STENCILENABLE,false));
 			if (!GetAsyncKeyState(VK_F3))
 			{
 				if (dosort && settings.Emulation.AlphaSortMode==1)
@@ -2956,9 +2956,9 @@ __error_out:
 
 		ppar.SwapEffect = D3DSWAPEFFECT_DISCARD;
 		ppar.PresentationInterval=settings.Video.VSync?D3DPRESENT_INTERVAL_ONE:D3DPRESENT_INTERVAL_IMMEDIATE;
-		ppar.Windowed =   TRUE;
+		ppar.Windowed =   true;
 
-		ppar.EnableAutoDepthStencil=TRUE;
+		ppar.EnableAutoDepthStencil=true;
 		ppar.AutoDepthStencilFormat = ZBufferMode==0 ? D3DFMT_D24FS8 : D3DFMT_D24S8;
 
 		ppar.MultiSampleType = (D3DMULTISAMPLE_TYPE)settings.Enhancements.MultiSampleCount;
@@ -3040,7 +3040,7 @@ __error_out:
 			Composition.ps_DrawRGBA=CompilePS("composition.fx","ps_DrawRGBA",0);
 		}
 
-		D3DXCreateFont( dev, 20, 0, FW_BOLD, 0, FALSE, DEFAULT_CHARSET, 
+		D3DXCreateFont( dev, 20, 0, FW_BOLD, 0, false, DEFAULT_CHARSET, 
 			OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Arial"), &font );
 
 		/*

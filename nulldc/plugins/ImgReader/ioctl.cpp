@@ -279,7 +279,7 @@ struct PhysicalDrive:Disc
 		}
 
 		DWORD bytesReturnedIO = 0;
-		BOOL resultIO = DeviceIoControl(drive, IOCTL_SCSI_GET_ADDRESS, NULL, 0, &scsi_addr, sizeof(scsi_addr), &bytesReturnedIO, NULL);
+		bool resultIO = DeviceIoControl(drive, IOCTL_SCSI_GET_ADDRESS, NULL, 0, &scsi_addr, sizeof(scsi_addr), &bytesReturnedIO, NULL);
 		//done !
 		if (resultIO)
 			use_scsi=true;
@@ -351,7 +351,7 @@ void PhysicalTrack::Read(u32 FAD,u8* dst,SectorFormat* sector_type,u8* subcode,S
 	if (SetFilePointer(disc->drive,LBA*2048,0,FILE_BEGIN)!=INVALID_SET_FILE_POINTER)
 	{
 		DWORD BytesRead;
-		if (FALSE!=ReadFile(disc->drive,dst,2048,&BytesRead,0) && BytesRead==2048)
+		if (false!=ReadFile(disc->drive,dst,2048,&BytesRead,0) && BytesRead==2048)
 		{
 			//sector read succcess, just user data
 			*sector_type=SECFMT_2048_MODE2_FORM1; //m2f1 seems more common ? is there some way to detect it properly here?

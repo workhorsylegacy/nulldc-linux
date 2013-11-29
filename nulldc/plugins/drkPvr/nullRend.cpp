@@ -1065,7 +1065,7 @@ next_y:
 		// SetWindowLongPtr(SdlWnd, GWL_WNDPROC, GetWindowLongPtr((HWND)emu.WindowHandle,GWL_WNDPROC));
 		 SetParent(SdlWnd,(HWND)emu.GetRenderTarget());
 		 SetWindowPos(SdlWnd,0,0,0,640,480,SWP_NOZORDER | SWP_SHOWWINDOW);	 
-		 EnableWindow(SdlWnd,FALSE);
+		 EnableWindow(SdlWnd,false);
 	}
 	void TermSDL()
 	{

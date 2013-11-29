@@ -184,7 +184,7 @@ bool uiInit()
 	}
 
 	MSG msg;
-	while( PeekMessage( &msg, NULL, 0, 0 ,TRUE) != 0)
+	while( PeekMessage( &msg, NULL, 0, 0 ,true) != 0)
 	{
 		TranslateMessage(&msg); 
 		DispatchMessage(&msg); 
@@ -368,7 +368,7 @@ void _MenuItem::Insert(MenuStrip* menu,u32 pos)
 		mif.fState=MFS_GRAYED;
 
 	owner=menu;
-	InsertMenuItem(owner->hmenu,pos,TRUE,&mif);
+	InsertMenuItem(owner->hmenu,pos,true,&mif);
 }
 void _MenuItem::Remove(HMENU menu)
 {
@@ -416,7 +416,7 @@ void _MenuItem::Update()
 		mif.fState|=MFS_GRAYED;
 	}
 
-	SetMenuItemInfo(owner->hmenu,nid,FALSE,&mif);
+	SetMenuItemInfo(owner->hmenu,nid,false,&mif);
 }
 _MenuItem::~_MenuItem()
 {
@@ -1156,7 +1156,7 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 	case WM_ERASEBKGND:
 		{
 			
-			return TRUE;
+			return true;
 		}
 		break;
 
@@ -1666,12 +1666,12 @@ INT_PTR CALLBACK DlgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 	case WM_DESTROY:			// for mem view dlg
 		OnDestroyTab(hWnd);
 		DestroyWindow(hWnd);
-		return TRUE; 
+		return true; 
 
 	case WM_MOVE:
 	case WM_SIZE:
 	//	OnSizeTab(hWnd);
-	//	return TRUE;
+	//	return true;
 		goto refresh;
 
 	case WM_GOTOPC:
@@ -1848,14 +1848,14 @@ inline static void RefreshArmDbg(void)
 {
 
 }
-BOOL CopyTextToClipboard(HWND hwnd, TCHAR *text);
+bool CopyTextToClipboard(HWND hwnd, TCHAR *text);
 INT_PTR CALLBACK ProfilerProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
 	switch( uMsg )
 	{
 	case WM_INITDIALOG:
 		SetTimer(hWnd,0,500,0);
-		return TRUE;
+		return true;
 
 	case WM_TIMER:
 		{
@@ -1944,7 +1944,7 @@ INT_PTR CALLBACK ProfilerProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 			**/
 			SetDlgItemText(hWnd,IDC_PROFTEXT,text_);
 		}
-		return TRUE;
+		return true;
 	
 
 	case WM_COMMAND:
@@ -1966,9 +1966,9 @@ INT_PTR CALLBACK ProfilerProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 	case WM_DESTROY:
 		EndDialog(hWnd,0);
 		ProfilerWindow=NULL;
-		return TRUE;
+		return true;
 
-	default: return FALSE;
+	default: return false;
 	}
 
 
@@ -1978,9 +1978,9 @@ INT_PTR CALLBACK ArmDlgProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam 
 	switch( uMsg )
 	{
 	case WM_INITDIALOG:
-		return TRUE;
+		return true;
 
-	default: return FALSE;
+	default: return false;
 	}
 
 
@@ -2087,7 +2087,7 @@ void SetMapleMain_Mask(wchar* plugin,HWND hWnd)
 		for (int j=0;j<5;j++)
 		{
 			SetSelected(GetDlgItem(hWnd,IDC_maple[j]),L"NULL");
-			ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),FALSE);
+			ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),false);
 		}
 	}
 	else
@@ -2102,12 +2102,12 @@ void SetMapleMain_Mask(wchar* plugin,HWND hWnd)
 				{
 					if (ci->Flags & (1<<j))
 					{
-						ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),TRUE);
+						ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),true);
 					}
 					else
 					{
 						SetSelected(GetDlgItem(hWnd,IDC_maple[j]),L"NULL");
-						ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),FALSE);
+						ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),false);
 					}
 				}
 				break;
@@ -2120,7 +2120,7 @@ void SetMapleMain_Mask(wchar* plugin,HWND hWnd)
 			for (int j=0;j<5;j++)
 			{
 				SetSelected(GetDlgItem(hWnd,IDC_maple[j]),L"NULL");
-				ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),FALSE);
+				ComboBox_Enable(GetDlgItem(hWnd,IDC_maple[j]),false);
 			}
 		}
 		emu.FreePluginList(lst);

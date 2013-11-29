@@ -267,7 +267,7 @@ static const codec_interface codec_interfaces[] =
 	{
 		CHDCOMPRESSION_NONE,
 		"none",
-		FALSE,
+		false,
 		NULL,
 		NULL,
 		NULL,
@@ -279,7 +279,7 @@ static const codec_interface codec_interfaces[] =
 	{
 		CHDCOMPRESSION_ZLIB,
 		"zlib",
-		FALSE,
+		false,
 		zlib_codec_init,
 		zlib_codec_free,
 		zlib_codec_compress,
@@ -291,7 +291,7 @@ static const codec_interface codec_interfaces[] =
 	{
 		CHDCOMPRESSION_ZLIB_PLUS,
 		"zlib+",
-		FALSE,
+		false,
 		zlib_codec_init,
 		zlib_codec_free,
 		zlib_codec_compress,
@@ -604,7 +604,7 @@ chd_error chd_open(const wchar *filename, int mode, chd_file *parent, chd_file *
 		goto cleanup;
 
 	/* we now own this file */
-	(*chd)->owns_file = TRUE;
+	(*chd)->owns_file = true;
 
 cleanup:
 	if ((err != CHDERR_NONE) && (file != NULL))
@@ -850,7 +850,7 @@ chd_error chd_verify_begin(chd_file *chd)
 	/* init the MD5/SHA1 computations */
 	MD5Init(&chd->vermd5);
 	sha1_init(&chd->versha1);
-	chd->verifying = TRUE;
+	chd->verifying = true;
 	chd->verhunk = 0;
 
 	return CHDERR_NONE;
@@ -920,7 +920,7 @@ chd_error chd_verify_finish(chd_file *chd, chd_verify_result *result)
 	metadata_compute_hash(chd, result->rawsha1, result->sha1);
 
 	/* return an error */
-	chd->verifying = FALSE;
+	chd->verifying = false;
 	return (chd->verhunk < chd->header.totalhunks) ? CHDERR_VERIFY_INCOMPLETE : CHDERR_NONE;
 }
 

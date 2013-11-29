@@ -6,7 +6,7 @@
 #include "common.h"
 
 HINSTANCE hInstance;
-BOOL APIENTRY DllMain( HMODULE hModule,
+bool APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
 					 )
@@ -20,7 +20,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	case DLL_PROCESS_DETACH:
 		break;
 	}
-    return TRUE;
+    return true;
 }
 _setts settings;
 int cfgGetInt(wchar* key,int def)

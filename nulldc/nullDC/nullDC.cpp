@@ -17,7 +17,7 @@
 
 __settings settings;
 
-BOOL CtrlHandler( DWORD fdwCtrlType ) 
+bool CtrlHandler( DWORD fdwCtrlType ) 
 { 
   switch( fdwCtrlType ) 
   { 
@@ -30,9 +30,9 @@ BOOL CtrlHandler( DWORD fdwCtrlType )
     // Handle the CTRL-C signal. 
     case CTRL_C_EVENT: 
 		SendMessageA((HWND)GetRenderTargetHandle(),WM_CLOSE,0,0); //FIXME
-      return( TRUE );
+      return( true );
     default: 
-      return FALSE; 
+      return false; 
   } 
 } 
 
@@ -218,7 +218,7 @@ int CALLBACK WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine
 			freopen("CON","w",stderr);
 			freopen("CON","r",stdin);
 		}
-		SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, TRUE );
+		SetConsoleCtrlHandler( (PHANDLER_ROUTINE) CtrlHandler, true );
 	}
 	
 	return _tmain(argc,argv);

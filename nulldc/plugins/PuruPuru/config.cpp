@@ -44,7 +44,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 	case WM_INITDIALOG:
 
 		// Disables the DING sound when using the keyboard...			
-		SystemParametersInfo( SPI_SETBEEP , FALSE , NULL , 0);
+		SystemParametersInfo( SPI_SETBEEP , false , NULL , 0);
 
 		TCITEM tci; 
 		tci.mask = TCIF_TEXT | TCIF_IMAGE;
@@ -70,20 +70,20 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 		// Dummy Keyb-only combobox
 		SendMessage(GetDlgItem(hDlg, IDC_JOYNAME_KEY), CB_ADDSTRING, 0, (LPARAM)L"Keyboard-Only");
 		SendMessage(GetDlgItem(hDlg, IDC_JOYNAME_KEY), CB_SETCURSEL, 0, 0);		
-		ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_KEY), FALSE);
+		ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_KEY), false);
 
 		//if(emulator_running)
 		if(emulator_running)
 		{
-			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_SDL), FALSE);
-			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), FALSE);
-			ComboBox_Enable(GetDlgItem(hDlg, IDC_CONTROLTYPE), FALSE);				
+			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_SDL), false);
+			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), false);
+			ComboBox_Enable(GetDlgItem(hDlg, IDC_CONTROLTYPE), false);				
 		}
 		else
 		{
-			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_SDL), TRUE);
-			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), TRUE);
-			ComboBox_Enable(GetDlgItem(hDlg, IDC_CONTROLTYPE), TRUE);				
+			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_SDL), true);
+			ComboBox_Enable(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), true);
+			ComboBox_Enable(GetDlgItem(hDlg, IDC_CONTROLTYPE), true);				
 		}
 
 		{	// Control type selection and deadzone control.
@@ -131,7 +131,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 			HWND CB = GetDlgItem(hDlg, IDC_JOYNAME_SDL);				
 			SendMessage(CB, CB_ADDSTRING, 0, (LPARAM)L"No Joystick detected!");
 			SendMessage(CB, CB_SETCURSEL, 0, 0);
-			ComboBox_Enable(CB, FALSE);
+			ComboBox_Enable(CB, false);
 		}
 
 		if( Support.XInput )
@@ -157,7 +157,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 			HWND CB = GetDlgItem(hDlg, IDC_JOYNAME_XINPUT);				
 			SendMessage(CB, CB_ADDSTRING, 0, (LPARAM)L"No Joystick detected!");
 			SendMessage(CB, CB_SETCURSEL, 0, 0);
-			ComboBox_Enable(CB, FALSE);
+			ComboBox_Enable(CB, false);
 		}
 	break;
 
@@ -180,7 +180,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 			{
 				GetControllerAll(hDlg, current_port);
 				EndDialog(hDlg, LOWORD(wParam));
-				return TRUE;
+				return true;
 			}
 			
 			case IDC_JOYNAME_SDL:
@@ -190,7 +190,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 				{
 					joysticks[current_port].ID = (int)SendMessage(GetDlgItem(hDlg, IDC_JOYNAME_SDL), CB_GETCURSEL, 0, 0);						
 				}
-				return TRUE;
+				return true;
 			}
 			break;
 
@@ -201,7 +201,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 				{
 					joysticks[current_port].ID = (int)SendMessage(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), CB_GETCURSEL, 0, 0);						
 				}
-				return TRUE;
+				return true;
 			}
 			break;
 
@@ -213,7 +213,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 					joysticks[current_port].controllertype = (int)SendMessage(GetDlgItem(hDlg, IDC_CONTROLTYPE), CB_GETCURSEL, 0, 0);										
 					UpdateVisibleItems(hDlg, joysticks[current_port].controllertype);
 				}
-				return TRUE;
+				return true;
 			}
 			break;
 
@@ -261,7 +261,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 					case CTL_TYPE_KEYBOARD:			GetInputKey(hDlg, LOWORD(wParam), current_port); break;
 				}
 								
-				return TRUE;
+				return true;
 			}
 			break;
 
@@ -269,7 +269,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 			{
 				// yay an about box ;p
 				OpenAbout(PuruPuru_hInst, hDlg);
-				return TRUE;
+				return true;
 			}
 			break;
 		}			
@@ -287,7 +287,7 @@ INT_PTR CALLBACK OpenConfig( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam 
 
 	default: break;
 	}	
-	return FALSE;
+	return false;
 }
 
 bool GetInputXInput(HWND hDlg, int buttonid, int controller)
@@ -761,55 +761,55 @@ bool GetInputSDL(HWND hDlg, int buttonid, int controller)
 void UpdateVisibleItems(HWND hDlg, int controllertype)
 {	
 #ifdef BUILD_DREAMCAST
-	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), FALSE);
-	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), FALSE);
-	ShowWindow(GetDlgItem(hDlg, IDC_PAKKU), FALSE);
-	ShowWindow(GetDlgItem(hDlg, IDC_PAKKU_TEXT), FALSE);
+	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), false);
+	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), false);
+	ShowWindow(GetDlgItem(hDlg, IDC_PAKKU), false);
+	ShowWindow(GetDlgItem(hDlg, IDC_PAKKU_TEXT), false);
 #endif
 	
 	switch(controllertype)
 	{
 	case CTL_TYPE_JOYSTICK_SDL: 
 		{
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_SDL), TRUE);
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), FALSE);
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_KEY), FALSE);
-			ShowWindow(GetDlgItem(hDlg, IDC_KEY), TRUE);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_SDL), true);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), false);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_KEY), false);
+			ShowWindow(GetDlgItem(hDlg, IDC_KEY), true);
 #ifdef BUILD_DREAMCAST			
 			if(joyinfo[joysticks[current_port].ID].canRumble)
 			{
-				ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), TRUE);			
-				ShowWindow(GetDlgItem(hDlg, IDC_PAKKU), TRUE);
-				ShowWindow(GetDlgItem(hDlg, IDC_PAKKU_TEXT), TRUE);	
+				ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), true);			
+				ShowWindow(GetDlgItem(hDlg, IDC_PAKKU), true);
+				ShowWindow(GetDlgItem(hDlg, IDC_PAKKU_TEXT), true);	
 			}
 			else
-				ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), TRUE);
+				ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), true);
 #endif
 		}
 		break;
 
 	case CTL_TYPE_JOYSTICK_XINPUT:
 		{
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), TRUE);
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_SDL), FALSE);		
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_KEY), FALSE);
-			ShowWindow(GetDlgItem(hDlg, IDC_KEY), TRUE);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), true);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_SDL), false);		
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_KEY), false);
+			ShowWindow(GetDlgItem(hDlg, IDC_KEY), true);
 #ifdef BUILD_DREAMCAST			
-			ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), TRUE);
-			ShowWindow(GetDlgItem(hDlg, IDC_PAKKU), TRUE);
-			ShowWindow(GetDlgItem(hDlg, IDC_PAKKU_TEXT), TRUE);
+			ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), true);
+			ShowWindow(GetDlgItem(hDlg, IDC_PAKKU), true);
+			ShowWindow(GetDlgItem(hDlg, IDC_PAKKU_TEXT), true);
 #endif
 		}
 		break;
 
 	case CTL_TYPE_KEYBOARD: 
 		{
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_KEY), TRUE);
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_SDL), FALSE);
-			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), FALSE);			
-			ShowWindow(GetDlgItem(hDlg, IDC_KEY), FALSE);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_KEY), true);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_SDL), false);
+			ShowWindow(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), false);			
+			ShowWindow(GetDlgItem(hDlg, IDC_KEY), false);
 #ifdef BUILD_DREAMCAST
-			ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), TRUE);
+			ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), true);
 #endif
 		}
 		break;
@@ -825,9 +825,9 @@ void SetControllerAll(HWND hDlg, int controller)
 	SendMessage(GetDlgItem(hDlg, IDC_JOYNAME_XINPUT), CB_SETCURSEL, joysticks[controller].ID, 0);
 
 #ifdef BUILD_DREAMCAST
-	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), FALSE);
-	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), FALSE);
-	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_OFF), FALSE);
+	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), false);
+	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), false);
+	ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_OFF), false);
 
 	if( joysticks[controller].enabled )
 	{
@@ -836,18 +836,18 @@ void SetControllerAll(HWND hDlg, int controller)
 		case CTL_TYPE_JOYSTICK_SDL: 
 			{
 				if(joyinfo[joysticks[controller].ID].canRumble)
-					ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), TRUE);
+					ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), true);
 				else
-					ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), TRUE);
+					ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), true);
 			}
-		case CTL_TYPE_JOYSTICK_XINPUT: ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), TRUE); break;
-		case CTL_TYPE_KEYBOARD: ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), TRUE); break;
+		case CTL_TYPE_JOYSTICK_XINPUT: ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON2), true); break;
+		case CTL_TYPE_KEYBOARD: ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_ON), true); break;
 		}			
 
-		ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_OFF), FALSE);
+		ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_OFF), false);
 	}
 	else			
-		ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_OFF), TRUE);	
+		ShowWindow(GetDlgItem(hDlg, IDC_CONFIG_OFF), true);	
 
 	SetButton(hDlg, IDTEXT_SHOULDERL,	joysticks[controller].names[MAP_LT]);
 	SetButton(hDlg, IDTEXT_SHOULDERR,	joysticks[controller].names[MAP_RT]);
@@ -1009,10 +1009,10 @@ BOOL CALLBACK AboutDlg(HWND abouthWnd, UINT message, WPARAM wParam, LPARAM lPara
 			if (LOWORD(wParam) == IDOK) 
 			{
 				EndDialog(abouthWnd, LOWORD(wParam));
-				return TRUE;
+				return true;
 			}
 		break;
 	}
-    return FALSE;
+    return false;
 }
 

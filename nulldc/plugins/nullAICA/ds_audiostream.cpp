@@ -47,7 +47,7 @@ u32 THREADCALL SoundThread1(void* param)
 {
 	for(;;)
 	{
-		u32 rv = WaitForMultipleObjects(sound_buffer_count,buffer_events,FALSE,400);
+		u32 rv = WaitForMultipleObjects(sound_buffer_count,buffer_events,false,400);
 		
 		if (!soundthread_running)
 			break;
@@ -195,7 +195,7 @@ void ds_InitAudio()
 
 	for (u32 bei=0;bei<chunk_count;bei++)
 	{
-		buffer_events[bei]=not[bei].hEventNotify=CreateEvent(NULL,FALSE,FALSE,NULL);
+		buffer_events[bei]=not[bei].hEventNotify=CreateEvent(NULL,false,false,NULL);
 
 		not[bei].dwOffset=bei*wait_buffer_size;
 		WritePositions[(bei+chunk_count-1)%chunk_count]=not[bei].dwOffset;

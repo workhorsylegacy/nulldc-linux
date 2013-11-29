@@ -97,24 +97,24 @@ CPicture::~CPicture()
 //////////////////
 // Load from resource. Looks for "IMAGE" type.
 //
-BOOL CPicture::Load(HINSTANCE hInst, UINT nIDRes)
+bool CPicture::Load(HINSTANCE hInst, UINT nIDRes)
 {
     // find resource in resource file
     HRSRC hRsrc = ::FindResource(hInst, MAKEINTRESOURCE(nIDRes), L"jpeg"); // type
     if ( !hRsrc )
-        return FALSE;
+        return false;
 
     // load resource into memory
     DWORD len = ::SizeofResource(hInst, hRsrc);
     HGLOBAL hResData = ::LoadResource(hInst, hRsrc);
     if ( !hResData )
-        return FALSE;
+        return false;
 
     HGLOBAL hGlobal = ::GlobalAlloc(GMEM_MOVEABLE | GMEM_NODISCARD, len);
     if ( !hGlobal )
     {
         ::FreeResource(hResData);
-        return FALSE;
+        return false;
     }
 
     char* pDest = reinterpret_cast<char*> ( ::GlobalLock(hGlobal) );
@@ -123,7 +123,7 @@ BOOL CPicture::Load(HINSTANCE hInst, UINT nIDRes)
     {
         ::GlobalFree(hGlobal);
         ::FreeResource(hResData);
-        return FALSE;
+        return false;
     }
 
     ::CopyMemory(pDest,pSrc,len);
@@ -133,14 +133,14 @@ BOOL CPicture::Load(HINSTANCE hInst, UINT nIDRes)
 
     // don't delete memory on object's release
     IStream* pStream = NULL;
-    if ( ::CreateStreamOnHGlobal(hGlobal,FALSE,&pStream) != S_OK )
+    if ( ::CreateStreamOnHGlobal(hGlobal,false,&pStream) != S_OK )
     {
         ::GlobalFree(hGlobal);
-        return FALSE;
+        return false;
     }
 
     // create memory file and load it
-    BOOL bRet = Load(pStream);
+    bool bRet = Load(pStream);
 	pStream->Release();
     ::GlobalFree(hGlobal);
 
@@ -150,7 +150,7 @@ BOOL CPicture::Load(HINSTANCE hInst, UINT nIDRes)
 //////////////////
 // Load from path name.
 //
-BOOL CPicture::Load(LPCTSTR pszPathName)
+bool CPicture::Load(LPCTSTR pszPathName)
 {
     HANDLE hFile = ::CreateFile(pszPathName, 
                                 FILE_READ_DATA,
@@ -160,17 +160,17 @@ BOOL CPicture::Load(LPCTSTR pszPathName)
                                 FILE_ATTRIBUTE_NORMAL,
                                 NULL);
     if ( !hFile )
-        return FALSE;
+        return false;
 
     DWORD len = ::GetFileSize( hFile, NULL); // only 32-bit of the actual file size is retained
     if (len == 0)
-        return FALSE;
+        return false;
 
     HGLOBAL hGlobal = ::GlobalAlloc(GMEM_MOVEABLE | GMEM_NODISCARD, len);
     if ( !hGlobal )
     {
         ::CloseHandle(hFile);
-        return FALSE;
+        return false;
     }
 
     char* lpBuffer = reinterpret_cast<char*> ( ::GlobalLock(hGlobal) );
@@ -192,20 +192,20 @@ BOOL CPicture::Load(LPCTSTR pszPathName)
 
     // don't delete memory on object's release
     IStream* pStream = NULL;
-    if ( ::CreateStreamOnHGlobal(hGlobal,FALSE,&pStream) != S_OK )
+    if ( ::CreateStreamOnHGlobal(hGlobal,false,&pStream) != S_OK )
     {
         ::GlobalFree(hGlobal);
-        return FALSE;
+        return false;
     }
 
     // create memory file and load it
-    BOOL bRet = Load(pStream);
+    bool bRet = Load(pStream);
 	pStream->Release();
     ::GlobalFree(hGlobal);
 
     return bRet;
 }
-BOOL CPicture::Select(HDC hDC, HDC* newhDC,OLE_HANDLE *hBmp)
+bool CPicture::Select(HDC hDC, HDC* newhDC,OLE_HANDLE *hBmp)
 {
 	return SUCCEEDED(m_spIPicture->SelectPicture(hDC,newhDC,hBmp));
 }
@@ -239,7 +239,7 @@ int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
    free(pImageCodecInfo);
    return -1;  // Failure
 }
-BOOL CPicture::Save(const wchar_t* to)
+bool CPicture::Save(const wchar_t* to)
 {
 	if (gdiPlus.Loaded())
 	{
@@ -278,7 +278,7 @@ BOOL CPicture::Save(const wchar_t* to)
 		return false;
 	}
 }
-BOOL CPicture::Load(HBITMAP hBmp,HPALETTE hPal,bool own)
+bool CPicture::Load(HBITMAP hBmp,HPALETTE hPal,bool own)
 {
     Free();
     
@@ -297,11 +297,11 @@ BOOL CPicture::Load(HBITMAP hBmp,HPALETTE hPal,bool own)
 // Load from stream (IStream). This is the one that really does it: call
 // OleLoadPicture to do the work.
 //
-BOOL CPicture::Load(IStream* pstm)
+bool CPicture::Load(IStream* pstm)
 {
     Free();
 
-    HRESULT hr = OleLoadPicture(pstm, 0, FALSE,
+    HRESULT hr = OleLoadPicture(pstm, 0, false,
                                 IID_IPicture, (void**)&m_spIPicture);
 
 	bmph=0;
@@ -314,7 +314,7 @@ BOOL CPicture::Load(IStream* pstm)
 //
 // prcMFBounds : NULL if dc is not a metafile dc
 //
-BOOL CPicture::Render(HDC dc, RECT* rc, LPCRECT prcMFBounds) const
+bool CPicture::Render(HDC dc, RECT* rc, LPCRECT prcMFBounds) const
 {
 
     if ( !rc || (rc->right == rc->left && rc->bottom == rc->top) ) 
@@ -332,7 +332,7 @@ BOOL CPicture::Render(HDC dc, RECT* rc, LPCRECT prcMFBounds) const
                         rc->right - rc->left, rc->bottom - rc->top,
                         0, hmHeight, hmWidth, -hmHeight, prcMFBounds);
 
-    return TRUE;
+    return true;
 }
 
 //////////////////

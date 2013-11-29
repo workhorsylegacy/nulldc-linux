@@ -871,7 +871,7 @@ void naomi_reg_Init()
 		
 		CommMapFile=OpenFileMapping(
                    FILE_MAP_ALL_ACCESS,   // read/write access
-                   FALSE,                 // do not inherit the name
+                   false,                 // do not inherit the name
                    L"Global\\nullDC_103_naomi_comm");               // name of mapping object 
 	}
 	

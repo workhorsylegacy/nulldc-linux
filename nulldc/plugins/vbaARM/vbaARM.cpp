@@ -10,13 +10,13 @@
 arm_init_params arm_params;
 emu_info eminf;
 HINSTANCE hinst;
-BOOL APIENTRY DllMain( HMODULE hModule,
+bool APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
 					 )
 {
 	hinst=(HINSTANCE)hModule;
-    return TRUE;
+    return true;
 }
 void EXPORT_CALL handle_About(u32 id,void* w,void* p)
 {

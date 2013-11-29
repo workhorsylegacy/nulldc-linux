@@ -46,8 +46,8 @@ int serial_cmdl(wchar** arg,int cl)
 		dcbConfig.ByteSize = 8;
 		dcbConfig.Parity = NOPARITY;
 		dcbConfig.StopBits = ONESTOPBIT;
-		dcbConfig.fBinary = TRUE;
-		dcbConfig.fParity = TRUE;
+		dcbConfig.fBinary = true;
+		dcbConfig.fParity = true;
 	}
 
 	SetCommState(writep, &dcbConfig);

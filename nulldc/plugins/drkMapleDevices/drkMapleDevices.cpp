@@ -875,14 +875,14 @@ void FASTCALL Term()
 */
 HMODULE hModule;
 HINSTANCE hInstance;
-BOOL APIENTRY DllMain( HMODULE hModule,
+bool APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
 					 )
 {
 	::hModule=hModule;
 	hInstance=(HINSTANCE)hModule;
-    return TRUE;
+    return true;
 }
 #define sk(num,key)kb_map[key]=0x##num;
 void Init_kb_map()
@@ -2693,9 +2693,9 @@ INT_PTR CALLBACK VMULCDProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			{
 				SetWindowLongPtr(hWnd,GWLP_USERDATA,lParam);
 			}
-			return TRUE;
+			return true;
 		case WM_ERASEBKGND:
-			return TRUE;
+			return true;
 		case WM_PAINT:
 			{
 				PAINTSTRUCT ps;
@@ -2719,7 +2719,7 @@ INT_PTR CALLBACK VMULCDProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		//	printf("VMU GOT FOCUS !\n");
 		//	break;
 	}
-	return FALSE;
+	return false;
 }
 
 u32 FASTCALL VmuDMA(void* device_instance,u32 Command,u32* buffer_in,u32 buffer_in_len,u32* buffer_out,u32& buffer_out_len)
@@ -2967,7 +2967,7 @@ u32 FASTCALL VmuDMA(void* device_instance,u32 Command,u32* buffer_in,u32 buffer_
 							--src;
 						}
 					}
-					InvalidateRect(dev->lcd.handle,NULL,FALSE);
+					InvalidateRect(dev->lcd.handle,NULL,false);
 				}
 
 	#ifdef _HAS_LGLCD_
@@ -3227,7 +3227,7 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst,u32 id,u32 flags,u32 rootm
 	memset(dev->lcd.bitmap,0xff,32*48*2);
 
 	RECT rc={0,0,48*3,32*3};
-	AdjustWindowRectEx(&rc,GetWindowLong(dev->lcd.handle,GWL_STYLE),FALSE,GetWindowLong(dev->lcd.handle,GWL_EXSTYLE));
+	AdjustWindowRectEx(&rc,GetWindowLong(dev->lcd.handle,GWL_STYLE),false,GetWindowLong(dev->lcd.handle,GWL_EXSTYLE));
 	static int lastPosX=0;
 	static int lastPosY=0;
 	SetWindowPos(dev->lcd.handle,NULL,32+lastPosX*192,32+lastPosY*128,rc.right-rc.left,rc.bottom-rc.top,SWP_NOZORDER|SWP_NOACTIVATE);
@@ -3242,7 +3242,7 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst,u32 id,u32 flags,u32 rootm
 	wchar windowtext[512];
 	swprintf_s(windowtext,L"nullDC VMU %c%d",'A'+(inst->port>>6),(int)(log10f((float)(inst->port&31))/log10f(2.0f)));
 	SetWindowText(dev->lcd.handle,windowtext);
-	EnableWindow(dev->lcd.handle,TRUE);
+	EnableWindow(dev->lcd.handle,true);
 
 	#ifdef _HAS_LGLCD_
     
@@ -3253,8 +3253,8 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst,u32 id,u32 flags,u32 rootm
     // set up connection context
     ZeroMemory(&connectContextA0, sizeof(connectContextA0));
     connectContextA0.appFriendlyName = (dev->lcd.handle,windowtext);
-    connectContextA0.isAutostartable = FALSE;
-    connectContextA0.isPersistent = FALSE;
+    connectContextA0.isAutostartable = false;
+    connectContextA0.isPersistent = false;
     // we don't have a configuration screen
     connectContextA0.onConfigure.configCallback = NULL;
     connectContextA0.onConfigure.configContext = NULL;
@@ -3294,8 +3294,8 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst,u32 id,u32 flags,u32 rootm
     // set up connection context
     ZeroMemory(&connectContextB0, sizeof(connectContextB0));
     connectContextB0.appFriendlyName = (dev->lcd.handle,windowtext);
-    connectContextB0.isAutostartable = FALSE;
-    connectContextB0.isPersistent = FALSE;
+    connectContextB0.isAutostartable = false;
+    connectContextB0.isPersistent = false;
     // we don't have a configuration screen
     connectContextB0.onConfigure.configCallback = NULL;
     connectContextB0.onConfigure.configContext = NULL;
@@ -3335,8 +3335,8 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst,u32 id,u32 flags,u32 rootm
     // set up connection context
     ZeroMemory(&connectContextC0, sizeof(connectContextC0));
     connectContextC0.appFriendlyName = (dev->lcd.handle,windowtext);
-    connectContextC0.isAutostartable = FALSE;
-    connectContextC0.isPersistent = FALSE;
+    connectContextC0.isAutostartable = false;
+    connectContextC0.isPersistent = false;
     // we don't have a configuration screen
     connectContextC0.onConfigure.configCallback = NULL;
     connectContextC0.onConfigure.configContext = NULL;
@@ -3376,8 +3376,8 @@ s32 FASTCALL CreateSub(maple_subdevice_instance* inst,u32 id,u32 flags,u32 rootm
     // set up connection context
     ZeroMemory(&connectContextD0, sizeof(connectContextD0));
     connectContextD0.appFriendlyName = (dev->lcd.handle,windowtext);
-    connectContextD0.isAutostartable = FALSE;
-    connectContextD0.isPersistent = FALSE;
+    connectContextD0.isAutostartable = false;
+    connectContextD0.isPersistent = false;
     // we don't have a configuration screen
     connectContextD0.onConfigure.configCallback = NULL;
     connectContextD0.onConfigure.configContext = NULL;

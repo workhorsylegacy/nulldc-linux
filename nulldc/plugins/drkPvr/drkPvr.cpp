@@ -28,7 +28,7 @@ pvr_init_params params;
 _settings_type settings;
 
 
-BOOL APIENTRY DllMain( HMODULE hModule,
+bool APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
 					 )
@@ -41,7 +41,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	case DLL_PROCESS_DETACH:
 		break;
 	}
-    return TRUE;
+    return true;
 }
 
 class Optiongroup
@@ -577,8 +577,8 @@ cResetEvent::cResetEvent(bool State,bool Auto)
 {
 		hEvent = CreateEvent( 
         NULL,             // default security attributes
-		Auto?FALSE:TRUE,  // auto-reset event?
-		State?TRUE:FALSE, // initial state is State
+		Auto?false:true,  // auto-reset event?
+		State?true:false, // initial state is State
         NULL			  // unnamed object
         );
 }

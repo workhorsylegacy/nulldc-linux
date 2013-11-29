@@ -42,7 +42,7 @@ void CtrlMemView::deinit()
 	//UnregisterClass(szClassName, hInst)
 }
 
-extern BOOL CopyTextToClipboard(HWND hwnd, TCHAR *text);
+extern bool CopyTextToClipboard(HWND hwnd, TCHAR *text);
 
 LRESULT CALLBACK CtrlMemView::wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -127,7 +127,7 @@ LRESULT CALLBACK CtrlMemView::wndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 		ccp->onVScroll(wParam,lParam);
 		break;
 	case WM_ERASEBKGND:
-		return FALSE;
+		return false;
 	case WM_KEYDOWN:
 		ccp->onKeyDown(wParam,lParam);
 		break;
@@ -166,8 +166,8 @@ CtrlMemView::CtrlMemView(HWND _wnd)
 	wnd=_wnd;
 	SetWindowPtr(wnd, 0, this);
 	SetWindowLong(wnd, GWL_STYLE, GetWindowLong(wnd,GWL_STYLE) | WS_VSCROLL);
-	SetScrollRange(wnd, SB_VERT, -1,1,TRUE);
-	font = CreateFont(16,0,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
+	SetScrollRange(wnd, SB_VERT, -1,1,true);
+	font = CreateFont(16,0,0,0,FW_DONTCARE,false,false,false,DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH, L"Courier New");
 	curAddress=0;
 	rowHeight=16;
@@ -338,7 +338,7 @@ void CtrlMemView::onKeyDown(WPARAM wParam, LPARAM lParam)
 
 void CtrlMemView::redraw()
 {
-	InvalidateRect(wnd, NULL, FALSE);
+	InvalidateRect(wnd, NULL, false);
 	UpdateWindow(wnd); 
 }
 

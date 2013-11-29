@@ -38,7 +38,7 @@ struct SPfcTrack {                                              // ---> 30h byte
   BYTE bCtrl;                                                   // [0E] Track control nibble
   BYTE bMode;                                                   // [0F] 0) Audio, 1) Mode1/DVD, 2) Mode2
   BYTE abISRC[12];                                              // [10] ISRC (International Standard Recording Code)
-  BOOL fISRCValid;                                              // [1C] TRUE if the ISRC is valid
+  bool fISRCValid;                                              // [1C] true if the ISRC is valid
   DWORD dwBlockSize;                                            // [20] Block size in bytes (2048, 2336, 2352, 2368, 2448)
   DWORD dwIndexCount;                                           // [24] Total number of index points (min. 2)
   DWORD* pdwIndex;                                              // [28] Pointer to an array of indexes. Each element contains
@@ -111,7 +111,7 @@ typedef  DWORD PFCTOCAPI PfcFreeTocFP(SPfcToc* pstToc);
 // 
 //   DWORD dwErr = PfcGetToc(_T("C:\\TEMP\\IMAGE1.CDI"), pstToc, dwSize);
 //   if (dwErr == PFCTOC_OK) {
-//     assert(IsBadReadPtr(pstToc, dwSize) == FALSE);
+//     assert(IsBadReadPtr(pstToc, dwSize) == false);
 // 
 //     //
 //     // Do something with the TOC
