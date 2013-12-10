@@ -15,8 +15,11 @@
 prof_info profile_info;
 
 cThread* prof_thread;
+bool profiler_is_first_run = true;
+prof_info info;
+prof_stats stats;
 
-u32 THREADCALL ProfileThead(void* param);
+bool THREADCALL ProfileThead(void* param);
 extern s32 rtc_cycles;
 
 struct Module
@@ -95,8 +98,8 @@ void init_Profiler(void* param)
 
 	RunProfiler=true;
 
-	prof_thread = new cThread(ProfileThead,param);
-	SetThreadPriority(prof_thread->hThread,THREAD_PRIORITY_TIME_CRITICAL);
+	prof_thread = new cThread((ThreadEntryFP) &ProfileThead, param);
+	SetThreadPriority(prof_thread->_tid.p, THREAD_PRIORITY_TIME_CRITICAL);
 	//prof_thread->Start();
 }
 void start_Profiler()
@@ -163,17 +166,19 @@ void AnalyseTick(u32 pc,prof_info* to)
 		to->current_count[REST_TC]++;
 }
 extern u32 no_interrupts,yes_interrupts;
- u32 THREADCALL ProfileThead(void* param)
- {
-	 prof_info info;		 
-	 prof_stats stats;
 
-	 memset(&info,0,sizeof(prof_info));
-	 memset(&stats,0,sizeof(prof_stats));
+ bool THREADCALL ProfileThead(void* param)
+ {
+
+	 if (profiler_is_first_run) {
+		 memset(&info, 0, sizeof(prof_info));
+		 memset(&stats, 0, sizeof(prof_stats));
+		 profiler_is_first_run = false;
+	 }
 
 	 CONTEXT cntx;
 
-	 while(RunProfiler)
+	 if(RunProfiler)
 	 {
 		 // Reset max/avg stats
 		 if(Reset_Stats)
@@ -221,7 +226,7 @@ extern u32 no_interrupts,yes_interrupts;
 	 }
 
 	 //CloseHandle((HANDLE)param);
-	 return 0;
+	 return RunProfiler;
  }
 
 int percent(int tick, int total) 

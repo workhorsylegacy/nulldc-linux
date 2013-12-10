@@ -3,7 +3,10 @@
 #include <memory.h>
 #include <vector>
 #include <random>
+#include <pthread.h>
 #include "log/logging_interface.h"
+
+#pragma comment(lib, "pthreadVC2.lib")
 
 #define PAGE_SIZE 4096
 #define PAGE_MASK (PAGE_SIZE-1)
@@ -18,17 +21,19 @@ u32 fastrand();
 //Windoze code
 //Threads
 
-typedef  u32 THREADCALL ThreadEntryFP(void* param);
-typedef void* THREADHANDLE;
+typedef void *(CDECL *ThreadEntryFP) (void* param);
+void CDECL thread_run(void* params);
 
 class cThread
 {
-private:
-	ThreadEntryFP* Entry;
-	void* param;
-public :
-	THREADHANDLE hThread;
-	cThread(ThreadEntryFP* function,void* param);
+public:
+	ThreadEntryFP _entry;
+	pthread_t _tid;
+	bool _is_suspended = true;
+	pthread_cond_t _condition;
+	pthread_mutex_t _mutex;
+public:
+	cThread(ThreadEntryFP function, void* param);
 	~cThread();
 	//Simple thread functions
 	void Start();

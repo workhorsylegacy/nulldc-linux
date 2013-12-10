@@ -12,6 +12,7 @@
 #include <string.h>
 #include <windows.h>
 
+bool emulation_is_first_run = true;
 bool dc_inited=false;
 bool dc_reseted=false;
 bool dc_ingore_init=false;
@@ -46,12 +47,12 @@ volatile emu_thread_rv_t emu_thread_rv=RV_WAIT;
 
 cThread* emu_thread=0;
 
-u32 THREADCALL emulation_thead(void* ptar);
+bool THREADCALL emulation_thead(void* ptar);
 struct _______initialzzz__
 {	
 	_______initialzzz__()
 	{
-		emu_thread = new cThread(emulation_thead,0);
+		emu_thread = new cThread((ThreadEntryFP) &emulation_thead, 0);
 		emu_thread->Start();
 	}
 } init_ctorz;
@@ -73,21 +74,25 @@ emu_thread_rv_t emu_rtc(emu_thread_state_t cmd)
 	return emu_thread_rv;
 }
 //This is the emulation thread =P
-u32 THREADCALL emulation_thead(void* ptar)
+bool THREADCALL emulation_thead(void* ptar)
 {
-	emu_thread_state=EMU_IDLE;
-	emu_thread_rv=RV_OK;
+	if (emulation_is_first_run) {
+		emu_thread_state = EMU_IDLE;
+		emu_thread_rv = RV_OK;
 
-	DuplicateHandle(GetCurrentProcess(), 
-		GetCurrentThread(), 
-		GetCurrentProcess(),
-		&(HANDLE)hEmuThread, 
-		0,
-		false,
-		DUPLICATE_SAME_ACCESS);
-	init_Profiler(hEmuThread);
+		DuplicateHandle(GetCurrentProcess(), 
+			GetCurrentThread(), 
+			GetCurrentProcess(),
+			&(HANDLE)hEmuThread, 
+			0,
+			false,
+			DUPLICATE_SAME_ACCESS);
+		init_Profiler(hEmuThread);
 
-	while (emu_thread_state!=EMU_QUIT)
+		emulation_is_first_run = false;
+	}
+
+	if (emu_thread_state!=EMU_QUIT)
 	{
 		__try
 		{
@@ -185,12 +190,15 @@ u32 THREADCALL emulation_thead(void* ptar)
 			log("Unhandled exeption ; Emulation thread halted...\n");
 			emu_thread_rv= RV_EXEPTION;
 		}
+
+		return true;
 	}
+
 	emu_thread_rv=RV_OK;
 	term_Profiler();
 	CloseHandle(hEmuThread);
 
-	return 0;
+	return false;
 }
 //called from the new thread
 /*void ThreadCallback_DC(bool start)
