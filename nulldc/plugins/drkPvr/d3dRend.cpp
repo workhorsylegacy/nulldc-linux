@@ -3152,17 +3152,15 @@ nl:
 		return 0;
 	}
 
-	u32 THREADCALL RenderThead(void* param)
+	bool THREADCALL RenderThead(void* param)
 	{
-		do
-		{
-			RenderThead_internal(param);
-			if (d3d_do_restart)
-				running=true;
-		} while(d3d_do_restart);
-		return 0;
+		RenderThead_internal(param);
+		if (d3d_do_restart)
+			running=true;
+
+		return d3d_do_restart;
 	}
-	cThread rth(RenderThead,0);
+	cThread rth((ThreadFunctionFP)&RenderThead, 0);
 
 
 	union _ISP_BACKGND_T_type

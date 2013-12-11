@@ -52,7 +52,7 @@ struct _______initialzzz__
 {	
 	_______initialzzz__()
 	{
-		emu_thread = new cThread((ThreadEntryFP) &emulation_thead, 0);
+		emu_thread = new cThread((ThreadFunctionFP) &emulation_thead, 0);
 		emu_thread->Start();
 	}
 } init_ctorz;

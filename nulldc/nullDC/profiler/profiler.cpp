@@ -98,7 +98,7 @@ void init_Profiler(void* param)
 
 	RunProfiler=true;
 
-	prof_thread = new cThread((ThreadEntryFP) &ProfileThead, param);
+	prof_thread = new cThread((ThreadFunctionFP) &ProfileThead, param);
 	SetThreadPriority(prof_thread->_tid.p, THREAD_PRIORITY_TIME_CRITICAL);
 	//prof_thread->Start();
 }

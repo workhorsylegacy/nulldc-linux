@@ -21,19 +21,20 @@ u32 fastrand();
 //Windoze code
 //Threads
 
-typedef void *(CDECL *ThreadEntryFP) (void* param);
+typedef void *(CDECL *ThreadRunnerFP) (void* param);
+typedef bool *(THREADCALL *ThreadFunctionFP) (void* param);
 void CDECL thread_run(void* params);
 
 class cThread
 {
 public:
-	ThreadEntryFP _entry;
+	ThreadFunctionFP _entry;
 	pthread_t _tid;
 	bool _is_suspended = true;
 	pthread_cond_t _condition;
 	pthread_mutex_t _mutex;
 public:
-	cThread(ThreadEntryFP function, void* param);
+	cThread(ThreadFunctionFP function, void* param);
 	~cThread();
 	//Simple thread functions
 	void Start();

@@ -3,6 +3,10 @@
 #include "../common/x86/x86_mem.hpp"
 #include "../common/portable.h"
 #include <vector>
+#include <pthread.h>
+
+#pragma comment(lib, "pthreadVC2.lib")
+
 using namespace std;
 
 #define LIST_MAX_ALLOC_CHUNK ((1024*1024*4)/sizeof(T))	//max 4 mb alloc
@@ -319,18 +323,21 @@ public :
 };
 //Windoze code
 
-typedef  u32 THREADCALL ThreadEntryFP(void* param);
-typedef void* THREADHANDLE;
+typedef void *(CDECL *ThreadRunnerFP) (void* param);
+typedef bool *(THREADCALL *ThreadFunctionFP) (void* param);
+void CDECL thread_run(void* params);
 
 class cThread
 {
-private:
-	ThreadEntryFP* Entry;
-	void* param;
-	THREADHANDLE hThread;
+public:
+	ThreadFunctionFP _entry;
+	pthread_t _tid;
+	bool _is_suspended = true;
+	pthread_cond_t _condition;
+	pthread_mutex_t _mutex;
 public :
 	bool ended;
-	cThread(ThreadEntryFP* function,void* param);
+	cThread(ThreadFunctionFP function, void* param);
 	~cThread();
 	//Simple thread functions
 	void Start();

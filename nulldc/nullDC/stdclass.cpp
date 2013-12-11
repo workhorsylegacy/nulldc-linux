@@ -115,7 +115,7 @@ void CDECL thread_run(void* params) {
 }
 
 //Thread class
-cThread::cThread(ThreadEntryFP function, void* prm)
+cThread::cThread(ThreadFunctionFP function, void* prm)
 {
 	_entry = function;
 
@@ -123,7 +123,7 @@ cThread::cThread(ThreadEntryFP function, void* prm)
 		exit(1);
 	if (pthread_cond_init(&_condition, NULL) != 0)
 		exit(1);
-	if (pthread_create(&this->_tid, NULL, (ThreadEntryFP)&thread_run, this) != 0)
+	if (pthread_create(&this->_tid, NULL, (ThreadRunnerFP)&thread_run, this) != 0)
 		exit(1);
 }
 cThread::~cThread()
