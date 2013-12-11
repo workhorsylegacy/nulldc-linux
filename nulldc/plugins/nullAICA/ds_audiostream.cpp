@@ -217,7 +217,7 @@ void ds_TermAudio()
 	buffer->Stop();
 	soundthread_running=false;
 	SetEvent(buffer_events[0]);
-	sound_th.WaitToEnd(INFINITE);
+	sound_th.WaitToEnd();
 
 	for (u32 i=0;i<sound_buffer_count;i++)
 		verify(CloseHandle(buffer_events[i]));

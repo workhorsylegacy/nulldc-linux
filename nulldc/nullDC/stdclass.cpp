@@ -147,10 +147,9 @@ void cThread::Suspend()
 	pthread_mutex_unlock(&_mutex);
 }
 
-void cThread::WaitToEnd(u32 msec)
+void cThread::WaitToEnd()
 {
-	// FIXME: There should be a pthread replacement for this
-	WaitForSingleObject(this->_tid.p, msec);
+	pthread_join(this->_tid, NULL);
 }
 //End thread class
 

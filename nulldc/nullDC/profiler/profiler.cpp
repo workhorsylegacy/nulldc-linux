@@ -123,7 +123,7 @@ void term_Profiler()
 {
 	RunProfiler=false;
 	prof_thread->Start();//make sure it is started
-	prof_thread->WaitToEnd(-1);
+	prof_thread->WaitToEnd();
 	delete prof_thread;
 	//Clear profile info
 	memset(&profile_info,0,sizeof(prof_info));	

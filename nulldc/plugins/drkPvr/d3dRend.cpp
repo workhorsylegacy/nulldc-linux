@@ -4275,7 +4275,7 @@ nl:
 			//if (!rth.ended)
 			{
 				rs.Set();
-				rth.WaitToEnd(0xFFFFFFFF);
+				rth.WaitToEnd();
 			}
 		}
 	}

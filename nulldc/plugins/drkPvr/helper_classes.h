@@ -342,7 +342,7 @@ public :
 	//Simple thread functions
 	void Start();
 	void Suspend();
-	void WaitToEnd(u32 msec);
+	void WaitToEnd();
 };
 
 //Wait Events
