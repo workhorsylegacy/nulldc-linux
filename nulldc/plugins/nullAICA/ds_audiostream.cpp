@@ -3,14 +3,14 @@
 #include "audiostream_rif.h"
 #include "audiostream.h"
 
-u32 THREADCALL SoundThread(void* param);
+bool THREADCALL SoundThread(void* param);
 #define V2_BUFFERSZ (16*1024)
 
 IDirectSound8* dsound;
 IDirectSoundBuffer8* buffer;
 IDirectSoundNotify8* buffer_notify;
 
-cThread sound_th(SoundThread,0);
+cThread sound_th((ThreadFunctionFP) &SoundThread, 0);
 HANDLE buffer_events[V2_BUFFERSZ/256];
 volatile bool soundthread_running=false;
 
@@ -43,28 +43,25 @@ void UpdateBuff(u8* pos)
 		}
 	}
 }
-u32 THREADCALL SoundThread1(void* param)
+bool THREADCALL SoundThread(void* param)
 {
-	for(;;)
+	u32 rv = WaitForMultipleObjects(sound_buffer_count,buffer_events,false,400);
+	
+	if (!soundthread_running)
+		return false;
+
+	LPVOID p1,p2;
+	DWORD s1,s2;
+
+	rv-=WAIT_OBJECT_0;
+
+	if(SUCCEEDED(buffer->Lock(WritePositions[rv],wait_buffer_size,&p1,&s1,&p2,&s2,0)))
 	{
-		u32 rv = WaitForMultipleObjects(sound_buffer_count,buffer_events,false,400);
-		
-		if (!soundthread_running)
-			break;
-
-		LPVOID p1,p2;
-		DWORD s1,s2;
-
-		rv-=WAIT_OBJECT_0;
-
-		if(SUCCEEDED(buffer->Lock(WritePositions[rv],wait_buffer_size,&p1,&s1,&p2,&s2,0)))
-		{
-			UpdateBuff((u8*)p1);	
-			verifyc(buffer->Unlock(p1,s1,p2,s2));
-		}
-
+		UpdateBuff((u8*)p1);	
+		verifyc(buffer->Unlock(p1,s1,p2,s2));
 	}
-	return 0;
+
+	return true;
 }
 /*
 u32 THREADCALL SoundThread2(void* param)
@@ -104,13 +101,6 @@ u32 THREADCALL SoundThread2(void* param)
 
 
 
-u32 THREADCALL SoundThread(void* param)
-{
-//	if (StreamV2)
-//		return SoundThread2(param);
-	//else
-		return SoundThread1(param);
-}
 void ds_InitAudio()
 {
 	if (settings.BufferSize<2048)
@@ -214,7 +204,7 @@ void ds_InitAudio()
 
 	//Start the thread
 	soundthread_running=true;
-	verify(SetThreadPriority((HANDLE)sound_th.hThread,THREAD_PRIORITY_TIME_CRITICAL));
+	SetThreadPriority(sound_th._tid.p, THREAD_PRIORITY_TIME_CRITICAL);
 	sound_th.Start();
 	//Make sure its run before the buffer releases the event
 	Sleep(0);

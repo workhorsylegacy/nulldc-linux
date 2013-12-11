@@ -234,29 +234,54 @@ void SaveSettings()
 
 //Windoze Code implementation of commong classes from here and after ..
 
+void CDECL thread_run(void* params) {
+	cThread* t = reinterpret_cast<cThread*>(params);
+
+	do {
+		pthread_mutex_lock(&t->_mutex);
+		while (t->_is_suspended)
+			pthread_cond_wait(&t->_condition, &t->_mutex);
+		pthread_mutex_unlock(&t->_mutex);
+	} while (t->_entry(NULL));
+}
+
 //Thread class
-cThread::cThread(ThreadEntryFP* function,void* prm)
+cThread::cThread(ThreadFunctionFP function, void* prm)
 {
-	Entry=function;
-	param=prm;
-	hThread=CreateThread(NULL,NULL,(LPTHREAD_START_ROUTINE)function,prm,CREATE_SUSPENDED,NULL);
+	_entry = function;
+
+	if (pthread_mutex_init(&_mutex, NULL) != 0)
+		exit(1);
+	if (pthread_cond_init(&_condition, NULL) != 0)
+		exit(1);
+	if (pthread_create(&this->_tid, NULL, (ThreadRunnerFP)&thread_run, this) != 0)
+		exit(1);
 }
 cThread::~cThread()
 {
-	//gota think of something !
+	pthread_cond_destroy(&_condition);
+	pthread_mutex_destroy(&_mutex);
 }
 	
 void cThread::Start()
 {
-	ResumeThread(hThread);
+	pthread_mutex_lock(&_mutex);
+	_is_suspended = false;
+	pthread_cond_signal(&_condition);
+	pthread_mutex_unlock(&_mutex);
 }
 void cThread::Suspend()
 {
-	SuspendThread(hThread);
+	pthread_mutex_lock(&_mutex);
+	_is_suspended = true;
+	pthread_cond_signal(&_condition);
+	pthread_mutex_unlock(&_mutex);
 }
+
 void cThread::WaitToEnd(u32 msec)
 {
-	WaitForSingleObject(hThread,msec);
+	// FIXME: There should be a pthread replacement for this
+	WaitForSingleObject(this->_tid.p, msec);
 }
 //End thread class
 

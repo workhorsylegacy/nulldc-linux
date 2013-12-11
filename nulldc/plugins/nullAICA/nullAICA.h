@@ -4,8 +4,11 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
 
 #include <string.h>
+
+#pragma comment(lib, "pthreadVC2.lib")
 
 #define BUILD 0
 #define MINOR 1
@@ -84,17 +87,20 @@ void SaveSettings();
 
 int cfgGetInt(char* key,int def);
 
-typedef  u32 THREADCALL ThreadEntryFP(void* param);
-typedef void* THREADHANDLE;
+typedef void *(CDECL *ThreadRunnerFP) (void* param);
+typedef bool *(THREADCALL *ThreadFunctionFP) (void* param);
+void CDECL thread_run(void* params);
 
 class cThread
 {
 public:
-	ThreadEntryFP* Entry;
-	void* param;
-	THREADHANDLE hThread;
+	ThreadFunctionFP _entry;
+	pthread_t _tid;
+	bool _is_suspended = true;
+	pthread_cond_t _condition;
+	pthread_mutex_t _mutex;
 public :
-	cThread(ThreadEntryFP* function,void* param);
+	cThread(ThreadFunctionFP function, void* param);
 	~cThread();
 	//Simple thread functions
 	void Start();
