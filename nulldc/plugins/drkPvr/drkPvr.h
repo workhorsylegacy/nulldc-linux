@@ -25,19 +25,17 @@ int msgboxf(wchar* text,unsigned int type,...);
 float GetSeconds();
 
 
-#define dbgbreak __debugbreak()
-
 #if DO_VERIFY==OP_ON
-#define verify(x) if((x)==false){ static bool d_msg=true; if (d_msg) { d_msg = msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d \nWant to report this error again ?",MB_ICONERROR|MB_YESNO,_T(__FUNCTION__),_T(__FILE__),__LINE__)==IDYES?true:false;} if (d_msg){ dbgbreak;}}
-#define verifyf(x) if((x)==false){ msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d \n",MB_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}
-#define verifyc(x) {HRESULT hrr=(x); if(FAILED(hrr)){ msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d HR=0x%08X\n",MB_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__,hrr); dbgbreak;} }
+#define verify(x) if((x)==false){ static bool d_msg=true; if (d_msg) { d_msg = msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d \nWant to report this error again ?",MB_ICONERROR|MB_YESNO,_T(__FUNCTION__),_T(__FILE__),__LINE__)==IDYES?true:false;} if (d_msg){ DEBUG_BREAK;}}
+#define verifyf(x) if((x)==false){ msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d \n",MB_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); DEBUG_BREAK;}
+#define verifyc(x) {HRESULT hrr=(x); if(FAILED(hrr)){ msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d HR=0x%08X\n",MB_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__,hrr); DEBUG_BREAK;} }
 #else
 #define verify(x)
 #define verifyf(x) (x)
 #define verifyc(x) (x)
 #endif
 
-#define die(reason) { printf("Fatal error : " #reason "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); dbgbreak;}
+#define die(reason) { printf("Fatal error : " #reason "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); DEBUG_BREAK;}
 #define fverify verify
 
 #define log0(xx) printf(xx " (from "__FUNCTION__ ")\n");

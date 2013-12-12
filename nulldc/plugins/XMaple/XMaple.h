@@ -23,15 +23,15 @@
 // ya let's spam console in debug build
 #define DEBUG_LOG(...) printf(__VA_ARGS__);
 // break into debugger
-#define dbgbreak {while(1) __noop;}
+#define DEBUG_BREAK {while(1) NOOP;}
 // print some info and crash
 #define verify(x) if((x)==false){	\
 	printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__);	\
-	dbgbreak;}
+	DEBUG_BREAK;}
 #else
 // just build, dammit
 #define DEBUG_LOG(...)
-#define dbgbreak
+#define DEBUG_BREAK
 #define verify(x)
 #endif
 

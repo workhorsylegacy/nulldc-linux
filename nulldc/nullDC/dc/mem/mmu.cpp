@@ -182,7 +182,7 @@ void FASTCALL mmu_raise_exeption(u32 mmu_error,u32 address,u32 am)
 		break;
 	}
 
-	__debugbreak(); 
+	DEBUG_BREAK; 
 }
 
 bool mmu_match(u32 va,CCN_PTEH_type Address,CCN_PTEL_type Data)

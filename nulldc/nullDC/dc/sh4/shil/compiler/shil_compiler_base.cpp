@@ -1297,7 +1297,7 @@ x86_reg  readwrteparams(shil_opcode* op,x86_reg* fast_reg,u32* fast_offset)
 	case flag_imm:
 		x86e->Emit(op_mov32,ECX,op->imm1);
 		reg=ECX;
-		dbgbreak;//must never ever happen
+		DEBUG_BREAK;//must never ever happen
 		break;
 
 	case flag_r2:
@@ -1649,7 +1649,7 @@ void apply_roml_patches()
 			if (roml_patch_list[i].is_float)
 			{
 				//meh ?
-				dbgbreak;
+				DEBUG_BREAK;
 			}
 			else
 			{

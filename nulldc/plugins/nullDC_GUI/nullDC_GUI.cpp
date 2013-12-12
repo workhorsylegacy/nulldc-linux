@@ -234,7 +234,7 @@ u32 GetSettingI(u32 id)
 
 	if (emu.GetSetting(id,&t)!=rv_ok)
 	{
-		dbgbreak;
+		DEBUG_BREAK;
 	}
 	return t;
 }
@@ -242,6 +242,6 @@ void SetSettingI(u32 id,u32 v)
 {
 	if (emu.SetSetting(id,&v)!=rv_ok)
 	{
-		dbgbreak;
+		DEBUG_BREAK;
 	}
 }

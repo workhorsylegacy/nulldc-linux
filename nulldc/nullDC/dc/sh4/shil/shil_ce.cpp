@@ -174,7 +174,7 @@ void ce_die(char* reason)
 	else
 		log("C.E. pass : die\n");
 
-	__debugbreak();
+	DEBUG_BREAK;
 }
 bool ce_CanBeConst(u32 reg)
 {

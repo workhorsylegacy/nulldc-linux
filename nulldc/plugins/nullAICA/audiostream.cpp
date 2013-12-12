@@ -224,7 +224,7 @@ void WriteSample(s16 r, s16 l)
 	//while limit on, 128 samples done, there is a buffer ready to be service AND speed is too fast then wait ;p
 	while (settings.LimitFPS==1 && gen_samples>128 && asRingUsedCount()>BufferSampleCount && QueryPerformanceCounter(&time_now) && (time_now.QuadPart-time_last.QuadPart)<=time_diff.QuadPart )
 	{
-		__noop;
+		NOOP;
 	}
 
 	if (settings.LimitFPS==1 && gen_samples>128)

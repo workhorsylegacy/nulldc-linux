@@ -86,8 +86,8 @@ s32 mo_wheel_delta = 0;
 //1 Right button (B) 
 //2 Left button (A) 
 //3 Thumb button (START) 
-#define dbgbreak {while(1) __noop;}
-#define verify(x) if((x)==false){ printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); dbgbreak;}
+#define DEBUG_BREAK {while(1) NOOP;}
+#define verify(x) if((x)==false){ printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); DEBUG_BREAK;}
 #pragma pack(1)
 char testJoy_strName[64] = "Dreamcast Controller\0";
 char testJoy_strName_nul[64] = "Null Dreamcast Controler\0";

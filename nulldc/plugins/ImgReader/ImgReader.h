@@ -13,7 +13,7 @@
 #define MAJOR 1
 extern emu_info emu;
 extern wchar emu_name[512];
-#define verify(x) if((x)==false){ printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); __debugbreak(); }
+#define verify(x) if((x)==false){ printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); DEBUG_BREAK; }
 struct _setts
 {
 	bool PatchRegion;

@@ -83,7 +83,7 @@ using namespace std;
 
 #ifdef MEM_ERROR_BREAK
 	#ifdef X86
-		#define MEM_DO_BREAK {__debugbreak(); }
+		#define MEM_DO_BREAK {DEBUG_BREAK; }
 	#else
 		#define MEM_DO_BREAK {log("**Mem Error Break**\n");getc(stdin);}
 	#endif
@@ -94,7 +94,7 @@ using namespace std;
 #ifdef TRACE
 	#ifdef DEBUG
 		#ifdef X86
-			#define TRACE_DO_BREAK {dbgbreak;}
+			#define TRACE_DO_BREAK {DEBUG_BREAK;}
 		#else
 			#define TRACE_DO_BREAK {log("**Trace Break**\n");getc(stdin);}
 		#endif
@@ -142,15 +142,14 @@ using namespace std;
 #define VER_FULLNAME	VER_EMUNAME L" v1.0.4" _X_x_X_MMU_VER_STR L" (built " _T(__DATE__) L"@" _T(__TIME__) L")"
 #define VER_SHORTNAME	VER_EMUNAME L" 1.0.4" _X_x_X_MMU_VER_STR
 
-#define dbgbreak __debugbreak(); 
 
 #ifndef NO_VERIFY
-#define verify(x) if(!(x)){ msgboxf(_T("Verify Failed  : ") _T(#x) _T("\n in %s -> %s : %d \n"),MBX_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}
+#define verify(x) if(!(x)){ msgboxf(_T("Verify Failed  : ") _T(#x) _T("\n in %s -> %s : %d \n"),MBX_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); DEBUG_BREAK;}
 #else
 	#define verify(x) (x);
 #endif
 
-#define die(reason) { msgboxf(_T("Fatal error : %s\n in %s -> %s : %d \n"),MBX_ICONERROR,_T(reason),_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}
+#define die(reason) { msgboxf(_T("Fatal error : %s\n in %s -> %s : %d \n"),MBX_ICONERROR,_T(reason),_T(__FUNCTION__),_T(__FILE__),__LINE__); DEBUG_BREAK;}
 #define fverify verify
 
 //will be removed sometime soon

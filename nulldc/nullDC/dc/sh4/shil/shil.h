@@ -290,30 +290,30 @@ enum x86_flags
 };
 class shil_stream
 {
-	u16 shil_stream::GetFloatFlags(Sh4RegType reg1,Sh4RegType reg2);
-	void shil_stream::emit32(shil_opcodes op,u32 imm1);
-	void shil_stream::emit32(shil_opcodes op,Sh4RegType reg1);
-	void shil_stream::emit32(shil_opcodes op,Sh4RegType reg1,u32 param);
-	void shil_stream::emit32(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2);
-	void shil_stream::emit(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 imm1,u32 imm2,u32 flags);
-	void shil_stream::emit32(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 extraflags);
+	u16 GetFloatFlags(Sh4RegType reg1,Sh4RegType reg2);
+	void emit32(shil_opcodes op,u32 imm1);
+	void emit32(shil_opcodes op,Sh4RegType reg1);
+	void emit32(shil_opcodes op,Sh4RegType reg1,u32 param);
+	void emit32(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2);
+	void emit(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 imm1,u32 imm2,u32 flags);
+	void emit32(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 extraflags);
 
-	void shil_stream::emitReg(shil_opcodes op,Sh4RegType reg1,u32 flags);
-	void shil_stream::emitRegImm(shil_opcodes op,Sh4RegType reg1,u32 imm1,u32 flags);
-	void shil_stream::emitRegImmImm(shil_opcodes op,Sh4RegType reg1,u32 imm1,u32 imm2,u32 flags);
-	void shil_stream::emitRegReg(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 flags);
-	void shil_stream::emitRegRegImm(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 imm1,u32 flags);
+	void emitReg(shil_opcodes op,Sh4RegType reg1,u32 flags);
+	void emitRegImm(shil_opcodes op,Sh4RegType reg1,u32 imm1,u32 flags);
+	void emitRegImmImm(shil_opcodes op,Sh4RegType reg1,u32 imm1,u32 imm2,u32 flags);
+	void emitRegReg(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 flags);
+	void emitRegRegImm(shil_opcodes op,Sh4RegType reg1,Sh4RegType  reg2,u32 imm1,u32 flags);
 
 public :
-	void shil_stream::jcond(u32 cond);
-	void shil_stream::jmp();
+	void jcond(u32 cond);
+	void jmp();
 
-	void shil_stream::muls_16_16_32(Sh4RegType reg1,Sh4RegType reg2);
-	void shil_stream::mulu_16_16_32(Sh4RegType reg1,Sh4RegType reg2);
-	void shil_stream::muls_32_32_32(Sh4RegType reg1,Sh4RegType reg2);
-	void shil_stream::mulu_32_32_32(Sh4RegType reg1,Sh4RegType reg2);
-	void shil_stream::muls_32_32_64(Sh4RegType reg1,Sh4RegType reg2);
-	void shil_stream::mulu_32_32_64(Sh4RegType reg1,Sh4RegType reg2);
+	void muls_16_16_32(Sh4RegType reg1,Sh4RegType reg2);
+	void mulu_16_16_32(Sh4RegType reg1,Sh4RegType reg2);
+	void muls_32_32_32(Sh4RegType reg1,Sh4RegType reg2);
+	void mulu_32_32_32(Sh4RegType reg1,Sh4RegType reg2);
+	void muls_32_32_64(Sh4RegType reg1,Sh4RegType reg2);
+	void mulu_32_32_64(Sh4RegType reg1,Sh4RegType reg2);
 
 	vector<shil_opcode> opcodes;
 	
@@ -328,53 +328,53 @@ public :
 
 	/*** Mem reads ***/
 	//readmem [const]
-	void shil_stream::readm8(Sh4RegType to,u32 from);
-	void shil_stream::readm16(Sh4RegType to,u32 from);
-	void shil_stream::readm32(Sh4RegType to,u32 from);
-	void shil_stream::readm64(Sh4RegType to,u32 from);
+	void readm8(Sh4RegType to,u32 from);
+	void readm16(Sh4RegType to,u32 from);
+	void readm32(Sh4RegType to,u32 from);
+	void readm64(Sh4RegType to,u32 from);
 
 	//readmem [reg]
-	void shil_stream::readm8(Sh4RegType to,Sh4RegType from);
-	void shil_stream::readm16(Sh4RegType to,Sh4RegType from);
-	void shil_stream::readm32(Sh4RegType to,Sh4RegType from);
-	void shil_stream::readm64(Sh4RegType to,Sh4RegType from);
+	void readm8(Sh4RegType to,Sh4RegType from);
+	void readm16(Sh4RegType to,Sh4RegType from);
+	void readm32(Sh4RegType to,Sh4RegType from);
+	void readm64(Sh4RegType to,Sh4RegType from);
 
 	//readmem base[offset]
-	void shil_stream::readm8(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
-	void shil_stream::readm16(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
-	void shil_stream::readm32(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
-	void shil_stream::readm64(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
+	void readm8(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
+	void readm16(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
+	void readm32(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
+	void readm64(Sh4RegType to,Sh4RegType base,Sh4RegType offset);
 
 	//readmem base[const]
-	void shil_stream::readm8(Sh4RegType to,Sh4RegType base,u32 offset);
-	void shil_stream::readm16(Sh4RegType to,Sh4RegType base,u32 offset);
-	void shil_stream::readm32(Sh4RegType to,Sh4RegType base,u32 offset);
+	void readm8(Sh4RegType to,Sh4RegType base,u32 offset);
+	void readm16(Sh4RegType to,Sh4RegType base,u32 offset);
+	void readm32(Sh4RegType to,Sh4RegType base,u32 offset);
 
 
 
 	/*** Mem writes ***/
 	//writemem [const]
-	void shil_stream::writem8(Sh4RegType from,u32 to);
-	void shil_stream::writem16(Sh4RegType from,u32 to);
-	void shil_stream::writem32(Sh4RegType from,u32 to);
-	void shil_stream::writem64(Sh4RegType from,u32 to);
+	void writem8(Sh4RegType from,u32 to);
+	void writem16(Sh4RegType from,u32 to);
+	void writem32(Sh4RegType from,u32 to);
+	void writem64(Sh4RegType from,u32 to);
 
 	//writemem [reg]
-	void shil_stream::writem8(Sh4RegType from,Sh4RegType to);
-	void shil_stream::writem16(Sh4RegType from,Sh4RegType to);
-	void shil_stream::writem32(Sh4RegType from,Sh4RegType to);
-	void shil_stream::writem64(Sh4RegType from,Sh4RegType to);
+	void writem8(Sh4RegType from,Sh4RegType to);
+	void writem16(Sh4RegType from,Sh4RegType to);
+	void writem32(Sh4RegType from,Sh4RegType to);
+	void writem64(Sh4RegType from,Sh4RegType to);
 
 	//writemem reg[reg]
-	void shil_stream::writem8(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
-	void shil_stream::writem16(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
-	void shil_stream::writem32(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
-	void shil_stream::writem64(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
+	void writem8(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
+	void writem16(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
+	void writem32(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
+	void writem64(Sh4RegType from,Sh4RegType base,Sh4RegType offset);
 
 	//writemem reg[const]
-	void shil_stream::writem8(Sh4RegType from,Sh4RegType base,u32 offset);
-	void shil_stream::writem16(Sh4RegType from,Sh4RegType base,u32 offset);
-	void shil_stream::writem32(Sh4RegType from,Sh4RegType base,u32 offset);
+	void writem8(Sh4RegType from,Sh4RegType base,u32 offset);
+	void writem16(Sh4RegType from,Sh4RegType base,u32 offset);
+	void writem32(Sh4RegType from,Sh4RegType base,u32 offset);
 
 	
 	void cmp(Sh4RegType to,Sh4RegType from);
@@ -445,15 +445,15 @@ public :
 	void fabs(Sh4RegType to);
 	void fneg(Sh4RegType to);
 
-	void shil_stream::fipr(Sh4RegType to,Sh4RegType from);
-	void shil_stream::fsqrt(Sh4RegType to);
-	void shil_stream::ftrv(Sh4RegType fv_n);
-	void shil_stream::floatfpul(Sh4RegType frn);
-	void shil_stream::ftrc(Sh4RegType frn);
-	void shil_stream::fsca(Sh4RegType frn);
-	void shil_stream::fsrra(Sh4RegType frn);
-	void shil_stream::div(Sh4RegType r0,Sh4RegType r1,Sh4RegType r2,u32 flags);
-	void shil_stream::fcmp(Sh4RegType to,Sh4RegType from);
+	void fipr(Sh4RegType to,Sh4RegType from);
+	void fsqrt(Sh4RegType to);
+	void ftrv(Sh4RegType fv_n);
+	void floatfpul(Sh4RegType frn);
+	void ftrc(Sh4RegType frn);
+	void fsca(Sh4RegType frn);
+	void fsrra(Sh4RegType frn);
+	void div(Sh4RegType r0,Sh4RegType r1,Sh4RegType r2,u32 flags);
+	void fcmp(Sh4RegType to,Sh4RegType from);
 	void pref(Sh4RegType addr);
 
 	//misc

@@ -23,8 +23,8 @@ extern gui_emu_info emu;
 extern wchar emu_name[128];
 
 //helper stuff
-#define verify(x) if((x)==false){ msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d \n",MBX_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}
-#define die(reason) { msgboxf(L"Fatal error : %s\n in %s -> %s : %d \n",MBX_ICONERROR,reason,_T(__FUNCTION__),_T(__FILE__),__LINE__); dbgbreak;}
+#define verify(x) if((x)==false){ msgboxf(L"Verify Failed  : " _T(#x) L"\n in %s -> %s : %d \n",MBX_ICONERROR,_T(__FUNCTION__),_T(__FILE__),__LINE__); DEBUG_BREAK;}
+#define die(reason) { msgboxf(L"Fatal error : %s\n in %s -> %s : %d \n",MBX_ICONERROR,reason,_T(__FUNCTION__),_T(__FILE__),__LINE__); DEBUG_BREAK;}
 #define fverify verify
 
 //functions
@@ -189,7 +189,6 @@ enum Sh4RegType
 #define MBX_RV_IGNORE            5
 #define MBX_RV_YES               6
 #define MBX_RV_NO                7
-#define dbgbreak __debugbreak()
 
 #define BPT_OPCODE		0x8A00
 

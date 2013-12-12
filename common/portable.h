@@ -29,11 +29,11 @@ typedef wchar_t wchar;
 	#define X64
 #endif
 
-#ifdef X86
+#if defined(X86) || defined(__i386__) || defined(__i686__)
 	typedef u32 unat;
 #endif
 
-#ifdef X64
+#if defined(X64) || defined(__x86_64__)
 	typedef u64 unat;
 #endif
 
@@ -104,4 +104,18 @@ typedef wchar_t wchar;
 
 #define ARRAY_LENGTH(x) (sizeof(x) / sizeof(x[0]))
 
+#endif
+
+
+#if defined(_MSC_VER)
+	#define DEBUG_BREAK __debugbreak()
+#else
+	#define DEBUG_BREAK __builtin_trap()
+#endif
+
+
+#if defined(_MSC_VER)
+	#define NOOP __noop
+#else
+	#define NOOP(void)0
 #endif

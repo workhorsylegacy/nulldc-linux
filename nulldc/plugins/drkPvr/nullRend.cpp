@@ -132,7 +132,7 @@ namespace SWRenderer
 		//present the vram to FB
 		SDL_Event ev;
 		while(SDL_PollEvent(&ev))
-			__noop;
+			NOOP;
 //return;
 		//SetWindowPos(SdlWnd,0,0,640,480,0,SWP_NOZORDER);	 
 		//FB_R_CTRL & 0x1000000

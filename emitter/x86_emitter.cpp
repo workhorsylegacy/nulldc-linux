@@ -400,7 +400,7 @@ void x86_block::Emit(x86_opcode_class op,x86_reg reg1,x86_reg reg2,u32 imm)
 //reg,mrm,imm	,reg1 is writen
 void x86_block::Emit(x86_opcode_class op,x86_reg reg,x86_ptr mem,u32 imm)
 {
-	ME_op_3_imm(op,reg,c_mrm(mem),imm);
+	ME_op_3_imm(op, reg, c_mrm(mem), imm);
 }
 
 //reg,mrm,imm	,reg1 is writen

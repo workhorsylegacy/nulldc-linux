@@ -78,9 +78,9 @@ class SimpleSSERegAlloc:public FloatRegAllocator
 	void ensure_valid(u32 reg)
 	{
 		if (reg>=fr_0 && reg<=fr_15)
-			__noop;
+			NOOP;
 		else
-			__debugbreak(); 
+			DEBUG_BREAK; 
 	}
 	bool DoAlloc;
 	
@@ -222,7 +222,7 @@ class SimpleSSERegAlloc:public FloatRegAllocator
 				x86e->Emit(op_movss,d_reg,GetRegPtr(reg));
 			return d_reg;
 		}
-//		__debugbreak(); 
+//		DEBUG_BREAK; 
 		//return XMM_Error;
 	}
 	//Save registers

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _H_X86_OP_CLASSES_
+#define _H_X86_OP_CLASSES_
 
 //auto generated
 enum x86_opcode_class
@@ -8,3 +9,5 @@ enum x86_opcode_class
 	////////
 	op_count,
 };
+
+#endif

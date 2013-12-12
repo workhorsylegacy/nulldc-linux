@@ -58,7 +58,7 @@ u32 LoadBinfileToSh4Mem(u32 offset,wchar*file)
 	for (int i=0;i<8;i++)
 	{
 		if (ReadMem8(0x8C010000 + i+0x300)==CheckStr[i])
-			__noop;
+			NOOP;
 		else
 			return rv;
 	}

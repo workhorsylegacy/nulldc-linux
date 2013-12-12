@@ -55,7 +55,7 @@ void sh4_int_restore_reg_cnt()
 			break;
 		case rn_fpu_4:
 			{
-				//dbgbreak;
+				//DEBUG_BREAK;
 				r[n]+=4;
 				//8 byte fixup if on double mode -> actualy this catches the exeption at the first reg read/write so i gota be carefull
 				if (fpscr.SZ)
@@ -68,7 +68,7 @@ void sh4_int_restore_reg_cnt()
 				if (n!=m)
 					r[n]+=1;
 				//else
-				//	dbgbreak;
+				//	DEBUG_BREAK;
 			}
 			break;
 
@@ -77,7 +77,7 @@ void sh4_int_restore_reg_cnt()
 				if (n!=m)
 					r[n]+=2;
 				//else
-				//	dbgbreak;
+				//	DEBUG_BREAK;
 			}
 			break;
 
@@ -86,7 +86,7 @@ void sh4_int_restore_reg_cnt()
 				if (n!=m)
 					r[n]+=4;
 				//else
-				//	dbgbreak;
+				//	DEBUG_BREAK;
 			}
 			break;
 
@@ -115,7 +115,7 @@ void FASTCALL sh4_int_RaiseExeption(u32 ExeptionCode,u32 VectorAddress)
 	if (sh4_exept_raised)
 	{
 		log("WARNING : DOUBLE EXEPTION RAISED , IGNORING SECOND EXEPTION\n");
-		dbgbreak;
+		DEBUG_BREAK;
 		return;
 	}
 	sh4_exept_raised=true;

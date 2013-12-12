@@ -113,7 +113,7 @@ void vramlock_list_add(vram_block* block)
 
 		list->push_back(block);
 added_it:
-		__noop;
+		NOOP;
 	}
 }
  
@@ -204,7 +204,7 @@ bool VramLockedWrite(u8* address)
 				if ((*list)[i])
 				{
 					msgboxf(L"Error , pvr is suposed to remove lock",MBX_OK);
-					__debugbreak(); 
+					DEBUG_BREAK; 
 				}
 
 			}

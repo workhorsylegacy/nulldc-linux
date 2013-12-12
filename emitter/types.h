@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef _H_TYPES_
+#define _H_TYPES_
 
 #include "../common/portable.h"
 
@@ -19,14 +21,13 @@
 #include <vector>
 using namespace std;
 
-#ifndef dbgbreak
-#define dbgbreak __asm {int 3}
-#endif
 
 #ifndef verify
-#define verify(x) if((x)==false){ printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); dbgbreak;}
+#define verify(x) if((x)==false){ printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__); DEBUG_BREAK;}
 #endif
 
 #ifndef die
-#define die(reason) { printf("Fatal error : %s\n in %s -> %s : %d \n",reason,__FUNCTION__,__FILE__,__LINE__); dbgbreak;}
+#define die(reason) { printf("Fatal error : %s\n in %s -> %s : %d \n",reason,__FUNCTION__,__FILE__,__LINE__); DEBUG_BREAK;}
+#endif
+
 #endif

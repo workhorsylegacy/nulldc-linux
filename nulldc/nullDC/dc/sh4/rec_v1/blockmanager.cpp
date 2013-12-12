@@ -189,7 +189,7 @@ public :
 			if (_Myfirst[i]!=BLOCK_NONE)
 			{
 				log("BlockList::CheckEmptyList fatal error , ItemCount!=RealItemCount\n");
-				__debugbreak(); 
+				DEBUG_BREAK; 
 				return;
 			}
 
@@ -979,6 +979,6 @@ void dyna_profiler_tick(void* addr)
 			return;
 		}
 	}
-	__debugbreak(); 
+	DEBUG_BREAK; 
 	log("0x%X OMG! UNABLE TO MATCH BLOCK TEH NOES\n",addr);
 }

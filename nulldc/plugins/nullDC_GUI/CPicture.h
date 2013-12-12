@@ -14,10 +14,10 @@ public:
 	// Load frm various sosurces
 	bool Load(HINSTANCE hInst, UINT nIDRes);
 	bool Load(LPCTSTR pszPathName);
-	bool CPicture::Load(HBITMAP hBmp,HPALETTE hPal,bool own=false);
+	bool Load(HBITMAP hBmp,HPALETTE hPal,bool own=false);
 	bool Load(IStream* pstm);
 	bool Save(const wchar_t* to);
-	bool CPicture::Select(HDC hDC, HDC* newhDC,OLE_HANDLE *hBmp);
+	bool Select(HDC hDC, HDC* newhDC,OLE_HANDLE *hBmp);
 	// render to device context
 	bool Render(HDC dc, RECT* rc, LPCRECT prcMFBounds=NULL) const;
 

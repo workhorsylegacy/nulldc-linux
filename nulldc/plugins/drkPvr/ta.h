@@ -556,7 +556,7 @@ public:
 						return 10;						//(Non-Textured, Intensity, with Two Volumes)
 				}
 			}
-			//dbgbreak;
+			//DEBUG_BREAK;
 			return 0xFFFFFFFF;
 		}
 		//0-4 | 0x80
