@@ -78,7 +78,10 @@ typedef wchar_t wchar;
 	#define EXPORT extern "C" __declspec(dllexport)
 	#define EXPORT_CALL __stdcall
 	#define THREADCALL __stdcall
-	#define CDECL __cdecl
+
+	#ifndef CDECL
+		#define CDECL __cdecl
+	#endif
 #else
 	#define DLLEXPORT
 

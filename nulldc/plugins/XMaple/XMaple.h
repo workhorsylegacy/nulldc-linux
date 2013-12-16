@@ -22,8 +22,6 @@
 #ifdef _DEBUG
 // ya let's spam console in debug build
 #define DEBUG_LOG(...) printf(__VA_ARGS__);
-// break into debugger
-#define DEBUG_BREAK {while(1) NOOP;}
 // print some info and crash
 #define verify(x) if((x)==false){	\
 	printf("Verify Failed  : " #x "\n in %s -> %s : %d \n",__FUNCTION__,__FILE__,__LINE__);	\
