@@ -309,7 +309,7 @@ u32 FASTCALL ControllerDMA_NAOMI(void* device_instance,u32 Command,u32* buffer_i
 
 					wchar eeprom_file[512];
 					host.ConfigLoadStr(L"emu",L"gamefile",eeprom_file,L"");
-					wcscat_s(eeprom_file,L".eeprom");
+					wcscat(eeprom_file, L".eeprom");
 					FILE* f;
 					_wfopen_s(&f,eeprom_file,L"wb");
 					if (f)
@@ -327,7 +327,7 @@ u32 FASTCALL ControllerDMA_NAOMI(void* device_instance,u32 Command,u32* buffer_i
 						EEPROM_loaded=true;
 						wchar eeprom_file[512];
 						host.ConfigLoadStr(L"emu",L"gamefile",eeprom_file,L"");
-						wcscat_s(eeprom_file,L".eeprom");
+						wcscat(eeprom_file, L".eeprom");
 						FILE* f;
 						_wfopen_s(&f,eeprom_file,L"rb");
 						if (f)

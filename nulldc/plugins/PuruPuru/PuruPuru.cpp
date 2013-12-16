@@ -57,7 +57,7 @@ void EXPORT_CALL dcGetInterface(plugin_interface* info)
 	// Set plugin info
 	info->InterfaceVersion = PLUGIN_I_F_VERSION;
 	info->common.InterfaceVersion = MAPLE_PLUGIN_I_F_VERSION;
-	wcscpy_s(info->common.Name, L"PuruPuru input plugin v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");
+	wcscpy(info->common.Name, L"PuruPuru input plugin v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");
 
 	// Assign callback functions
 	info->common.Load = Load;
@@ -71,15 +71,15 @@ void EXPORT_CALL dcGetInterface(plugin_interface* info)
 
 	u8 id = 0;
 #ifdef BUILD_DREAMCAST	
-	wcscpy_s(info->maple.devices[id].Name, L"PuruPuru Dreamcast Controller v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");	
+	wcscpy(info->maple.devices[id].Name, L"PuruPuru Dreamcast Controller v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");	
 	info->maple.devices[id].Type = MDT_Main;	
 	info->maple.devices[id].Flags = MDTF_Sub0 | MDTF_Sub1 | MDTF_Hotplug;
 	id++; // PuruPuru Pack
-	wcscpy_s(info->maple.devices[id].Name, L"PuruPuru Pakku v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");
+	wcscpy(info->maple.devices[id].Name, L"PuruPuru Pakku v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");
 	info->maple.devices[id].Type = MDT_Sub;
 	info->maple.devices[id].Flags = MDTF_Hotplug;	
 #elif defined BUILD_NAOMI
-	wcscpy_s(info->maple.devices[id].Name, L"PuruPuru NAOMI JAMMA Controller v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");
+	wcscpy(info->maple.devices[id].Name, L"PuruPuru NAOMI JAMMA Controller v" _T(INPUT_VERSION) L" by Falcon4ever [" _T(__DATE__) L"]");
 	info->maple.devices[id].Type = MDT_Main;
 	info->maple.devices[id].Flags = 0;
 #endif 

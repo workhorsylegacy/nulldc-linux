@@ -281,13 +281,13 @@ void FASTCALL Destroy(void* data,u32 id)
 }
 
 #define AddMapleDevice(name, flags)	\
-	wcscpy_s(info->maple.devices[id].Name, ##name##L" [XInput] (" _T(__DATE__) L")"); \
+	wcscpy(info->maple.devices[id].Name, ##name##L" [XInput] (" _T(__DATE__) L")"); \
 	info->maple.devices[id].Type	= MDT_Main;	\
 	info->maple.devices[id].Flags	= flags;	\
 	id++;
 
 #define AddMapleSubDevice(name, flags) \
-	wcscpy_s(info->maple.devices[id].Name, ##name##L" [XInput] (" _T(__DATE__) L")"); \
+	wcscpy(info->maple.devices[id].Name, ##name##L" [XInput] (" _T(__DATE__) L")"); \
 	info->maple.devices[id].Type	= MDT_Sub;	\
 	info->maple.devices[id].Flags	= flags;	\
 	id++;
@@ -306,7 +306,7 @@ void EXPORT_CALL dcGetInterface(plugin_interface* info)
 	info->common.Type	= Plugin_Maple;
 
 	//wcscpy : unicode ;)
-	wcscpy_s(info->common.Name, L"XInput for nullDC by shuffle2 [" _T(__DATE__) L"]");
+	wcscpy(info->common.Name, L"XInput for nullDC by shuffle2 [" _T(__DATE__) L"]");
 
 	//Fill in the maple info
 	info->maple.CreateMain	= CreateMain;
