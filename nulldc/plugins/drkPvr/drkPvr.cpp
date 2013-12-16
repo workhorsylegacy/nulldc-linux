@@ -687,7 +687,7 @@ int msgboxf(wchar* text,unsigned int type,...)
 
 	wchar temp[2048];
 	va_start(args, type);
-	vswprintf(temp,2048, text, args);
+	vswprintf(temp, WCHAR_LEN(temp), text, args);
 	va_end(args);
 
 

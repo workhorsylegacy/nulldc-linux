@@ -455,14 +455,14 @@ void nullDC_ExtDevice_plugin::LoadI(plugin_interface* t)
 	b:
 	Unload
 */
-void maple_cfg_name(int i,int j,wchar * out)
+void maple_cfg_name(int i, int j, wchar* out, size_t out_len)
 {
-	swprintf(out,_T("Current_maple%d_%d"),i,j);
+	swprintf(out, out_len, _T("Current_maple%d_%d"), i, j);
 }
 void maple_cfg_plug(int i,int j,wchar * out)
 {
 	wchar temp[512];
-	maple_cfg_name(i,j,temp);
+	maple_cfg_name(i, j, temp, WCHAR_LEN(temp));
 	cfgLoadStr(_T("nullDC_plugins"),temp,out,pluginDefaults[NDCS_PLUGIN_MAPLE_0_0-NDCS_PLUGIN_PVR + i*6+j]);
 }
 u8 GetMaplePort(u32 port,u32 device)

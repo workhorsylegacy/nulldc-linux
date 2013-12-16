@@ -237,7 +237,7 @@ void CtrlMemView::onPaint(WPARAM wParam, LPARAM lParam)
 		switch(mode)
 		{
 		case MV_NORMAL:
-			swprintf(temp, L"%08X  %08X  %08X  %08X",
+			swprintf(temp, WCHAR_LEN(temp), L"%08X  %08X  %08X  %08X",
 				ReadMem32((address+0)), ReadMem32((address+4)), ReadMem32((address+8)), ReadMem32((address+12)));
 			TextOut(hdc,90,rowY1,temp,(int)wcslen(temp));
 
