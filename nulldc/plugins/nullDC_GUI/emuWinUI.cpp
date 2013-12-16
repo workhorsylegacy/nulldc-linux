@@ -1869,65 +1869,65 @@ INT_PTR CALLBACK ProfilerProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 #define strcatf text+=swprintf
 			if (ndcpi.TBP.Valid)
 			{
-				strcatf(text,L"\r\nTBP: Enabled, look at the console for the profiler output ..\r\n");
+				strcatf(text, WCHAR_LEN(text), L"\r\nTBP: Enabled, look at the console for the profiler output ..\r\n");
 				//the console has more usefull info ;p
 			}
 			else
 			{
-				strcatf(text,L"\r\nTBP: Disabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"\r\nTBP: Disabled\r\n");
 			}
 
 			if (ndcpi.Dynarec.Runtime.Lookups.Valid)
 			{
-				strcatf(text,L"\r\nRuntime dynarec lookup profiling enabled\r\n");
-				strcatf(text,L"%d full lookups , %d fast lookups , ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.Lookups.FullLookupDelta,ndcpi.Dynarec.Runtime.Lookups.FastLookupDelta
+				strcatf(text, WCHAR_LEN(text), L"\r\nRuntime dynarec lookup profiling enabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"%d full lookups , %d fast lookups , ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.Lookups.FullLookupDelta, ndcpi.Dynarec.Runtime.Lookups.FastLookupDelta
 														,ndcpi.Dynarec.Runtime.Lookups.FullLookupDelta/(float)ndcpi.Dynarec.Runtime.Lookups.LookupDelta*100);
-				strcatf(text,L"%d blocks TOTAL , (100%%)\r\n",ndcpi.Dynarec.Runtime.Execution.TotalBlocks);
-				strcatf(text,L" |- %d blocks staticaly linked , ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.Execution.TotalBlocks-ndcpi.Dynarec.Runtime.Lookups.LookupDelta-ndcpi.Dynarec.Runtime.RetCache.Count,
+				strcatf(text, WCHAR_LEN(text), L"%d blocks TOTAL , (100%%)\r\n", ndcpi.Dynarec.Runtime.Execution.TotalBlocks);
+				strcatf(text, WCHAR_LEN(text), L" |- %d blocks staticaly linked , ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.Execution.TotalBlocks - ndcpi.Dynarec.Runtime.Lookups.LookupDelta - ndcpi.Dynarec.Runtime.RetCache.Count,
 					(ndcpi.Dynarec.Runtime.Execution.TotalBlocks-ndcpi.Dynarec.Runtime.Lookups.LookupDelta-ndcpi.Dynarec.Runtime.RetCache.Count)/(float)ndcpi.Dynarec.Runtime.Execution.TotalBlocks*100);
-				strcatf(text,L" |- %d blocks ret cache , ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.RetCache.Count,
+				strcatf(text, WCHAR_LEN(text), L" |- %d blocks ret cache , ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.RetCache.Count,
 					(ndcpi.Dynarec.Runtime.RetCache.Count)/(float)ndcpi.Dynarec.Runtime.Execution.TotalBlocks*100);
-				strcatf(text,L" |- %d blocks from BM (total), ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.Lookups.LookupDelta,
+				strcatf(text, WCHAR_LEN(text), L" |- %d blocks from BM (total), ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.Lookups.LookupDelta,
 					(ndcpi.Dynarec.Runtime.Lookups.LookupDelta)/(float)ndcpi.Dynarec.Runtime.Execution.TotalBlocks*100);
-				strcatf(text,L" |  |- %d blocks from BM cache, ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.Lookups.FastLookupDelta,
+				strcatf(text, WCHAR_LEN(text), L" |  |- %d blocks from BM cache, ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.Lookups.FastLookupDelta,
 					(ndcpi.Dynarec.Runtime.Lookups.FastLookupDelta)/(float)ndcpi.Dynarec.Runtime.Execution.TotalBlocks*100);
-				strcatf(text,L" |  |- %d blocks from BM slow, ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.Lookups.FullLookupDelta,
+				strcatf(text, WCHAR_LEN(text), L" |  |- %d blocks from BM slow, ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.Lookups.FullLookupDelta,
 					(ndcpi.Dynarec.Runtime.Lookups.FullLookupDelta)/(float)ndcpi.Dynarec.Runtime.Execution.TotalBlocks*100);
 			}
 			else
 			{
-				strcatf(text,L"\r\nRuntime dynarec lookup profiling disabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"\r\nRuntime dynarec lookup profiling disabled\r\n");
 			}
 			if (ndcpi.Dynarec.Runtime.Execution.Valid)
 			{
-				strcatf(text,L"\r\nRuntime dynarec execution profiling enabled\r\n");
-				strcatf(text,L"%d Manual blocks , %d locked blocks , ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.Execution.ManualBlocks,ndcpi.Dynarec.Runtime.Execution.LockedBlocks,
+				strcatf(text, WCHAR_LEN(text), L"\r\nRuntime dynarec execution profiling enabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"%d Manual blocks , %d locked blocks , ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.Execution.ManualBlocks, ndcpi.Dynarec.Runtime.Execution.LockedBlocks,
 				ndcpi.Dynarec.Runtime.Execution.ManualBlocks/(float)ndcpi.Dynarec.Runtime.Execution.TotalBlocks*100);
 			}
 			else
 			{
-				strcatf(text,L"\r\nRuntime dynarec execution profiling disabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"\r\nRuntime dynarec execution profiling disabled\r\n");
 			}
-			strcatf(text,L"\r\nDynarec Translation Cache stats:\r\n");
-			strcatf(text,L"%.2f MB src size, %.2f ratio\r\n",ndcpi.Dynarec.CodeGen.SrcCodeSize/1024.0f/1024.0f,ndcpi.Dynarec.CodeGen.CodeSize/(float)ndcpi.Dynarec.CodeGen.SrcCodeSize);
-			strcatf(text,L"%.2f MB size, %d blocks, %.1f B avg size\r\n",ndcpi.Dynarec.CodeGen.CodeSize/1024.0f/1024.0f,ndcpi.Dynarec.CodeGen.TotalBlocks,
+			strcatf(text, WCHAR_LEN(text), L"\r\nDynarec Translation Cache stats:\r\n");
+			strcatf(text, WCHAR_LEN(text), L"%.2f MB src size, %.2f ratio\r\n", ndcpi.Dynarec.CodeGen.SrcCodeSize / 1024.0f / 1024.0f, ndcpi.Dynarec.CodeGen.CodeSize / (float)ndcpi.Dynarec.CodeGen.SrcCodeSize);
+			strcatf(text, WCHAR_LEN(text), L"%.2f MB size, %d blocks, %.1f B avg size\r\n", ndcpi.Dynarec.CodeGen.CodeSize / 1024.0f / 1024.0f, ndcpi.Dynarec.CodeGen.TotalBlocks,
 														ndcpi.Dynarec.CodeGen.CodeSize/(float)ndcpi.Dynarec.CodeGen.TotalBlocks);
-			strcatf(text,L"%.3f ms compile time, %.3f ÅE/block, %.3f MB/s\r\n",(float)ndcpi.Dynarec.CodeGen.TotalCompileTime/1000.f,ndcpi.Dynarec.CodeGen.TotalCompileTime/(float)ndcpi.Dynarec.CodeGen.TotalBlocks,
+			strcatf(text, WCHAR_LEN(text), L"%.3f ms compile time, %.3f ÅE/block, %.3f MB/s\r\n", (float)ndcpi.Dynarec.CodeGen.TotalCompileTime / 1000.f, ndcpi.Dynarec.CodeGen.TotalCompileTime / (float)ndcpi.Dynarec.CodeGen.TotalBlocks,
 																				ndcpi.Dynarec.CodeGen.SrcCodeSize/(float)ndcpi.Dynarec.CodeGen.TotalCompileTime);
 			
-			strcatf(text,L"%d Manual blocks , %d locked blocks , ratio %.2f%%\r\n",ndcpi.Dynarec.CodeGen.ManualBlocks,ndcpi.Dynarec.CodeGen.LockedBlocks,
+			strcatf(text, WCHAR_LEN(text), L"%d Manual blocks , %d locked blocks , ratio %.2f%%\r\n", ndcpi.Dynarec.CodeGen.ManualBlocks, ndcpi.Dynarec.CodeGen.LockedBlocks,
 				ndcpi.Dynarec.CodeGen.ManualBlocks/(float)ndcpi.Dynarec.CodeGen.TotalBlocks*100);
 			
 			
 			if (ndcpi.Dynarec.Runtime.RetCache.Valid)
 			{
-				strcatf(text,L"\r\nRuntime dynarec ret cache stats enabled\r\n");
-				strcatf(text,L"%d rets missmatched , %d rets matched , ratio %.2f%%\r\n",ndcpi.Dynarec.Runtime.RetCache.Misses,ndcpi.Dynarec.Runtime.RetCache.Hits
+				strcatf(text, WCHAR_LEN(text), L"\r\nRuntime dynarec ret cache stats enabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"%d rets missmatched , %d rets matched , ratio %.2f%%\r\n", ndcpi.Dynarec.Runtime.RetCache.Misses, ndcpi.Dynarec.Runtime.RetCache.Hits
 														,ndcpi.Dynarec.Runtime.RetCache.Misses/(float)ndcpi.Dynarec.Runtime.RetCache.Count*100);
 			}
 			else
 			{
-				strcatf(text,L"\r\nRuntime dynarec ret cache stats disabled\r\n");
+				strcatf(text, WCHAR_LEN(text), L"\r\nRuntime dynarec ret cache stats disabled\r\n");
 			}
 			/**
 			sprintf(text,"Block manager : \r\ntracking %d blocks , %d kb TCH\r\n"
@@ -2027,7 +2027,7 @@ void SetSelected(HWND hw,wchar* selected)
 	for (int i=0;i<item_count;i++)
 	{
 		wchar * it=(wchar*)ComboBox_GetItemData(hw,i);
-		if (wcsicmp(it,selected)==0)
+		if (_wcsicmp(it,selected)==0)
 		{
 			ComboBox_SetCurSel(hw,i);
 			return;
